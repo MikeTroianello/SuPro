@@ -34,25 +34,11 @@ router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
     });
 });
 
-// GET See all logs from everyone
+//GET See all logs from everyone
 router.get('/all/everyone', (req, res, nex) => {
   Log.find()
     .then(allLogs => {
       res.send(allLogs);
-    })
-    .catch(err => {
-      next(err);
-    });
-});
-
-// GET See all logs from user
-router.get('/all/my-posts', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  console.log(req.user);
-  console.log(req.user._id);
-  Log.find({ creatorId: req.user._id })
-    .then(userLogs => {
-      console.log(userLogs);
-      res.send(userLogs);
     })
     .catch(err => {
       next(err);

@@ -47,9 +47,7 @@ router.get('/all/everyone', (req, res, nex) => {
 
 // GET See all logs from user
 router.get('/all/my-posts', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  console.log(req.user);
-  console.log(req.user._id);
-  Log.find({ creatorId: req.user._id })
+  Log.find(req.user._id)
     .then(userLogs => {
       console.log(userLogs);
       res.send(userLogs);
