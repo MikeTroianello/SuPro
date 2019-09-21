@@ -5,15 +5,10 @@ const User = require('../models/User');
 const Log = require('../models/Log');
 const ensureLogin = require('connect-ensure-login');
 
-const axios = require('axios');
-
 //POST Create a Log *NOT FINISHED*
 router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   console.log(req.body);
   console.log(req.user);
-
-  // axios.get(`http://api.geonames.org/findNearestAddressJSON?lat=${req.body.latitude}&lng=${req.body.longitude}&username=${GEO_NAME}`
-
   const log = {
     mood: req.body.mood,
     productivity: req.body.productivity,
@@ -77,13 +72,10 @@ router.get('/all/:id', (req, res, next) => {
 });
 
 // GET see individual log
-//Come back to this later and make this have some properties if the user clicks their own post
 router.get('/view/:logId', (req, res, next) => {
-  console.log(req.params.logId);
-
-  Log.findById(req.params.logId)
+  console.log(req.params.id);
+  Log.findById(req.params.id)
     .then(foundLog => {
-      console.log(foundLog);
       res.send(foundLog);
     })
     .catch(err => {
