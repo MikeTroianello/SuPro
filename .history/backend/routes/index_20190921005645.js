@@ -11,12 +11,6 @@ const ensureLogin = require('connect-ensure-login');
 
 //ALL SIGNUP/LOGIN ROUTES WILL BE HERE
 
-//GET Login Page
-
-router.get('/login', (req, res, next) => {
-  res.send('We are at the login page');
-});
-
 //POST Signup
 
 router.post('/signup', (req, res, next) => {

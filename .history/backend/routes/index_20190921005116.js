@@ -11,12 +11,6 @@ const ensureLogin = require('connect-ensure-login');
 
 //ALL SIGNUP/LOGIN ROUTES WILL BE HERE
 
-//GET Login Page
-
-router.get('/login', (req, res, next) => {
-  res.send('We are at the login page');
-});
-
 //POST Signup
 
 router.post('/signup', (req, res, next) => {
@@ -93,8 +87,7 @@ router.get('/logout', (req, res) => {
 
 /* GET home page */
 router.get('/', (req, res, next) => {
-  res.send('home');
-  // res.render('index');
+  res.render('index');
 });
 
 module.exports = router;

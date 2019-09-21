@@ -11,12 +11,6 @@ const ensureLogin = require('connect-ensure-login');
 
 //ALL SIGNUP/LOGIN ROUTES WILL BE HERE
 
-//GET Login Page
-
-router.get('/login', (req, res, next) => {
-  res.send('We are at the login page');
-});
-
 //POST Signup
 
 router.post('/signup', (req, res, next) => {
@@ -63,38 +57,13 @@ router.post('/signup', (req, res, next) => {
     });
 });
 
-//POST Login User
-
-router.post(
-  '/login',
-  passport.authenticate('local', {
-    successRedirect: '/private-page',
-    failureRedirect: '/login',
-    failureFlash: true,
-    passReqToCallback: true
-  })
-);
-
-router.get('/private-page', ensureLogin.ensureLoggedIn(), (req, res) => {
-  console.log('WE DONE DID IT');
-  res.send('YEET');
-  // res.render('user/private-page', { user: req.user });
-});
-
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.send('logged oot');
-  // res.redirect('/login');
-});
-
 //POST Delete user
 
 // router.post('/delete-user', (req,res,next) =>)
 
 /* GET home page */
 router.get('/', (req, res, next) => {
-  res.send('home');
-  // res.render('index');
+  res.render('index');
 });
 
 module.exports = router;
