@@ -35,7 +35,7 @@ const logSchema = new Schema({
     type: Boolean,
     default: true
   },
-  date: {
+  time: {
     type: Object
   },
   timeStamp: { type: Date, default: Date.now }

@@ -142,7 +142,16 @@ router.get('/view/:logId', (req, res, next) => {
   Log.findById(req.params.logId)
     .then(foundLog => {
       console.log(foundLog);
-      res.sendStatus(foundLog);
+      let now = foundLog.time;
+      var start = new Date(now.getFullYear(), 0, 0);
+      var diff =
+        now -
+        start +
+        (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
+      var oneDay = 1000 * 60 * 60 * 24;
+      var day = Math.floor(diff / oneDay);
+      console.log(day);
+      res.sendStatus(day);
     })
     .catch(err => {
       next(err);

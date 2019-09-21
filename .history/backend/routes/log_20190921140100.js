@@ -28,30 +28,6 @@ router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
         console.log(response.data.address.adminName2);
         console.log(response.data.address.adminName1);
 
-        var now = new Date();
-
-        function dayOfYear(now) {
-          var start = new Date(now.getFullYear(), 0, 0);
-          var diff =
-            now -
-            start +
-            (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-          var oneDay = 1000 * 60 * 60 * 24;
-          var day = Math.floor(diff / oneDay);
-          console.log('Day of year: ' + day);
-          return day;
-        }
-
-        let a = now.toString().split(' ');
-
-        let theDate = {
-          dayOfWeek: a[0],
-          month: a[1],
-          dayOfMonth: Number(a[2]),
-          dayOfyear: dayOfYear(now),
-          year: Number(a[3])
-        };
-
         const log = {
           mood: req.body.mood,
           productivity: req.body.productivity,
@@ -65,7 +41,6 @@ router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
           state: response.data.address.adminName1,
           zip: req.body.zip,
           hideCreator: req.body.hideCreator,
-          date: theDate,
           creatorId: req.user._id
         };
 
@@ -141,8 +116,14 @@ router.get('/view/:logId', (req, res, next) => {
 
   Log.findById(req.params.logId)
     .then(foundLog => {
-      console.log(foundLog);
-      res.sendStatus(foundLog);
+      // console.log(foundLog);
+      let hour = today.getHours(),
+        min = today.getMinutes(),
+        sec = today.getSeconds();
+
+      let time = { hour, minute, sec };
+
+      res.send(foundLog.time);
     })
     .catch(err => {
       next(err);
