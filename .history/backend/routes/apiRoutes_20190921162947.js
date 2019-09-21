@@ -90,7 +90,7 @@ router.post('/api', ensureLogin.ensureLoggedIn(), (req, res, next) => {
         const log = {
           mood: req.body.mood,
           productivity: req.body.productivity,
-          weatherType: weatherType,
+          weatherType: weatherStuff,
           weatherCode: weatherCode,
           externalFactors: req.body.externalFactors,
           journal: req.body.journal,

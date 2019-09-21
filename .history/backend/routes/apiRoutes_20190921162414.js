@@ -81,7 +81,6 @@ router.post('/api', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const countAddress = async weatherStuff => {
     const weatherType = weatherStuff.type;
     const weatherCode = weatherStuff.code;
-    console.log('=-=-=-=-=-=-=-', weatherType, weatherCode);
     const address = getAddress()
       .then(response => {
         console.log(response.data.address.adminName2);
@@ -90,8 +89,7 @@ router.post('/api', ensureLogin.ensureLoggedIn(), (req, res, next) => {
         const log = {
           mood: req.body.mood,
           productivity: req.body.productivity,
-          weatherType: weatherType,
-          weatherCode: weatherCode,
+          weather: req.body.weather,
           externalFactors: req.body.externalFactors,
           journal: req.body.journal,
           privateJournal: req.body.privateJournal,
@@ -103,8 +101,6 @@ router.post('/api', ensureLogin.ensureLoggedIn(), (req, res, next) => {
           hideCreator: req.body.hideCreator,
           creatorId: req.user._id
         };
-
-        console.log(log);
 
         Log.create(log)
           .then(createdLog => {

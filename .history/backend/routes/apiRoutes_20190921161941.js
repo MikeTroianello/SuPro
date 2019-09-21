@@ -64,24 +64,16 @@ router.post('/api', ensureLogin.ensureLoggedIn(), (req, res, next) => {
         console.log(response.data.weather);
         console.log(response.data.weather[0]);
         console.log(response.data.weather[0].id); //USE THIS ONE
-        console.log(response.data.weather[0].main); //USE THIS ONE
-        const weatherStuff = {
-          type: response.data.weather[0].main,
-          code: response.data.weather[0].id
-        };
-
-        countAddress(weatherStuff);
-        // res.send(response.data);
+        res.send(response.data);
       })
       .catch(error => {
         console.log(error);
       });
   };
+  axiosWeather();
+  //EVERYTHING ABOVE IS GOOD
 
-  const countAddress = async weatherStuff => {
-    const weatherType = weatherStuff.type;
-    const weatherCode = weatherStuff.code;
-    console.log('=-=-=-=-=-=-=-', weatherType, weatherCode);
+  const countAddress = async () => {
     const address = getAddress()
       .then(response => {
         console.log(response.data.address.adminName2);
@@ -90,8 +82,7 @@ router.post('/api', ensureLogin.ensureLoggedIn(), (req, res, next) => {
         const log = {
           mood: req.body.mood,
           productivity: req.body.productivity,
-          weatherType: weatherType,
-          weatherCode: weatherCode,
+          weather: req.body.weather,
           externalFactors: req.body.externalFactors,
           journal: req.body.journal,
           privateJournal: req.body.privateJournal,
@@ -103,8 +94,6 @@ router.post('/api', ensureLogin.ensureLoggedIn(), (req, res, next) => {
           hideCreator: req.body.hideCreator,
           creatorId: req.user._id
         };
-
-        console.log(log);
 
         Log.create(log)
           .then(createdLog => {
@@ -118,7 +107,7 @@ router.post('/api', ensureLogin.ensureLoggedIn(), (req, res, next) => {
         console.log(error);
       });
   };
-  axiosWeather();
+  countAddress();
 });
 
 module.exports = router;
