@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const logSchema = new Schema({
+const logSchema = newSchema({
   mood: {
     type: Number,
     min: 1,
@@ -22,10 +22,9 @@ const logSchema = new Schema({
     type: String
     //Max length will be created on the front end
   },
-  latitude: Number,
-  longitude: Number,
+  latitude: String,
+  longitude: String,
   city: String,
-  state: String,
   creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
 
   time: { type: Date, default: Date.now }
