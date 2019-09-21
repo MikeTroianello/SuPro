@@ -22,6 +22,8 @@ router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
     }
   };
 
+  //EVERYTHING ABOVE IS GOOD
+
   const countAddress = async () => {
     const address = getAddress()
       .then(response => {
@@ -90,19 +92,6 @@ router.get('/all/:id', (req, res, next) => {
     .then(userLogs => {
       console.log(userLogs);
       res.send(userLogs);
-    })
-    .catch(err => {
-      next(err);
-    });
-});
-
-//GET See all posts from one area
-router.get('/region/:county', (req, res, next) => {
-  console.log(req.params.county);
-  Log.find({ county: req.params.county })
-    .then(countyLogs => {
-      console.log(countyLogs);
-      res.send(countyLogs);
     })
     .catch(err => {
       next(err);

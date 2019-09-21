@@ -97,12 +97,11 @@ router.get('/all/:id', (req, res, next) => {
 });
 
 //GET See all posts from one area
-router.get('/region/:county', (req, res, next) => {
-  console.log(req.params.county);
-  Log.find({ county: req.params.county })
-    .then(countyLogs => {
-      console.log(countyLogs);
-      res.send(countyLogs);
+router.get('/region/:city', (req, res, next) => {
+  Log.find({ city: req.params.id })
+    .then(cityLogs => {
+      console.log(userLogs);
+      res.send(userLogs);
     })
     .catch(err => {
       next(err);

@@ -97,17 +97,6 @@ router.get('/all/:id', (req, res, next) => {
 });
 
 //GET See all posts from one area
-router.get('/region/:county', (req, res, next) => {
-  console.log(req.params.county);
-  Log.find({ county: req.params.county })
-    .then(countyLogs => {
-      console.log(countyLogs);
-      res.send(countyLogs);
-    })
-    .catch(err => {
-      next(err);
-    });
-});
 
 // GET see individual log
 //Come back to this later and make this have some properties if the user clicks their own post

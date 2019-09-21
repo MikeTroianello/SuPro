@@ -59,6 +59,6 @@ const Log = require('../models/Log');
 //       });
 //   };
 //   countAddress();
-// });s
+// });
 
 module.exports = router;
