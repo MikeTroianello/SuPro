@@ -134,7 +134,9 @@ router.get('/region/:county', (req, res, next) => {
 router.get('/date/:day', (req, res, next) => {
   console.log(req.params.day);
 
-  Log.find({ dayOfYear: req.params.day })
+  Log.find({
+    dayOfYear: req.params.day
+  })
     .then(dayLogs => {
       console.log(dayLogs);
       res.send(dayLogs);

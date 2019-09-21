@@ -53,7 +53,7 @@ router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
           privateJournal: req.body.privateJournal,
           latitude: req.body.latitude,
           longitude: req.body.longitude,
-          county: response.data.address.adminName2,
+          city: response.data.address.adminName2,
           state: response.data.address.adminName1,
           zip: req.body.zip,
           hideCreator: req.body.hideCreator,
@@ -134,7 +134,9 @@ router.get('/region/:county', (req, res, next) => {
 router.get('/date/:day', (req, res, next) => {
   console.log(req.params.day);
 
-  Log.find({ dayOfYear: req.params.day })
+  Log.find({
+    date: { dayOfYear: req.params.day }
+  })
     .then(dayLogs => {
       console.log(dayLogs);
       res.send(dayLogs);

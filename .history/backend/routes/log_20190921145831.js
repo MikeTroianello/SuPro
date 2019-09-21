@@ -44,6 +44,14 @@ router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
         let a = now.toString().split(' ');
 
+        let theDate = {
+          dayOfWeek: a[0],
+          month: a[1],
+          dayOfMonth: Number(a[2]),
+          dayOfyear: dayOfYear(now),
+          year: Number(a[3])
+        };
+
         const log = {
           mood: req.body.mood,
           productivity: req.body.productivity,
@@ -53,16 +61,12 @@ router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
           privateJournal: req.body.privateJournal,
           latitude: req.body.latitude,
           longitude: req.body.longitude,
-          county: response.data.address.adminName2,
+          city: response.data.address.adminName2,
           state: response.data.address.adminName1,
           zip: req.body.zip,
           hideCreator: req.body.hideCreator,
-          creatorId: req.user._id,
-          dayOfWeek: a[0],
-          month: a[1],
-          dayOfMonth: Number(a[2]),
-          dayOfYear: dayOfYear(now),
-          year: Number(a[3])
+          date: theDate,
+          creatorId: req.user._id
         };
 
         Log.create(log)
@@ -133,8 +137,9 @@ router.get('/region/:county', (req, res, next) => {
 //GET See all posts from a certain date
 router.get('/date/:day', (req, res, next) => {
   console.log(req.params.day);
-
-  Log.find({ dayOfYear: req.params.day })
+  const specificDay = Log.date.dayOfYear.Log.find({
+    specificDay: req.params.day
+  })
     .then(dayLogs => {
       console.log(dayLogs);
       res.send(dayLogs);

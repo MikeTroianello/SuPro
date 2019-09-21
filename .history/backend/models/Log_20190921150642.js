@@ -35,11 +35,11 @@ const logSchema = new Schema({
     type: Boolean,
     default: true
   },
-  dayOfWeek: String,
-  month: String,
-  dayOfMonth: Number,
-  dayOfYear: Number,
-  year: Number,
+  dayOfWeek: a[0],
+  month: a[1],
+  dayOfMonth: Number(a[2]),
+  dayOfYear: dayOfYear(now),
+  year: Number(a[3])
   timeStamp: { type: Date, default: Date.now }
 });
 
