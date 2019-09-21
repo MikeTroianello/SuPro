@@ -32,10 +32,10 @@ const logSchema = new Schema({
   state: String,
   zip: Number,
   creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
-  hideCreator: {
-    type: Boolean,
-    default: true
-  },
+  // hideCreator: {
+  //   type: Boolean,
+  //   default: true
+  // },
   time: { type: Date, default: Date.now }
 });
 

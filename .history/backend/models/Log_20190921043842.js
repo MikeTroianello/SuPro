@@ -35,7 +35,7 @@ const logSchema = new Schema({
   hideCreator: {
     type: Boolean,
     default: true
-  },
+  }
   time: { type: Date, default: Date.now }
 });
 

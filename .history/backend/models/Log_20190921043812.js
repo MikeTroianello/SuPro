@@ -25,7 +25,7 @@ const logSchema = new Schema({
   privateJournal: {
     type: Boolean,
     default: true
-  },
+  }
   latitude: Number,
   longitude: Number,
   city: String,
@@ -35,7 +35,7 @@ const logSchema = new Schema({
   hideCreator: {
     type: Boolean,
     default: true
-  },
+  }
   time: { type: Date, default: Date.now }
 });
 

@@ -27,7 +27,7 @@ router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
   Log.create(log)
     .then(createdLog => {
-      res.send(createdLog);
+      resizeBy.send(createdLog);
     })
     .catch(err => {
       res.send(err);

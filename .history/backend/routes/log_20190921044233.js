@@ -15,7 +15,7 @@ router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
     weather: req.body.weather,
     externalFactors: req.body.externalFactors,
     journal: req.body.journal,
-    privateJournal: req.body.privateJournal,
+    privateJournal: rec.body.privateJournal,
     latitude: req.body.latitude,
     longitude: req.body.longitude,
     city: req.body.city,
@@ -27,7 +27,7 @@ router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
   Log.create(log)
     .then(createdLog => {
-      res.send(createdLog);
+      resizeBy.send(createdLog);
     })
     .catch(err => {
       res.send(err);

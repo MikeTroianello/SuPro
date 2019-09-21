@@ -25,17 +25,13 @@ const logSchema = new Schema({
   privateJournal: {
     type: Boolean,
     default: true
-  },
+  }
   latitude: Number,
   longitude: Number,
   city: String,
   state: String,
-  zip: Number,
   creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
-  hideCreator: {
-    type: Boolean,
-    default: true
-  },
+
   time: { type: Date, default: Date.now }
 });
 
