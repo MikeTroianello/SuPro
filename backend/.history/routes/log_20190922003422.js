@@ -182,76 +182,82 @@ router.get('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 //POST create log
-router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  console.log(req.params);
+router.post(
+  '/create/:latitude/:longitude',
+  ensureLogin.ensureLoggedIn(),
+  (req, res, next) => {
+    console.log(req.body);
+    console.log(req.user);
+    console.log(req.params);
 
-  const getAddress = () => {
-    try {
-      return axios.get(
-        `http://api.geonames.org/findNearestAddressJSON?lat=${req.body.latitude}&lng=${req.body.longitude}&username=${process.env.GEO_NAME}`
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    const getAddress = () => {
+      try {
+        return axios.get(
+          `http://api.geonames.org/findNearestAddressJSON?lat=${req.body.latitude}&lng=${req.body.longitude}&username=${process.env.GEO_NAME}`
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const countAddress = async () => {
-    const address = getAddress()
-      .then(response => {
-        console.log(response.data.address.adminName2);
-        console.log(response.data.address.adminName1);
+    const countAddress = async () => {
+      const address = getAddress()
+        .then(response => {
+          console.log(response.data.address.adminName2);
+          console.log(response.data.address.adminName1);
 
-        var now = new Date();
+          var now = new Date();
 
-        function dayOfYear(now) {
-          var start = new Date(now.getFullYear(), 0, 0);
-          var diff =
-            now -
-            start +
-            (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-          var oneDay = 1000 * 60 * 60 * 24;
-          var day = Math.floor(diff / oneDay);
-          console.log('Day of year: ' + day);
-          return day;
-        }
+          function dayOfYear(now) {
+            var start = new Date(now.getFullYear(), 0, 0);
+            var diff =
+              now -
+              start +
+              (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
+            var oneDay = 1000 * 60 * 60 * 24;
+            var day = Math.floor(diff / oneDay);
+            console.log('Day of year: ' + day);
+            return day;
+          }
 
-        let a = now.toString().split(' ');
+          let a = now.toString().split(' ');
 
-        const log = {
-          mood: req.body.mood,
-          productivity: req.body.productivity,
-          weather: req.body.weather,
-          externalFactors: req.body.externalFactors,
-          journal: req.body.journal,
-          privateJournal: req.body.privateJournal,
-          latitude: req.body.latitude,
-          longitude: req.body.longitude,
-          county: response.data.address.adminName2,
-          state: response.data.address.adminName1,
-          zip: req.body.zip,
-          hideCreator: req.body.hideCreator,
-          creatorId: req.user._id,
-          dayOfWeek: a[0],
-          month: a[1],
-          dayOfMonth: Number(a[2]),
-          dayOfYear: dayOfYear(now),
-          year: Number(a[3])
-        };
+          const log = {
+            mood: req.body.mood,
+            productivity: req.body.productivity,
+            weather: req.body.weather,
+            externalFactors: req.body.externalFactors,
+            journal: req.body.journal,
+            privateJournal: req.body.privateJournal,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
+            county: response.data.address.adminName2,
+            state: response.data.address.adminName1,
+            zip: req.body.zip,
+            hideCreator: req.body.hideCreator,
+            creatorId: req.user._id,
+            dayOfWeek: a[0],
+            month: a[1],
+            dayOfMonth: Number(a[2]),
+            dayOfYear: dayOfYear(now),
+            year: Number(a[3])
+          };
 
-        Log.create(log)
-          .then(createdLog => {
-            res.send(createdLog);
-          })
-          .catch(err => {
-            res.send(err);
-          });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-  countAddress();
-});
+          Log.create(log)
+            .then(createdLog => {
+              res.send(createdLog);
+            })
+            .catch(err => {
+              res.send(err);
+            });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    };
+    countAddress();
+  }
+);
 
 module.exports = router;
 

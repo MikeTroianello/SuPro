@@ -28,39 +28,47 @@ router.get('/signup', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  // const email = req.body.email;
+  // const phone = req.body.phone;
+  // const gender = req.body.gender;
 
-  if (username === '' || password === '') {
-    res.render('auth-signup', { message: 'Indicate username and password' });
-    return;
+  const user = req.body;
+
+  if (!username || !password) {
+    // res.send('missing username/password');
+    res.redirect('/');
   }
 
+  const salt = bcrypt.genSaltSync(bcryptSalt);
+  const hashPass = bcrypt.hashSync(password, salt);
+
+  const newUser = new User({
+    username,
+    password: hashPass,
+    email,
+    phone,
+    gender
+  });
+
+  console.log(newUser);
+
   User.findOne({ username })
-    .then(user => {
-      if (user !== null) {
-        res.render('auth-signup', { message: 'The username already exists' });
-        return;
+    .then(foundUser => {
+      console.log(foundUser);
+      if (foundUser) {
+        // res.send('User exists!');
+        res.redirect('/');
+      } else {
+        User.create(newUser);
+        // res.send('User Created');
+        // res.redirect('/');
+        passport.authenticate('local')(req, res, function() {
+          res.redirect('/profile');
+        });
       }
-
-      const salt = bcrypt.genSaltSync(bcryptSalt);
-      const hashPass = bcrypt.hashSync(password, salt);
-
-      const newUser = new User({
-        username,
-        password: hashPass
-      });
-
-      newUser.save(err => {
-        if (err) {
-          res.render('auth-signup', { message: 'Something went wrong' });
-        } else {
-          passport.authenticate('local')(req, res, function() {
-            res.redirect('/profile');
-          });
-        }
-      });
     })
-    .catch(error => {
-      next(error);
+    .catch(err => {
+      next(err);
     });
 });
 
@@ -78,8 +86,8 @@ router.post(
 
 router.get('/profile', ensureLogin.ensureLoggedIn(), (req, res) => {
   console.log('WE DONE DID IT');
-  // res.send('YEET');
-  res.render('user/profile', { user: req.user });
+  res.send('YEET');
+  // res.render('user/private-page', { user: req.user });
 });
 
 router.get('/logout', (req, res) => {

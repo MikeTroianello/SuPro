@@ -176,14 +176,10 @@ router.get('/view/:logId', (req, res, next) => {
 
 //GET see time of log
 
-//GET create log
-router.get('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  res.render('logs/create');
-});
-
 //POST create log
 router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  console.log(req.params);
+  console.log(req.body);
+  console.log(req.user);
 
   const getAddress = () => {
     try {

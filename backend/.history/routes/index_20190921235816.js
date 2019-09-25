@@ -25,7 +25,7 @@ router.get('/signup', (req, res, next) => {
 });
 
 //POST Signup
-router.post('/signup', (req, res, next) => {
+routes.post('/signup', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -78,8 +78,8 @@ router.post(
 
 router.get('/profile', ensureLogin.ensureLoggedIn(), (req, res) => {
   console.log('WE DONE DID IT');
-  // res.send('YEET');
-  res.render('user/profile', { user: req.user });
+  res.send('YEET');
+  // res.render('user/private-page', { user: req.user });
 });
 
 router.get('/logout', (req, res) => {
