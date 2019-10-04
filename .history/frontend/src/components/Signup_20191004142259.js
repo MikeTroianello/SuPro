@@ -1,27 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 export default class Signup extends Component {
-  state = {
-    name: '',
-    password: ''
-  };
-
-  handleChange = e => {
-    e.preventDefault();
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
-    axios.post('http://localhost:5000/signup', (req, res) => {
-      console.log('We hit the backend?');
-    });
+    console.log(this);
+    console.log(e);
   };
-
   render() {
     return (
       <div>
@@ -29,19 +13,11 @@ export default class Signup extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className='form-piece'>
             <label htmlFor='name'>Enter Your Name:</label>
-            <input
-              name='name'
-              placeholder='Your name...'
-              onChange={this.handleChange}
-            />
+            <input name='name' placeholder='Your name...' />
           </div>
           <div className='form-piece'>
             <label htmlFor='password'>Enter Your password:</label>
-            <input
-              name='password'
-              placeholder='Your password...'
-              onChange={this.handleChange}
-            />
+            <input name='password' placeholder='Your password...' />
           </div>
           <div className='form-piece'>
             <label htmlFor='gender'>What is your gender?</label>

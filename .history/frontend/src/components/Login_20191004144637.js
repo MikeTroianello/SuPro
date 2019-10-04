@@ -1,31 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
-export default class Signup extends Component {
-  state = {
-    name: '',
-    password: ''
-  };
-
-  handleChange = e => {
-    e.preventDefault();
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log(this.state);
-    axios.post('http://localhost:5000/signup', (req, res) => {
-      console.log('We hit the backend?');
-    });
-  };
-
+export default class Login extends Component {
   render() {
     return (
       <div>
-        This is the Signup Page
+        This is the Login Page
         <form onSubmit={this.handleSubmit}>
           <div className='form-piece'>
             <label htmlFor='name'>Enter Your Name:</label>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 export default class Signup extends Component {
   state = {
@@ -17,9 +16,6 @@ export default class Signup extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-    axios.post('http://localhost:5000/signup', (req, res) => {
-      console.log('We hit the backend?');
-    });
   };
 
   render() {
