@@ -37,9 +37,6 @@ router.post('/signup', (req, res, next) => {
   console.log('hello', req.body);
   const username = req.body.username;
   const password = req.body.password;
-  const email = req.body.email;
-  const phone = req.body.phone;
-  const gender = req.body.gender;
 
   if (username === '' || password === '') {
     res.render('auth-signup', { message: 'Indicate username and password' });
@@ -58,10 +55,7 @@ router.post('/signup', (req, res, next) => {
 
       const newUser = new User({
         username,
-        password: hashPass,
-        email,
-        phone,
-        gender
+        password: hashPass
       });
 
       console.log('almost there', newUser);

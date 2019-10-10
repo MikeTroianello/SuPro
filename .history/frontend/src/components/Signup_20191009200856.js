@@ -14,9 +14,11 @@ export default class Signup extends Component {
 
   handleChange = e => {
     e.preventDefault();
+    console.log(e.target);
     this.setState({
       [e.target.name]: e.target.value
     });
+    console.log(this.state);
   };
 
   handleSubmit = e => {
@@ -74,7 +76,7 @@ export default class Signup extends Component {
           </div>
           <div className='form-piece'>
             <label htmlFor='gender'>What is your gender?</label>
-            <select name='gender' onChange={this.handleChange}>
+            <select onChange={this.handleChange}>
               <option disabled selected>
                 Choose:
               </option>

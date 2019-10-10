@@ -14,9 +14,11 @@ export default class Signup extends Component {
 
   handleChange = e => {
     e.preventDefault();
+    console.log(e.target);
     this.setState({
       [e.target.name]: e.target.value
     });
+    console.log(this.state);
   };
 
   handleSubmit = e => {

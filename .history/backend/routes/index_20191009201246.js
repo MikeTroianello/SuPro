@@ -58,10 +58,7 @@ router.post('/signup', (req, res, next) => {
 
       const newUser = new User({
         username,
-        password: hashPass,
-        email,
-        phone,
-        gender
+        password: hashPass
       });
 
       console.log('almost there', newUser);

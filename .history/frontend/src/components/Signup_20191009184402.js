@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 export default class Signup extends Component {
   state = {
-    user: '',
     username: '',
-    password: '',
-    email: '',
-    phone: '',
-    gender: ''
+    password: ''
   };
 
   handleChange = e => {
@@ -23,16 +18,11 @@ export default class Signup extends Component {
     e.preventDefault();
     console.log(this.state);
     axios.post('http://localhost:5000/signup', this.state).then(results => {
-      this.setState({
-        user: results.data.username
-      });
+      console.log(results.data);
     });
   };
 
   render() {
-    if (this.state.user) {
-      return <Redirect to='/' />;
-    }
     return (
       <div>
         This is the Signup Page
@@ -40,7 +30,7 @@ export default class Signup extends Component {
           <div className='form-piece'>
             <label htmlFor='name'>Enter Your Name:</label>
             <input
-              name='username'
+              name='name'
               placeholder='Your name...'
               onChange={this.handleChange}
             />
@@ -49,39 +39,14 @@ export default class Signup extends Component {
             <label htmlFor='password'>Enter Your password:</label>
             <input
               name='password'
-              type='password'
               placeholder='Your password...'
               onChange={this.handleChange}
             />
           </div>
           <div className='form-piece'>
-            <label htmlFor='email'>Enter Your email: (optional)</label>
-            <input
-              name='email'
-              type='email'
-              placeholder='Your email...'
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className='form-piece'>
-            <label htmlFor='phone'>Enter Your phone: (optional)</label>
-            <input
-              name='phone'
-              type='number'
-              placeholder='867-5309'
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className='form-piece'>
             <label htmlFor='gender'>What is your gender?</label>
-            <select name='gender' onChange={this.handleChange}>
-              <option disabled selected>
-                Choose:
-              </option>
-              <option value='male'>Male</option>
-              <option value='female'>Female</option>
-              <option value='non-binary'>Non-binary</option>
-            </select>
+            <p>look this up later when you have internet</p>
+            {/* <input>male, female, nonbinary</input> */}
           </div>
           <button>Submit</button>
         </form>

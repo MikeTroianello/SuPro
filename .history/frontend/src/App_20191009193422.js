@@ -13,21 +13,11 @@ import Navbar from './components/Navbar';
 import './App.css';
 
 class App extends React.Component {
-  state = {
-    user: ''
-  };
   componentDidMount() {
-    axios.get('http://localhost5000/isLoggedIn').then(result => {
-      if (result.data.user) {
-        this.setState({
-          user: result.data.user
-        });
-      }
-    });
+    axios.get('http://localhost5000/isLoggedIn');
   }
 
   render() {
-    console.log(this.state.user);
     return (
       <Router>
         <div className='App'>

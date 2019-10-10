@@ -13,14 +13,6 @@ const ensureLogin = require('connect-ensure-login');
 
 //GET Login Page
 
-router.get('/isLoggedIn', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  if (req.user) {
-    res.json({ user: res.user });
-  } else {
-    console.log('Not Logged In');
-  }
-});
-
 router.get('/login', (req, res, next) => {
   // res.send('We are at the login page');
   res.render('user/login.hbs');
@@ -37,9 +29,6 @@ router.post('/signup', (req, res, next) => {
   console.log('hello', req.body);
   const username = req.body.username;
   const password = req.body.password;
-  const email = req.body.email;
-  const phone = req.body.phone;
-  const gender = req.body.gender;
 
   if (username === '' || password === '') {
     res.render('auth-signup', { message: 'Indicate username and password' });
@@ -58,20 +47,15 @@ router.post('/signup', (req, res, next) => {
 
       const newUser = new User({
         username,
-        password: hashPass,
-        email,
-        phone,
-        gender
+        password: hashPass
       });
-
-      console.log('almost there', newUser);
 
       newUser.save(err => {
         if (err) {
-          res.json({ message: err });
+          res.render('auth-signup', { message: 'Something went wrong' });
         } else {
           passport.authenticate('local')(req, res, function() {
-            res.json(newUser);
+            res.redirect('/profile');
           });
         }
       });

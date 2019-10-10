@@ -6,10 +6,7 @@ export default class Signup extends Component {
   state = {
     user: '',
     username: '',
-    password: '',
-    email: '',
-    phone: '',
-    gender: ''
+    password: ''
   };
 
   handleChange = e => {
@@ -49,7 +46,6 @@ export default class Signup extends Component {
             <label htmlFor='password'>Enter Your password:</label>
             <input
               name='password'
-              type='password'
               placeholder='Your password...'
               onChange={this.handleChange}
             />
@@ -58,7 +54,6 @@ export default class Signup extends Component {
             <label htmlFor='email'>Enter Your email: (optional)</label>
             <input
               name='email'
-              type='email'
               placeholder='Your email...'
               onChange={this.handleChange}
             />
@@ -67,14 +62,13 @@ export default class Signup extends Component {
             <label htmlFor='phone'>Enter Your phone: (optional)</label>
             <input
               name='phone'
-              type='number'
               placeholder='867-5309'
               onChange={this.handleChange}
             />
           </div>
           <div className='form-piece'>
             <label htmlFor='gender'>What is your gender?</label>
-            <select name='gender' onChange={this.handleChange}>
+            <select>
               <option disabled selected>
                 Choose:
               </option>
