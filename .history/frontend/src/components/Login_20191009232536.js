@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 export default class Login extends Component {
   state = {
@@ -17,19 +16,12 @@ export default class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    axios.post('http://localhost:5000/login', this.state).then(results => {
-      console.log(results.data);
-      this.setState(
-        {
-          user: results.data.username
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
+    console.log(this.state);
+    axios.post('http://localhost:5000/signup', this.state).then(results => {
+      this.setState({
+        user: results.data.username
+      });
       localStorage.setItem('user', JSON.stringify(results.data));
-      this.props.login();
-      this.props.history.push('/');
     });
   };
 
@@ -39,9 +31,9 @@ export default class Login extends Component {
         This is the Login Page
         <form onSubmit={this.handleSubmit}>
           <div className='form-piece'>
-            <label htmlFor='username'>Username:</label>
+            <label htmlFor='name'>Username:</label>
             <input
-              name='username'
+              name='name'
               placeholder='Your name...'
               onChange={this.handleChange}
             />

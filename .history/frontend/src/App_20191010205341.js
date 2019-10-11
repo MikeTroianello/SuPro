@@ -43,17 +43,13 @@ class App extends React.Component {
     return (
       <Router>
         <div className='App'>
-          <Navbar info={this.state} />
+          <Navbar info={this.state} login={() => this.loggedIn} />
           <h1>FRONTEND</h1>
         </div>
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/signup' component={Signup} />
-          <Route
-            exact
-            path='/login'
-            render={props => <Login {...props} login={this.login} />}
-          />
+          <Route exact path='/login' component={Login} />
           <Route exact path='/create' component={Create} />
           <Route exact path='/view' component={View} />
         </Switch>

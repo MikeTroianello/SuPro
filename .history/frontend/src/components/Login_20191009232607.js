@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 export default class Login extends Component {
   state = {
@@ -17,19 +16,12 @@ export default class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.state);
     axios.post('http://localhost:5000/login', this.state).then(results => {
-      console.log(results.data);
-      this.setState(
-        {
-          user: results.data.username
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
+      this.setState({
+        user: results.data.username
+      });
       localStorage.setItem('user', JSON.stringify(results.data));
-      this.props.login();
-      this.props.history.push('/');
     });
   };
 

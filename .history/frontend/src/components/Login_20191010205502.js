@@ -28,7 +28,7 @@ export default class Login extends Component {
         }
       );
       localStorage.setItem('user', JSON.stringify(results.data));
-      this.props.login();
+      this.props.login);
       this.props.history.push('/');
     });
   };

@@ -21,8 +21,8 @@ export default function Navbar(props) {
         <div>
           <Link to='/view'>View</Link>
         </div>
+        <h2>{props.info.message}</h2>
       </div>
-      <h2>{props.info.message}</h2>
     </div>
   );
 }

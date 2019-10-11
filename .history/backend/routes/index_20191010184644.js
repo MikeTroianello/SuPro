@@ -13,17 +13,11 @@ const ensureLogin = require('connect-ensure-login');
 
 //GET Login Page
 
-router.get('/isLoggedIn', (req, res, next) => {
-  console.log(req.user);
+router.get('/isLoggedIn', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   if (req.user) {
-    console.log('logged in');
-    res.json({
-      user: req.user,
-      message: `Welsome back, ${req.user.username}!`
-    });
+    res.json({ user: res.user });
   } else {
     console.log('Not Logged In');
-    res.json({ message: 'Not Logged In' });
   }
 });
 
@@ -101,7 +95,8 @@ router.post(
 
 router.get('/profile', (req, res) => {
   console.log('WE DONE DID IT');
-  res.json(req.user);
+  // res.json(req.user);
+  res.json({ message: 'almost complete. index line 99' });
   // res.render('user/profile', { user: req.user });
 });
 

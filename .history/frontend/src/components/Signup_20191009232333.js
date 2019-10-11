@@ -21,16 +21,11 @@ export default class Signup extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
+    console.log(this.state);
     axios.post('http://localhost:5000/signup', this.state).then(results => {
-      this.setState(
-        {
-          user: results.data.username
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
+      this.setState({
+        user: results.data.username
+      });
       localStorage.setItem('user', JSON.stringify(results.data));
     });
   };
@@ -81,7 +76,7 @@ export default class Signup extends Component {
           <div className='form-piece'>
             <label htmlFor='gender'>What is your gender?</label>
             <select name='gender' onChange={this.handleChange}>
-              <option disabled defaultValue>
+              <option disabled selected>
                 Choose:
               </option>
               <option value='male'>Male</option>

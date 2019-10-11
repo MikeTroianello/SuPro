@@ -17,7 +17,9 @@ export default class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.state);
     axios.post('http://localhost:5000/login', this.state).then(results => {
+      console.log(results);
       console.log(results.data);
       this.setState(
         {
@@ -28,12 +30,11 @@ export default class Login extends Component {
         }
       );
       localStorage.setItem('user', JSON.stringify(results.data));
-      this.props.login();
-      this.props.history.push('/');
     });
   };
 
   render() {
+    console.log(this.state);
     return (
       <div>
         This is the Login Page

@@ -14,48 +14,42 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    user: null,
-    message: null
+    user: ''
   };
 
   componentDidMount() {
-    this.login();
-  }
-
-  login = () => {
+    console.log('starting here');
     axios.get('http://localhost:5000/isLoggedIn').then(result => {
       console.log(result.data);
-      // if (result.data.user) {
-      this.setState(
-        {
-          user: result.data.user || null,
-          message: result.data.message
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
+      if (result.data.user) {
+        this.setState(
+          {
+            user: result.data.user
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
+      }
     });
-  };
+  }
 
   render() {
     console.log(this.state.user);
     return (
       <Router>
         <div className='App'>
-          <Navbar info={this.state} />
+          <Navbar />
           <h1>FRONTEND</h1>
         </div>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/signup' component={Signup} />
-          <Route
-            exact
-            path='/login'
-            render={props => <Login {...props} login={this.login} />}
-          />
-          <Route exact path='/create' component={Create} />
-          <Route exact path='/view' component={View} />
+          {!this.state.user && (
+            <Route exact path='/signup' component={Signup} />
+          )}
+          {!this.state.user && <Route exact path='/login' component={Login} />}
+          {this.state.user && <Route exact path='/create' component={Create} />}
+          {this.state.user && <Route exact path='/view' component={View} />}
         </Switch>
       </Router>
     );

@@ -14,7 +14,7 @@ const ensureLogin = require('connect-ensure-login');
 //GET Login Page
 
 router.get('/isLoggedIn', (req, res, next) => {
-  console.log(req.user);
+  console.log(req);
   if (req.user) {
     console.log('logged in');
     res.json({

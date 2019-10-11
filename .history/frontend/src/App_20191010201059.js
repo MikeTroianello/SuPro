@@ -19,10 +19,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.login();
-  }
-
-  login = () => {
+    console.log('starting here');
     axios.get('http://localhost:5000/isLoggedIn').then(result => {
       console.log(result.data);
       // if (result.data.user) {
@@ -35,8 +32,9 @@ class App extends React.Component {
           console.log(this.state);
         }
       );
+      // }
     });
-  };
+  }
 
   render() {
     console.log(this.state.user);
@@ -49,11 +47,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/signup' component={Signup} />
-          <Route
-            exact
-            path='/login'
-            render={props => <Login {...props} login={this.login} />}
-          />
+          <Route exact path='/login' component={Login} />
           <Route exact path='/create' component={Create} />
           <Route exact path='/view' component={View} />
         </Switch>

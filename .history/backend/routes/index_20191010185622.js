@@ -14,12 +14,11 @@ const ensureLogin = require('connect-ensure-login');
 //GET Login Page
 
 router.get('/isLoggedIn', (req, res, next) => {
-  console.log(req.user);
   if (req.user) {
     console.log('logged in');
     res.json({
-      user: req.user,
-      message: `Welsome back, ${req.user.username}!`
+      user: res.user,
+      message: `Welsome back, ${res.user.username}!`
     });
   } else {
     console.log('Not Logged In');

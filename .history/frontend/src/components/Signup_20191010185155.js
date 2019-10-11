@@ -81,7 +81,7 @@ export default class Signup extends Component {
           <div className='form-piece'>
             <label htmlFor='gender'>What is your gender?</label>
             <select name='gender' onChange={this.handleChange}>
-              <option disabled defaultValue>
+              <option disabled selected>
                 Choose:
               </option>
               <option value='male'>Male</option>
