@@ -24,7 +24,7 @@ export default class Signup extends Component {
     e.preventDefault();
 
     axios.post('http://localhost:5000/signup', this.state).then(results => {
-      console.log('RESULTS', results.data.user);
+      console.log('RESULTS', results);
       this.setState(
         {
           message: results.data.message,

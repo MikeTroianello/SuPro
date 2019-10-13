@@ -82,13 +82,7 @@ router.post('/signup', (req, res, next) => {
           console.log('SAVED');
           passport.authenticate('local')(req, res, function() {
             console.log('complete', newUser);
-
-            const { username, _id, gender } = newUser;
-            const userToLocalStorage = { username, _id, gender };
-            res.json({
-              message: 'User has been created',
-              user: userToLocalStorage
-            });
+            res.json({ message: 'User has been created', user: newUser });
           });
         }
       });

@@ -21,7 +21,7 @@ class App extends React.Component {
   componentDidMount() {
     console.log('TESTING LOCAL STORAGE', localStorage.getItem('user'));
 
-    console.log('XXXXXXXX', JSON.parse(localStorage.getItem('user')).gender);
+    // console.log('XXXXXXXX', JSON.parse(localStorage.getItem('user')));
     this.login();
   }
 

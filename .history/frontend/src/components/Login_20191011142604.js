@@ -22,10 +22,10 @@ export default class Login extends Component {
         'http://localhost:5000/login',
         { username: this.state.username },
         { password: this.state.password },
-        { withCredentials: true }
+        (withCredentials: true)
       )
       .then(results => {
-        console.log('RESULTS', results);
+        console.log(results);
         this.setState(
           {
             user: results.data.username

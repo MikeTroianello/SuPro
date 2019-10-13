@@ -80,15 +80,10 @@ router.post('/signup', (req, res, next) => {
           res.json({ message: err });
         } else {
           console.log('SAVED');
+          debugger;
           passport.authenticate('local')(req, res, function() {
             console.log('complete', newUser);
-
-            const { username, _id, gender } = newUser;
-            const userToLocalStorage = { username, _id, gender };
-            res.json({
-              message: 'User has been created',
-              user: userToLocalStorage
-            });
+            res.json({ message: 'User has been created' }, newUser);
           });
         }
       });

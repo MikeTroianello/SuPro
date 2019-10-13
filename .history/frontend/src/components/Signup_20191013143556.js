@@ -34,7 +34,7 @@ export default class Signup extends Component {
           console.log(this.state);
         }
       );
-      localStorage.setItem('user', JSON.stringify(results.data.user));
+      localStorage.setItem('user', toJSON(results.data.user));
     });
   };
 

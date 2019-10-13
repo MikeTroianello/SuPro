@@ -4,7 +4,6 @@ import axios from 'axios';
 
 export default class Signup extends Component {
   state = {
-    message: null,
     user: '',
     username: '',
     password: '',
@@ -24,17 +23,16 @@ export default class Signup extends Component {
     e.preventDefault();
 
     axios.post('http://localhost:5000/signup', this.state).then(results => {
-      console.log('RESULTS', results.data.user);
+      console.log('RESULTS', results);
       this.setState(
         {
-          message: results.data.message,
-          user: results.data.user
+          user: results.data.username
         },
         () => {
           console.log(this.state);
         }
       );
-      localStorage.setItem('user', JSON.stringify(results.data.user));
+      localStorage.setItem('user', JSON.stringify(results.data));
     });
   };
 
@@ -84,7 +82,7 @@ export default class Signup extends Component {
           <div className='form-piece'>
             <label htmlFor='gender'>What is your gender?</label>
             <select name='gender' onChange={this.handleChange}>
-              <option selected disabled>
+              <option disabled defaultValue>
                 Choose:
               </option>
               <option value='male'>Male</option>
@@ -94,7 +92,6 @@ export default class Signup extends Component {
           </div>
           <button>Submit</button>
         </form>
-        {this.state.message}
       </div>
     );
   }

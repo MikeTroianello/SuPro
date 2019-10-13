@@ -48,15 +48,14 @@ router.post('/signup', (req, res, next) => {
   const phone = req.body.phone;
   const gender = req.body.gender;
 
-  if (username === '' || password === '' || gender === '') {
+  if (username === '' || password === '') {
     console.log('missing username or password');
-    res.json({ message: 'Username, Password, and Gender must be entered' });
+    res.json({ message: 'Indicate username and password' });
     return;
   }
 
   User.findOne({ username })
     .then(user => {
-      console.log('USER FOUND:', user);
       if (user !== null) {
         res.json({ message: 'The username already exists' });
         return;
@@ -79,16 +78,9 @@ router.post('/signup', (req, res, next) => {
         if (err) {
           res.json({ message: err });
         } else {
-          console.log('SAVED');
           passport.authenticate('local')(req, res, function() {
             console.log('complete', newUser);
-
-            const { username, _id, gender } = newUser;
-            const userToLocalStorage = { username, _id, gender };
-            res.json({
-              message: 'User has been created',
-              user: userToLocalStorage
-            });
+            res.json({ message: 'User has been created' }, newUser);
           });
         }
       });

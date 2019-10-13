@@ -25,7 +25,7 @@ export default class Login extends Component {
         { withCredentials: true }
       )
       .then(results => {
-        console.log('RESULTS', results);
+        console.log(results);
         this.setState(
           {
             user: results.data.username

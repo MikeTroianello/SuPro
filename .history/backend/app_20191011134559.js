@@ -98,7 +98,6 @@ passport.use(
           return next(null, false, { message: 'Incorrect password' });
         }
         console.log('Successful Login. app.js line 100');
-        console.log(user);
         return next(null, user);
       });
     }
