@@ -9,17 +9,17 @@ export default function Navbar(props) {
         <div>
           <Link to='/'>Home</Link>
         </div>
-        {!props.info.username && (
+        {!props.username && (
           <div>
             <Link to='/login'>Login</Link>
           </div>
         )}
-        {!props.info.username && (
+        {!props.username && (
           <div>
             <Link to='/signup'>Signup</Link>
           </div>
         )}
-        {props.info.username && (
+        {props.username && (
           <div>
             <Link to='/create'>Create</Link>
           </div>

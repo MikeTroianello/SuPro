@@ -3,8 +3,7 @@ import axios from 'axios';
 
 export default class View extends Component {
   componentDidMount() {
-    let today = new Date();
-    axios.get(`http://localhost:5000/${today}`);
+    axios.get('http://localhost:5000');
   }
 
   render() {

@@ -14,21 +14,22 @@ const ensureLogin = require('connect-ensure-login');
 
 //GET Login Page
 
-router.get('/isLoggedIn', (req, res, next) => {
-  console.log(req.user);
-  if (req.user) {
-    console.log('logged in');
-    res.json({
-      user: req.user,
-      message: `Welsome back, ${req.user.username}!`
+router.get('/isLoggedIn/:id', (req, res, next) => {
+  console.log('IS LOGGED IN', req.params.id);
+  User.findById(req.params.id).then(result => {
+    console.log(`we found you, ${result.username}`);
+    passport.authenticate('local', {
+      successRedirect: '/profile',
+      failureRedirect: '/login',
+      failureFlash: true,
+      passReqToCallback: true
     });
-  } else {
-    console.log('Not Logged In');
-    res.json({ message: 'Not Logged In' });
-  }
+    console.log('???????');
+  });
 });
 
 router.get('/login', (req, res, next) => {
+  console.log('failure');
   // res.send('We are at the login page');
   res.render('user/login.hbs');
 });
@@ -110,8 +111,8 @@ router.post(
   })
 );
 
-router.get('/profile', ensureLogin.ensureLoggedIn(), (req, res) => {
-  console.log('YEET');
+router.get('/profile', (req, res) => {
+  console.log('YEET', req);
   res.json(req.user);
   // res.render('user/profile', { user: req.user });
 });

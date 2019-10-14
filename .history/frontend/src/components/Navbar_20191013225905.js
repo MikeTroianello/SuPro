@@ -9,21 +9,15 @@ export default function Navbar(props) {
         <div>
           <Link to='/'>Home</Link>
         </div>
-        {!props.info.username && (
-          <div>
-            <Link to='/login'>Login</Link>
-          </div>
-        )}
-        {!props.info.username && (
-          <div>
-            <Link to='/signup'>Signup</Link>
-          </div>
-        )}
-        {props.info.username && (
-          <div>
-            <Link to='/create'>Create</Link>
-          </div>
-        )}
+        <div>
+          <Link to='/login'>Login</Link>
+        </div>
+        <div>
+          <Link to='/signup'>Signup</Link>
+        </div>
+        <div>
+          <Link to='/create'>Create</Link>
+        </div>
         <div>
           <Link to='/view'>View</Link>
         </div>
