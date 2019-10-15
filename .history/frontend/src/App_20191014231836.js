@@ -37,7 +37,6 @@ class App extends React.Component {
   }
 
   setUser = () => {
-    console.log('SETTING USER');
     let storedUser = JSON.parse(localStorage.getItem('user'));
 
     this.setState({

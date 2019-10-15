@@ -183,7 +183,7 @@ router.get('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 //POST create log
 router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  console.log(req.body);
+  console.log(req.params);
 
   const getAddress = () => {
     try {

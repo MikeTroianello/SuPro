@@ -24,6 +24,8 @@ class App extends React.Component {
       JSON.parse(localStorage.getItem('user'))
     );
 
+    console.log('XXXXXXXX', JSON.parse(localStorage.getItem('user')).gender);
+
     let storedUser = JSON.parse(localStorage.getItem('user'));
 
     if (storedUser) {
@@ -31,20 +33,9 @@ class App extends React.Component {
         username: storedUser.username,
         message: `Hello ${storedUser.username}`
       });
-
-      this.login(storedUser);
     }
+    this.login(storedUser);
   }
-
-  setUser = () => {
-    console.log('SETTING USER');
-    let storedUser = JSON.parse(localStorage.getItem('user'));
-
-    this.setState({
-      username: storedUser.username,
-      message: `Hello ${storedUser.username}`
-    });
-  };
 
   login = storedUser => {
     console.log('LOGIN');
@@ -88,11 +79,7 @@ class App extends React.Component {
         </div>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route
-            exact
-            path='/signup'
-            render={props => <Signup {...props} setUser={this.setUser} />}
-          />
+          <Route exact path='/signup' component={Signup} />
           <Route exact path='/login' render={props => <Login {...props} />} />
           <Route exact path='/create' component={Create} />
           <Route exact path='/view' component={View} />

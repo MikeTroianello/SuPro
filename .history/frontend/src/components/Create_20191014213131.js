@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import Redirect from 'react-router-dom';
 
 export default class Create extends Component {
   state = {
@@ -37,47 +37,40 @@ export default class Create extends Component {
   };
 
   render() {
-    // let submit;
-    // if (submit) {
-    //   return <Redirect to='/view' />;
-    // }
+    let submit;
+    if (submit) {
+      <Redirect to='/view' />;
+    }
 
     //THIS FINDS LATITUDE AND LONGITUDE
 
-    if ('geolocation' in navigator) {
-      console.log('Geolocation is available');
+    if ("geolocation" in navigator) {
+      console.log("Geolocation is available")
       navigator.geolocation.getCurrentPosition(position => {
         //console.log("HERE")
-        // {
-        //   {
-        //    console.log(position)
-        //     console.log("latitude: ", position.coords.latitude)
-        //     console.log("longitude: ", position.coords.longitude)--
-        //   }
-        // }
+        {
+          {
+            !--console.log(position)
+            console.log("latitude: ", position.coords.latitude)
+            console.log("longitude: ", position.coords.longitude)--
+          }
+        }
 
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        document.getElementById('lat').textContent = latitude;
-        document.getElementById('lon').textContent = longitude;
-
-        this.setState(
-          {
-            latitude: latitude,
-            longitude: longitude
-          },
-          () => {
-            console.log(
-              'COORDINATES',
-              this.state.latitude,
-              this.state.longitude
-            );
-          }
-        );
+        document.getElementById("lat").textContent = latitude;
+        document.getElementById("lon").textContent = longitude;
+        
       });
     } else {
-      console.log('geolocation IS NOT available');
+      console.log('geolocation IS NOT available')
     }
+
+
+
+
+
+
 
     return (
       <div>
@@ -156,8 +149,8 @@ export default class Create extends Component {
         {/* <input type='hidden' value={latitude} name='latitude' />
         <input type='hidden' value={longitude} name='longitude' /> */}
         <button onClick={this.handleSubmit}>Log It</button>
-        <div id='lat'>lat</div>
-        <div id='lon'>lon</div>
+        <div id="lat">lat</div>
+        <div id="lon">lon</div>
       </div>
     );
   }

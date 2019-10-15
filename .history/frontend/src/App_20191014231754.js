@@ -37,7 +37,6 @@ class App extends React.Component {
   }
 
   setUser = () => {
-    console.log('SETTING USER');
     let storedUser = JSON.parse(localStorage.getItem('user'));
 
     this.setState({
@@ -91,7 +90,7 @@ class App extends React.Component {
           <Route
             exact
             path='/signup'
-            render={props => <Signup {...props} setUser={this.setUser} />}
+            render={props => <Signup {...props} setLogin={this.setUser} />}
           />
           <Route exact path='/login' render={props => <Login {...props} />} />
           <Route exact path='/create' component={Create} />

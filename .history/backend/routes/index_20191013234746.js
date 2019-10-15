@@ -133,12 +133,6 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
-// POST Logout
-router.post('/logout', (req, res, next) => {
-  req.logout();
-  res.json({ message: 'You have been logged out. Come back soon!' });
-});
-
 module.exports = router;
 
 //how to authenticate a user without logging out

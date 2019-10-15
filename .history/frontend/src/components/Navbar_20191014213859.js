@@ -27,11 +27,7 @@ export default function Navbar(props) {
         <div>
           <Link to='/view'>View</Link>
         </div>
-        {props.info.username && (
-          <a href='#' onClick={props.logout}>
-            Logout
-          </a>
-        )}
+        {props.info.username && <div onclick={this.logout}>Logout</div>}
       </div>
       <h2>{props.info.message}</h2>
     </div>

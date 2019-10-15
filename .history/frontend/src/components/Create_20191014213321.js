@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import Redirect from 'react-router-dom';
 
 export default class Create extends Component {
   state = {
@@ -37,10 +37,10 @@ export default class Create extends Component {
   };
 
   render() {
-    // let submit;
-    // if (submit) {
-    //   return <Redirect to='/view' />;
-    // }
+    let submit;
+    if (submit) {
+      <Redirect to='/view' />;
+    }
 
     //THIS FINDS LATITUDE AND LONGITUDE
 

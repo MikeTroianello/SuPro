@@ -35,7 +35,7 @@ export default class Signup extends Component {
         }
       );
       localStorage.setItem('user', JSON.stringify(results.data.user));
-      this.props.setUser();
+      // this.props.setUser();
       this.props.history.push('/');
     });
   };

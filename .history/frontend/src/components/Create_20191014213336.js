@@ -37,10 +37,10 @@ export default class Create extends Component {
   };
 
   render() {
-    // let submit;
-    // if (submit) {
-    //   return <Redirect to='/view' />;
-    // }
+    let submit;
+    if (submit) {
+      <Redirect to='/view' />;
+    }
 
     //THIS FINDS LATITUDE AND LONGITUDE
 
