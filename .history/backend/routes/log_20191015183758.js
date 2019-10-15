@@ -183,21 +183,13 @@ router.get('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 //POST create log
 router.post('/create', (req, res, next) => {
-  const {
-    mood,
-    productivity,
-    journal,
-    privateJournal,
-    hideCreator,
-    latitude,
-    longitude
-  } = req.body.info;
   console.log('BODY', req.body);
+  console.log('USER', req.user);
 
   const getAddress = () => {
     try {
       return axios.get(
-        `http://api.geonames.org/findNearestAddressJSON?lat=${latitude}&lng=${longitude}&username=${process.env.GEO_NAME}`
+        `http://api.geonames.org/findNearestAddressJSON?lat=${req.body.latitude}&lng=${req.body.longitude}&username=${process.env.GEO_NAME}`
       );
     } catch (error) {
       console.error(error);
@@ -207,7 +199,7 @@ router.post('/create', (req, res, next) => {
   const countAddress = async () => {
     const address = getAddress()
       .then(response => {
-        console.log('ADDRESS', response.data);
+        console.log(response);
         // console.log(response.data.address.adminName2);
         // console.log(response.data.address.adminName1);
 
@@ -228,19 +220,19 @@ router.post('/create', (req, res, next) => {
         let a = now.toString().split(' ');
 
         const log = {
-          mood: mood,
-          productivity: productivity,
-          // weather: weather,
-          // externalFactors: externalFactors,
-          journal: journal,
-          privateJournal: privateJournal,
-          latitude: latitude,
-          longitude: longitude,
+          mood: req.body.mood,
+          productivity: req.body.productivity,
+          weather: req.body.weather,
+          externalFactors: req.body.externalFactors,
+          journal: req.body.journal,
+          privateJournal: req.body.privateJournal,
+          latitude: req.body.latitude,
+          longitude: req.body.longitude,
           county: response.data.address.adminName2,
           state: response.data.address.adminName1,
-          // zip: zip,
-          hideCreator: hideCreator,
-          // creatorId: req.user._id,
+          zip: req.body.zip,
+          hideCreator: req.body.hideCreator,
+          creatorId: req.user._id,
           dayOfWeek: a[0],
           month: a[1],
           dayOfMonth: Number(a[2]),

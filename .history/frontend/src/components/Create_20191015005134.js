@@ -28,11 +28,8 @@ export default class Create extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log('SUBMITTING');
-    let info = this.state;
     axios
-      .post('http://localhost:5000/log/create', {
-        info
-      })
+      .post('http://localhost:5000/log/create', { info: this.state })
       .then(results => {
         console.log(results);
         this.props.history.push('/');
@@ -40,11 +37,25 @@ export default class Create extends Component {
   };
 
   render() {
+    // let submit;
+    // if (submit) {
+    //   return <Redirect to='/view' />;
+    // }
+
     //THIS FINDS LATITUDE AND LONGITUDE
 
     if ('geolocation' in navigator) {
       console.log('Geolocation is available');
       navigator.geolocation.getCurrentPosition(position => {
+        //console.log("HERE")
+        // {
+        //   {
+        //    console.log(position)
+        //     console.log("latitude: ", position.coords.latitude)
+        //     console.log("longitude: ", position.coords.longitude)--
+        //   }
+        // }
+
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         document.getElementById('lat').textContent = latitude;

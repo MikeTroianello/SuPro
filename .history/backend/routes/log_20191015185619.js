@@ -207,7 +207,7 @@ router.post('/create', (req, res, next) => {
   const countAddress = async () => {
     const address = getAddress()
       .then(response => {
-        console.log('ADDRESS', response.data);
+        console.log(response.data);
         // console.log(response.data.address.adminName2);
         // console.log(response.data.address.adminName1);
 

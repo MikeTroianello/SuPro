@@ -28,11 +28,12 @@ export default class Create extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log('SUBMITTING');
-    let info = this.state;
     axios
-      .post('http://localhost:5000/log/create', {
-        info
-      })
+      .post(
+        'http://localhost:5000/log/create',
+        { info: this.state },
+        { withCredentials: true }
+      )
       .then(results => {
         console.log(results);
         this.props.history.push('/');

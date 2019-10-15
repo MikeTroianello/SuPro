@@ -78,6 +78,7 @@ class App extends React.Component {
         message: result.data.message
       });
       localStorage.removeItem('user');
+      this.props.history.push('/');
     });
   };
 

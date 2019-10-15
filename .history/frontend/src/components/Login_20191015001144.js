@@ -25,14 +25,14 @@ export default class Login extends Component {
       })
       .then(results => {
         console.log('RESULTS', results.data);
-        // this.setState(
-        //   {
-        //     user: results.data.username
-        //   },
-        //   () => {
-        //     console.log(this.state);
-        //   }
-        // );
+        this.setState(
+          {
+            user: results.data.username
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
         localStorage.setItem('user', JSON.stringify(results.data));
         this.props.setUser();
         this.props.history.push('/');

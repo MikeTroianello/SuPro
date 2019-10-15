@@ -28,8 +28,8 @@ export default function Navbar(props) {
           <Link to='/view'>View</Link>
         </div>
         {props.info.username && (
-          <Link to='/' onClick={props.logout}>
-            Logout
+          <Link to='/'>
+            <p onClick={props.logout}>Logout</p>
           </Link>
         )}
       </div>

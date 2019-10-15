@@ -32,7 +32,7 @@ class App extends React.Component {
         message: `Hello ${storedUser.username}`
       });
 
-      // this.login(storedUser);
+      this.login(storedUser);
     }
   }
 

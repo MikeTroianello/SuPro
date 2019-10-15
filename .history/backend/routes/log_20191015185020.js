@@ -207,7 +207,7 @@ router.post('/create', (req, res, next) => {
   const countAddress = async () => {
     const address = getAddress()
       .then(response => {
-        console.log('ADDRESS', response.data);
+        console.log(response.data);
         // console.log(response.data.address.adminName2);
         // console.log(response.data.address.adminName1);
 
@@ -230,17 +230,17 @@ router.post('/create', (req, res, next) => {
         const log = {
           mood: mood,
           productivity: productivity,
-          // weather: weather,
-          // externalFactors: externalFactors,
+          weather: weather,
+          externalFactors: externalFactors,
           journal: journal,
           privateJournal: privateJournal,
           latitude: latitude,
           longitude: longitude,
           county: response.data.address.adminName2,
           state: response.data.address.adminName1,
-          // zip: zip,
+          zip: zip,
           hideCreator: hideCreator,
-          // creatorId: req.user._id,
+          creatorId: req.user._id,
           dayOfWeek: a[0],
           month: a[1],
           dayOfMonth: Number(a[2]),

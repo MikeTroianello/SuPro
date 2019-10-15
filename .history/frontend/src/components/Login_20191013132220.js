@@ -18,23 +18,24 @@ export default class Login extends Component {
   handleSubmit = e => {
     e.preventDefault();
     axios
-      .post('http://localhost:5000/login', {
-        username: this.state.username,
-        password: this.state.password,
-        withCredentials: true
-      })
+      .post(
+        'http://localhost:5000/login',
+        { username: this.state.username },
+        { password: this.state.password },
+        { withCredentials: true }
+      )
       .then(results => {
-        console.log('RESULTS', results.data);
-        // this.setState(
-        //   {
-        //     user: results.data.username
-        //   },
-        //   () => {
-        //     console.log(this.state);
-        //   }
-        // );
-        localStorage.setItem('user', JSON.stringify(results.data));
-        this.props.setUser();
+        console.log('RESULTS', results);
+        this.setState(
+          {
+            user: results.data.username
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
+        localStorage.setItem('user', JSON.stringify(results.data.username));
+        this.props.login();
         this.props.history.push('/');
       });
   };

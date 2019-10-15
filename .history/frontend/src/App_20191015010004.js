@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -42,7 +47,8 @@ class App extends React.Component {
 
     this.setState({
       username: storedUser.username,
-      message: `Hello ${storedUser.username}`
+      message: `Hello ${storedUser.username}`,
+      logout: false
     });
   };
 
@@ -75,7 +81,8 @@ class App extends React.Component {
       console.log(result);
       this.setState({
         username: null,
-        message: result.data.message
+        message: result.data.message,
+        logout: true
       });
       localStorage.removeItem('user');
     });
@@ -83,6 +90,9 @@ class App extends React.Component {
 
   render() {
     console.log(this.state.user);
+    if (this.state.logout) {
+      return <Redirect to='/' />;
+    }
     return (
       <Router>
         <div className='App'>

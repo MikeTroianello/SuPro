@@ -32,7 +32,7 @@ class App extends React.Component {
         message: `Hello ${storedUser.username}`
       });
 
-      // this.login(storedUser);
+      this.login(storedUser);
     }
   }
 
@@ -49,10 +49,7 @@ class App extends React.Component {
   login = storedUser => {
     console.log('LOGIN');
     axios
-      .get(`http://localhost:5000/login`, {
-        theUser: storedUser,
-        withCredentials: true
-      })
+      .get(`http://localhost:5000/isLoggedIn/${storedUser._id}`)
       .then(result => {
         console.log(result.data);
         // if (result.data.user) {

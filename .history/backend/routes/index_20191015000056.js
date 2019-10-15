@@ -18,7 +18,12 @@ router.get('/isLoggedIn/:id', (req, res, next) => {
   console.log('IS LOGGED IN', req.params.id);
   User.findById(req.params.id).then(result => {
     console.log(`we found you, ${result.username}`);
-
+    passport.authenticate('local', {
+      successRedirect: '/profile',
+      failureRedirect: '/login',
+      failureFlash: true,
+      passReqToCallback: true
+    });
     console.log('???????');
   });
 });
@@ -96,6 +101,18 @@ router.post('/signup', (req, res, next) => {
     });
 });
 
+//POST Login User
+
+// router.post(
+//   '/login',
+//   passport.authenticate('local', {
+//     successRedirect: '/profile',
+//     failureRedirect: '/login',
+//     failureFlash: true,
+//     passReqToCallback: true
+//   })
+// );
+
 //POST New Login User
 
 router.post('/login', (req, res, next) => {
@@ -121,7 +138,7 @@ router.post('/login', (req, res, next) => {
         res.status(500).json({ message: 'Session save went bad.' });
         return;
       }
-      console.log('LOGGED IN', theUser, 'REQ.USER', req.user);
+
       // We are now logged in (that's why we can also send req.user)
       res.status(200).json(theUser);
     });
