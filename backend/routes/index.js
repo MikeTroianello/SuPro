@@ -80,13 +80,15 @@ router.post('/signup', (req, res, next) => {
         if (err) {
           res.json({ message: err });
         } else {
-          console.log('SAVED');
-          passport.authenticate('local')(req, res, function() {
-            console.log('complete', newUser);
+          req.login(newUser, err => {
+            if (err) {
+              res.status(500).json({ message: 'Login after signup went bad.' });
+              return;
+            }
 
             const { username, _id, gender } = newUser;
             const userToLocalStorage = { username, _id, gender };
-            res.json({
+            res.status(200).json({
               message: 'User has been created',
               user: userToLocalStorage
             });
@@ -101,15 +103,52 @@ router.post('/signup', (req, res, next) => {
 
 //POST Login User
 
-router.post(
-  '/login',
-  passport.authenticate('local', {
-    successRedirect: '/profile',
-    failureRedirect: '/login',
-    failureFlash: true,
-    passReqToCallback: true
-  })
-);
+// router.post(
+//   '/login',
+//   passport.authenticate('local', {
+//     successRedirect: '/profile',
+//     failureRedirect: '/login',
+//     failureFlash: true,
+//     passReqToCallback: true
+//   })
+// );
+
+//POST New Login User
+
+router.post('/login', (req, res, next) => {
+  console.log('NEW LOGIN ATTEMPT', req.body);
+  passport.authenticate('local', (err, theUser, failureDetails) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ message: 'Something went wrong authenticating user' });
+      return;
+    }
+
+    if (!theUser) {
+      // "failureDetails" contains the error messages
+      // from our logic in "LocalStrategy" { message: '...' }.
+      res.status(401).json(failureDetails);
+      return;
+    }
+
+    // save user in session
+    req.login(theUser, err => {
+      if (err) {
+        res.status(500).json({ message: 'Session save went bad.' });
+        return;
+      }
+
+      // We are now logged in (that's why we can also send req.user)
+      res.status(200).json(theUser);
+    });
+  })(req, res, next);
+});
+
+///END
+///////
+///////////
+///////////////
 
 router.get('/profile', (req, res) => {
   console.log('YEET', req);

@@ -16,6 +16,8 @@ const flash = require('connect-flash');
 // const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
 
+// require('./configs/passport');
+
 const User = require('./models/User');
 
 mongoose
@@ -54,6 +56,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Passport
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(
   session({
