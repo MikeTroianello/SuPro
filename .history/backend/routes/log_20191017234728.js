@@ -8,23 +8,14 @@ const ensureLogin = require('connect-ensure-login');
 const axios = require('axios');
 
 //POST Create a Log *NOT FINISHED*
-router.post('/create', (req, res, next) => {
+router.post('/create', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   console.log(req.body);
-
-  const {
-    mood,
-    productivity,
-    journal,
-    privateJournal,
-    hideCreator,
-    latitude,
-    longitude
-  } = req.body.info;
+  console.log(req.user);
 
   const getAddress = () => {
     try {
       return axios.get(
-        `http://api.geonames.org/findNearestAddressJSON?lat=${latitude}&lng=${longitude}&username=${process.env.GEO_NAME}`
+        `http://api.geonames.org/findNearestAddressJSON?lat=${req.body.latitude}&lng=${req.body.longitude}&username=${process.env.GEO_NAME}`
       );
     } catch (error) {
       console.error(error);
@@ -34,7 +25,7 @@ router.post('/create', (req, res, next) => {
   const getWeather = () => {
     try {
       return axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.WEATHER_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${req.body.latitude}&lon=${req.body.longitude}&appid=${process.env.WEATHER_KEY}`
       );
     } catch (error) {
       console.error(error);
@@ -70,41 +61,21 @@ router.post('/create', (req, res, next) => {
         console.log(response.data.address.adminName2);
         console.log(response.data.address.adminName1);
 
-        var now = new Date();
-
-        function dayOfYear(now) {
-          var start = new Date(now.getFullYear(), 0, 0);
-          var diff =
-            now -
-            start +
-            (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-          var oneDay = 1000 * 60 * 60 * 24;
-          var day = Math.floor(diff / oneDay);
-          console.log('Day of year: ' + day);
-          return day;
-        }
-
-        let a = now.toString().split(' ');
-
         const log = {
-          mood: mood,
-          productivity: productivity,
-          // weather: weather,
-          // externalFactors: externalFactors,
-          journal: journal,
-          privateJournal: privateJournal,
-          latitude: latitude,
-          longitude: longitude,
-          county: response.data.address.adminName2,
+          mood: req.body.mood,
+          productivity: req.body.productivity,
+          weatherType: weatherType,
+          weatherCode: weatherCode,
+          externalFactors: req.body.externalFactors,
+          journal: req.body.journal,
+          privateJournal: req.body.privateJournal,
+          latitude: req.body.latitude,
+          longitude: req.body.longitude,
+          city: response.data.address.adminName2,
           state: response.data.address.adminName1,
-          // zip: zip,
-          hideCreator: hideCreator,
-          // creatorId: req.user._id,
-          dayOfWeek: a[0],
-          month: a[1],
-          dayOfMonth: Number(a[2]),
-          dayOfYear: dayOfYear(now),
-          year: Number(a[3])
+          zip: req.body.zip,
+          hideCreator: req.body.hideCreator,
+          creatorId: req.user._id
         };
 
         console.log(log);

@@ -70,22 +70,6 @@ router.post('/create', (req, res, next) => {
         console.log(response.data.address.adminName2);
         console.log(response.data.address.adminName1);
 
-        var now = new Date();
-
-        function dayOfYear(now) {
-          var start = new Date(now.getFullYear(), 0, 0);
-          var diff =
-            now -
-            start +
-            (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-          var oneDay = 1000 * 60 * 60 * 24;
-          var day = Math.floor(diff / oneDay);
-          console.log('Day of year: ' + day);
-          return day;
-        }
-
-        let a = now.toString().split(' ');
-
         const log = {
           mood: mood,
           productivity: productivity,
