@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
 
-// const flash = require('connect-flash');
+const flash = require('connect-flash');
 // const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
 
@@ -69,7 +69,7 @@ app.use(
   })
 );
 
-// app.use(flash());
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());

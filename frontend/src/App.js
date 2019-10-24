@@ -87,7 +87,7 @@ class App extends React.Component {
       <Router>
         <div className='App'>
           <Navbar info={this.state} logout={this.logout} />
-          <h1>FRONTEND</h1>
+          <h1 className='frontend'>THIS IS THE FRONTEND</h1>
         </div>
         <Switch>
           <Route exact path='/' component={Home} />
