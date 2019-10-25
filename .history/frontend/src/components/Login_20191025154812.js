@@ -7,8 +7,8 @@ export default class Login extends Component {
     super(props);
     this.state = {
       user: '',
-      username: 'mike',
-      password: 'mike'
+      username: '',
+      password: ''
     };
     this.service = new AuthService();
   }
@@ -29,9 +29,10 @@ export default class Login extends Component {
       .then(results => {
         this.setState({ username: '', password: '' });
         console.log('RESULTS', results);
+        console.log('RESULTS.DATA', results.data);
         console.log('RESULTS.USERNAME', results.username);
         this.props.getUser(results);
-        localStorage.setItem('user', JSON.stringify(results));
+        // localStorage.setItem('user', JSON.stringify(results.data));
         // this.props.setUser();
         this.props.history.push('/');
       })

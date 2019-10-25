@@ -14,14 +14,14 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    loggedInUser: null,
+    username: null,
     message: 'Not logged in'
   };
 
   componentDidMount() {
     console.log(
-      'TESTING LOCAL STORAGE'
-      // JSON.parse(localStorage.getItem('user'))
+      'TESTING LOCAL STORAGE',
+      JSON.parse(localStorage.getItem('user'))
     );
 
     // let storedUser = JSON.parse(localStorage.getItem('user'));
@@ -32,14 +32,14 @@ class App extends React.Component {
     //     message: `Hello ${storedUser.username}`
     //   });
 
-    // this.login(storedUser);
-    // }
+      // this.login(storedUser);
+    }
   }
 
   setUser = () => {
     console.log('SETTING USER');
     let storedUser = JSON.parse(localStorage.getItem('user'));
-    console.log('LOCAL STORAGE: ', storedUser);
+
     this.setState(
       {
         username: storedUser.username,
@@ -86,18 +86,6 @@ class App extends React.Component {
     });
   };
 
-  getTheUser = userObj => {
-    this.setState(
-      {
-        loggedInUser: userObj,
-        message: `Hello, ${userObj.username}!`
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
-  };
-
   render() {
     console.log(this.state.user);
     return (
@@ -111,12 +99,12 @@ class App extends React.Component {
           <Route
             exact
             path='/signup'
-            render={props => <Signup {...props} getUser={this.getTheUser} />}
+            render={props => <Signup {...props} setUser={this.setUser} />}
           />
           <Route
             exact
             path='/login'
-            render={props => <Login {...props} getUser={this.getTheUser} />}
+            render={props => <Login {...props} setUser={this.setUser} />}
           />
           <Route exact path='/create' component={Create} />
           <Route exact path='/view' component={View} />

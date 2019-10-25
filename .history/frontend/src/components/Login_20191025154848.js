@@ -7,8 +7,8 @@ export default class Login extends Component {
     super(props);
     this.state = {
       user: '',
-      username: 'mike',
-      password: 'mike'
+      username: '',
+      password: ''
     };
     this.service = new AuthService();
   }

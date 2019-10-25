@@ -3,18 +3,18 @@ import axios from 'axios';
 import AuthService from './auth/auth-service';
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.service = new AuthService();
+  constructor(props){
+    super(props)
+    this.service = new AuthService()
   }
 
+
   checkIfLoggedIn = () => {
-    this.service
-      .loggedin()
-      .then(results => {
-        console.log(results);
+    this.service.loggedin()
+      .then(results=>{
+        console.log(results)
       })
-      .catch(error => console.log(error));
+    )
   };
   // checkIfLoggedIn = () => {
   //   axios.get('http://localhost:5000/isLoggedIn').then(results => {

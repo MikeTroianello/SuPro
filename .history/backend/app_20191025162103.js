@@ -93,7 +93,7 @@ app.use(
 const index = require('./routes/index');
 app.use('/api', index);
 const log = require('./routes/log');
-app.use('/api/log', log);
+app.use('/api/log', index);
 const authRoutes = require('./routes/auth-routes');
 app.use('/api', authRoutes);
 

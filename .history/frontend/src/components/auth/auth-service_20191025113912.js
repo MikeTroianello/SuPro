@@ -15,9 +15,9 @@ class AuthService {
   //     .then(response => response.data);
   // };
 
-  loggedin = () => {
-    return this.service.get('/loggedin').then(response => response.data);
-  };
+  // loggedin = () => {
+  //   return this.service.get('/loggedin').then(response => response.data);
+  // };
 
   login = (username, password) => {
     return this.service

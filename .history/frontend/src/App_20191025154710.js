@@ -90,7 +90,7 @@ class App extends React.Component {
     this.setState(
       {
         loggedInUser: userObj,
-        message: `Hello, ${userObj.username}!`
+        message: `Hello, ${userObj.username}`
       },
       () => {
         console.log(this.state);
@@ -111,12 +111,12 @@ class App extends React.Component {
           <Route
             exact
             path='/signup'
-            render={props => <Signup {...props} getUser={this.getTheUser} />}
+            render={props => <Signup {...props} setUser={this.setUser} />}
           />
           <Route
             exact
             path='/login'
-            render={props => <Login {...props} getUser={this.getTheUser} />}
+            render={props => <Login {...props} getTheUser={this.setUser} />}
           />
           <Route exact path='/create' component={Create} />
           <Route exact path='/view' component={View} />

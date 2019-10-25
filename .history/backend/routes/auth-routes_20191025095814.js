@@ -68,8 +68,7 @@ authRoutes.post('/signup', (req, res, next) => {
 });
 
 authRoutes.post('/login', (req, res, next) => {
-  console.log('LOGGING IN');
-  console.log(req.body);
+  // console.log('LOGGING IN');
   passport.authenticate('local', (err, theUser, failureDetails) => {
     if (err) {
       res
@@ -91,10 +90,10 @@ authRoutes.post('/login', (req, res, next) => {
         res.status(500).json({ message: 'Session save went bad.' });
         return;
       }
-      console.log('here');
+      console.log('LOGGED IN', theUser);
       // We are now logged in (that's why we can also send req.user)
-      res.status(200).json(theUser);
-      // res.redirect('/api/loggedin');
+      // res.status(200).json(theUser);
+      res.redirect('/api/loggedin');
     });
   })(req, res, next);
 });

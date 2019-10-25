@@ -10,8 +10,8 @@ export default class Login extends Component {
       username: 'mike',
       password: 'mike'
     };
-    this.service = new AuthService();
   }
+  service = new AuthService();
 
   handleChange = e => {
     e.preventDefault();
