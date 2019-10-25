@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import AuthService from '../components/auth/auth-service';
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: '',
-      username: '',
-      password: ''
-    };
-    this.service = new AuthService();
-  }
+  state = {
+    user: '',
+    username: '',
+    password: ''
+  };
 
   handleChange = e => {
     e.preventDefault();
@@ -22,19 +17,26 @@ export default class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const username = this.state.username;
-    const password = this.state.password;
-    this.service
-      .login(username, password)
+    axios
+      .post('http://localhost:5000/api/login', {
+        username: this.state.username,
+        password: this.state.password,
+        withCredentials: true
+      })
       .then(results => {
-        this.setState({ username: '', password: '' });
-        // this.props.getUser(response);
+        console.log('RESULTS', results.data);
+        // this.setState(
+        //   {
+        //     user: results.data.username
+        //   },
+        //   () => {
+        //     console.log(this.state);
+        //   }
+        // );
         localStorage.setItem('user', JSON.stringify(results.data));
         this.props.setUser();
         this.props.history.push('/');
-      })
-      .catch(error => console.log(error));
-    // );
+      });
   };
 
   render() {

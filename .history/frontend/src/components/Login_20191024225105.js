@@ -3,15 +3,11 @@ import axios from 'axios';
 import AuthService from '../components/auth/auth-service';
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: '',
-      username: '',
-      password: ''
-    };
-    this.service = new AuthService();
-  }
+  state = {
+    user: '',
+    username: '',
+    password: ''
+  };
 
   handleChange = e => {
     e.preventDefault();

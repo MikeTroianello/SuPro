@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+const User = require('../models/User');
+
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
 const jwt = require('jsonwebtoken');
 const ensureLogin = require('connect-ensure-login');
-const User = require('../models/User');
 
 //ALL SIGNUP/LOGIN ROUTES WILL BE HERE
 
@@ -108,38 +109,38 @@ router.post('/signup', (req, res, next) => {
 
 //POST New Login User
 
-// router.post('/login', (req, res, next) => {
-//   passport.authenticate('local', (err, theUser, failureDetails) => {
-//     if (err) {
-//       res
-//         .status(500)
-//         .json({ message: 'Something went wrong authenticating user' });
-//       return;
-//     }
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, theUser, failureDetails) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ message: 'Something went wrong authenticating user' });
+      return;
+    }
 
-//     if (!theUser) {
-//       // "failureDetails" contains the error messages
-//       // from our logic in "LocalStrategy" { message: '...' }.
-//       res.status(401).json(failureDetails);
-//       return;
-//     }
+    if (!theUser) {
+      // "failureDetails" contains the error messages
+      // from our logic in "LocalStrategy" { message: '...' }.
+      res.status(401).json(failureDetails);
+      return;
+    }
 
-//     // save user in session
-//     req.login(theUser, err => {
-//       if (err) {
-//         res.status(500).json({ message: 'Session save went bad.' });
-//         return;
-//       }
+    // save user in session
+    req.login(theUser, err => {
+      if (err) {
+        res.status(500).json({ message: 'Session save went bad.' });
+        return;
+      }
 
-//       console.log('theUser', theUser);
-//       console.log('req.user', req.user);
+      console.log('theUser', theUser);
+      console.log('req.user', req.user);
 
-//       // We are now logged in (that's why we can also send req.user)
-//       // res.redirect('/isLoggedIn');
-//       res.status(200).json(theUser);
-//     });
-//   })(req, res, next);
-// });
+      // We are now logged in (that's why we can also send req.user)
+      // res.redirect('/isLoggedIn');
+      res.status(200).json(theUser);
+    });
+  })(req, res, next);
+});
 
 ///END
 ///////

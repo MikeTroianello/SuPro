@@ -3,15 +3,11 @@ import axios from 'axios';
 import AuthService from '../components/auth/auth-service';
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: '',
-      username: '',
-      password: ''
-    };
-    this.service = new AuthService();
-  }
+  state = {
+    user: '',
+    username: '',
+    password: ''
+  };
 
   handleChange = e => {
     e.preventDefault();
@@ -22,6 +18,7 @@ export default class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    axios;
     const username = this.state.username;
     const password = this.state.password;
     this.service

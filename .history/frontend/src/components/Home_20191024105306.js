@@ -12,7 +12,7 @@ export default class Home extends Component {
     return (
       <div>
         Home Page
-        <button onClick={this.checkIfLoggedIn}>Check if logged in</button>
+        <button onClick={this.checkIfLoggedIn}></button>
       </div>
     );
   }

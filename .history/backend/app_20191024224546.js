@@ -23,7 +23,7 @@ require('./configs/passport');
 // IF YOU STILL DIDN'T, GO TO 'configs/passport.js' AND UN-COMMENT OUT THE WHOLE FILE
 
 mongoose
-  .connect('mongodb://localhost/SuPro', {
+  .connect('mongodb://localhost/project-SuPro', {
     useNewUrlParser: true
   })
   .then(x => {

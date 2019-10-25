@@ -10,7 +10,7 @@ const axios = require('axios');
 //POST Create a Log *NOT FINISHED*
 router.post('/create', (req, res, next) => {
   console.log(req.body);
-  console.log('user', req.user);
+  console.log(req.user);
 
   const {
     mood,
