@@ -9,17 +9,17 @@ export default function Navbar(props) {
         <div>
           <Link to='/'>Home</Link>
         </div>
-        {!props.info.loggedInUser && (
+        {!props.info.username && (
           <div>
             <Link to='/login'>Login</Link>
           </div>
         )}
-        {!props.info.loggedInUser && (
+        {!props.info.username && (
           <div>
             <Link to='/signup'>Signup</Link>
           </div>
         )}
-        {props.info.loggedInUser && (
+        {props.info.username && (
           <div>
             <Link to='/create'>Create</Link>
           </div>
@@ -27,7 +27,7 @@ export default function Navbar(props) {
         <div>
           <Link to='/view'>View</Link>
         </div>
-        {props.info.loggedInUser && (
+        {props.info.username && (
           <Link to='/' onClick={props.logout}>
             Logout
           </Link>

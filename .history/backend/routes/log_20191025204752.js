@@ -91,8 +91,7 @@ router.post('/create', (req, res, next) => {
           const log = {
             mood: mood,
             productivity: productivity,
-            weatherType: weatherType,
-            weatherCode: weatherCode,
+            // weather: weather,
             // externalFactors: externalFactors,
             journal: journal,
             privateJournal: privateJournal,
@@ -102,7 +101,7 @@ router.post('/create', (req, res, next) => {
             state: response.data.address.adminName1,
             // zip: zip,
             hideCreator: hideCreator,
-            creatorId: req.user._id,
+            // creatorId: req.user._id,
             dayOfWeek: a[0],
             month: a[1],
             dayOfMonth: Number(a[2]),

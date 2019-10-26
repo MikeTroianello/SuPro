@@ -10,122 +10,120 @@ const axios = require('axios');
 
 //POST Create a Log *NOT FINISHED*
 router.post('/create', (req, res, next) => {
-  // console.log(req.body);
-  console.log('LOGGING!!!! user', req.user);
-  if (req.isAuthenticated()) {
-    const {
-      mood,
-      productivity,
-      journal,
-      privateJournal,
-      hideCreator,
-      latitude,
-      longitude
-    } = req.body.info;
+  console.log(req.body);
+  console.log('user', req.user);
 
-    const getAddress = () => {
-      try {
-        return axios.get(
-          `http://api.geonames.org/findNearestAddressJSON?lat=${latitude}&lng=${longitude}&username=${process.env.GEO_NAME}`
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const {
+    mood,
+    productivity,
+    journal,
+    privateJournal,
+    hideCreator,
+    latitude,
+    longitude
+  } = req.body.info;
 
-    const getWeather = () => {
-      try {
-        return axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.WEATHER_KEY}`
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const getAddress = () => {
+    try {
+      return axios.get(
+        `http://api.geonames.org/findNearestAddressJSON?lat=${latitude}&lng=${longitude}&username=${process.env.GEO_NAME}`
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const axiosWeather = async () => {
-      const weather = getWeather()
-        .then(response => {
-          console.log(response.data.weather);
-          console.log(response.data.weather[0]);
-          console.log(response.data.weather[0].id); //USE THIS ONE
-          console.log(response.data.weather[0].main); //USE THIS ONE
-          const weatherStuff = {
-            type: response.data.weather[0].main,
-            code: response.data.weather[0].id
-          };
-          console.log('WEATHER STUFF', weatherStuff);
-          countAddress(weatherStuff);
-          // res.send(response.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    };
+  const getWeather = () => {
+    try {
+      return axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.WEATHER_KEY}`
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const countAddress = async weatherStuff => {
-      const weatherType = weatherStuff.type;
-      const weatherCode = weatherStuff.code;
-      console.log('=-=-=-=-=-=-=-', weatherType, weatherCode);
-      const address = getAddress()
-        .then(response => {
-          console.log(response.data.address.adminName2);
-          console.log(response.data.address.adminName1);
+  const axiosWeather = async () => {
+    const weather = getWeather()
+      .then(response => {
+        console.log(response.data.weather);
+        console.log(response.data.weather[0]);
+        console.log(response.data.weather[0].id); //USE THIS ONE
+        console.log(response.data.weather[0].main); //USE THIS ONE
+        const weatherStuff = {
+          type: response.data.weather[0].main,
+          code: response.data.weather[0].id
+        };
 
-          var now = new Date();
+        countAddress(weatherStuff);
+        // res.send(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-          function dayOfYear(now) {
-            var start = new Date(now.getFullYear(), 0, 0);
-            var diff =
-              now -
-              start +
-              (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-            var oneDay = 1000 * 60 * 60 * 24;
-            var day = Math.floor(diff / oneDay);
-            console.log('Day of year: ' + day);
-            return day;
-          }
+  const countAddress = async weatherStuff => {
+    const weatherType = weatherStuff.type;
+    const weatherCode = weatherStuff.code;
+    console.log('=-=-=-=-=-=-=-', weatherType, weatherCode);
+    const address = getAddress()
+      .then(response => {
+        console.log(response.data.address.adminName2);
+        console.log(response.data.address.adminName1);
 
-          let a = now.toString().split(' ');
+        var now = new Date();
 
-          const log = {
-            mood: mood,
-            productivity: productivity,
-            weatherType: weatherType,
-            weatherCode: weatherCode,
-            // externalFactors: externalFactors,
-            journal: journal,
-            privateJournal: privateJournal,
-            latitude: latitude,
-            longitude: longitude,
-            county: response.data.address.adminName2,
-            state: response.data.address.adminName1,
-            // zip: zip,
-            hideCreator: hideCreator,
-            creatorId: req.user._id,
-            dayOfWeek: a[0],
-            month: a[1],
-            dayOfMonth: Number(a[2]),
-            dayOfYear: dayOfYear(now),
-            year: Number(a[3])
-          };
+        function dayOfYear(now) {
+          var start = new Date(now.getFullYear(), 0, 0);
+          var diff =
+            now -
+            start +
+            (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
+          var oneDay = 1000 * 60 * 60 * 24;
+          var day = Math.floor(diff / oneDay);
+          console.log('Day of year: ' + day);
+          return day;
+        }
 
-          console.log(log);
+        let a = now.toString().split(' ');
 
-          Log.create(log)
-            .then(createdLog => {
-              res.send(createdLog);
-            })
-            .catch(err => {
-              res.send(err);
-            });
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    };
-    axiosWeather();
-  }
+        const log = {
+          mood: mood,
+          productivity: productivity,
+          // weather: weather,
+          // externalFactors: externalFactors,
+          journal: journal,
+          privateJournal: privateJournal,
+          latitude: latitude,
+          longitude: longitude,
+          county: response.data.address.adminName2,
+          state: response.data.address.adminName1,
+          // zip: zip,
+          hideCreator: hideCreator,
+          // creatorId: req.user._id,
+          dayOfWeek: a[0],
+          month: a[1],
+          dayOfMonth: Number(a[2]),
+          dayOfYear: dayOfYear(now),
+          year: Number(a[3])
+        };
+
+        console.log(log);
+
+        Log.create(log)
+          .then(createdLog => {
+            res.send(createdLog);
+          })
+          .catch(err => {
+            res.send(err);
+          });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+  axiosWeather();
 });
 
 // GET See all logs from everyone

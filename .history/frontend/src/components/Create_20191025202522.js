@@ -4,9 +4,9 @@ import { Redirect } from 'react-router-dom';
 import AuthService from '../components/auth/auth-service';
 
 export default class Create extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  constructor(props){
+    super(props)
+    state = {
       mood: null,
       productivity: null,
       journal: null,
@@ -48,11 +48,9 @@ export default class Create extends Component {
     e.preventDefault();
     console.log('SUBMITTING');
     let info = this.state;
-    this.service.create(info).then(results => {
-      console.log('WE DID IT', results);
-      this.props.history.push('/');
-    });
+    this
   };
+    this.props.history.push('/');
 
   render() {
     //THIS FINDS LATITUDE AND LONGITUDE

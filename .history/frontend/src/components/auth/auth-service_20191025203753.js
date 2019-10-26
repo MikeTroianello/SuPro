@@ -25,9 +25,9 @@ class AuthService {
       .then(response => response.data);
   };
 
-  create = info => {
+  create = () => {
     return this.service
-      .post('/log/create', { info })
+      .post('/create', { username, password })
       .then(response => response.data);
   };
 

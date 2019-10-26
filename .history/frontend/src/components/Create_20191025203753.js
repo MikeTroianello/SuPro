@@ -6,7 +6,7 @@ import AuthService from '../components/auth/auth-service';
 export default class Create extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    state = {
       mood: null,
       productivity: null,
       journal: null,

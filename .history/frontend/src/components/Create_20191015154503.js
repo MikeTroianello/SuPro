@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import AuthService from '../components/auth/auth-service';
 
 export default class Create extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mood: null,
-      productivity: null,
-      journal: null,
-      privateJournal: false,
-      hideCreator: false,
-      latitude: null,
-      longitude: null
-    };
-    this.service = new AuthService();
-  }
+  state = {
+    mood: null,
+    productivity: null,
+    journal: null,
+    privateJournal: false,
+    hideCreator: false,
+    latitude: null,
+    longitude: null
+  };
 
   handleChange = e => {
     console.log('E', e.target.value);
@@ -30,28 +25,18 @@ export default class Create extends Component {
     );
   };
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   console.log('SUBMITTING');
-  //   let info = this.state;
-  //   axios
-  //     .post('http://localhost:5000/log/create', {
-  //       info
-  //     })
-  //     .then(results => {
-  //       console.log(results);
-  //       this.props.history.push('/');
-  //     });
-  // };
-
   handleSubmit = e => {
     e.preventDefault();
     console.log('SUBMITTING');
     let info = this.state;
-    this.service.create(info).then(results => {
-      console.log('WE DID IT', results);
-      this.props.history.push('/');
-    });
+    axios
+      .post('http://localhost:5000/log/create', {
+        info
+      })
+      .then(results => {
+        console.log(results);
+        this.props.history.push('/');
+      });
   };
 
   render() {
