@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import AuthService from './auth/auth-service';
 
 export default class Test extends Component {
-  service = new AuthService();
-
   checkIfLoggedIn = () => {
     this.service
       .loggedin()

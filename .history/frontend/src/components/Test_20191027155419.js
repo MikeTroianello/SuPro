@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import AuthService from './auth/auth-service';
 
 export default class Test extends Component {
-  service = new AuthService();
-
   checkIfLoggedIn = () => {
     this.service
       .loggedin()
@@ -14,12 +11,6 @@ export default class Test extends Component {
   };
 
   render() {
-    return (
-      <div>
-        <button onClick={this.checkIfLoggedIn}>
-          Check if logged in Without CONSTRUCTOR
-        </button>
-      </div>
-    );
+    return <div></div>;
   }
 }
