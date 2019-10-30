@@ -7,8 +7,6 @@ export default class View extends Component {
     logs: null
   };
 
-  service = new AuthService();
-
   componentDidMount() {
     let today = new Date();
     axios.get(`http://localhost:5000/${today}`);

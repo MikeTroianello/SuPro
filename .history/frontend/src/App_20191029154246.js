@@ -8,10 +8,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Create from './components/Create';
 import View from './components/View';
-import Profile from './components/Profile';
 import Navbar from './components/Navbar';
-
-import AuthService from './components/auth/auth-service';
 
 import './App.css';
 
@@ -21,25 +18,22 @@ class App extends React.Component {
     message: 'Not logged in'
   };
 
-  service = new AuthService();
-
   componentDidMount() {
-    if (!this.state.loggedInUser) {
-      this.service
-        .loggedin()
-        .then(response => {
-          console.log('RESPONSE:', response);
-          this.setState({
-            loggedInUser: response,
-            message: `Welcome back, ${response.username}`
-          });
-        })
-        .catch(err => {
-          this.setState({
-            loggedInUser: false
-          });
-        });
-    }
+    console.log(
+      'TESTING LOCAL STORAGE'
+      // JSON.parse(localStorage.getItem('user'))
+    );
+
+    // let storedUser = JSON.parse(localStorage.getItem('user'));
+
+    // if (storedUser) {
+    //   this.setState({
+    //     username: storedUser.username,
+    //     message: `Hello ${storedUser.username}`
+    //   });
+
+    // this.login(storedUser);
+    // }
   }
 
   setUser = () => {
@@ -123,13 +117,6 @@ class App extends React.Component {
             exact
             path='/login'
             render={props => <Login {...props} getUser={this.getTheUser} />}
-          />
-          <Route
-            exact
-            path='/profile'
-            render={props => (
-              <Profile {...props} users={this.state.loggedInUser} />
-            )}
           />
           <Route exact path='/create' render={props => <Create {...props} />} />
           <Route exact path='/view' component={View} />

@@ -8,10 +8,9 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Create from './components/Create';
 import View from './components/View';
-import Profile from './components/Profile';
 import Navbar from './components/Navbar';
 
-import AuthService from './components/auth/auth-service';
+import AuthService from './components/auth/auth-service'
 
 import './App.css';
 
@@ -21,17 +20,16 @@ class App extends React.Component {
     message: 'Not logged in'
   };
 
-  service = new AuthService();
+  service = new AuthService()
 
   componentDidMount() {
     if (!this.state.loggedInUser) {
       this.service
         .loggedin()
         .then(response => {
-          console.log('RESPONSE:', response);
+          console.log("RESPONSE:", response)
           this.setState({
-            loggedInUser: response,
-            message: `Welcome back, ${response.username}`
+            loggedInUser: response
           });
         })
         .catch(err => {
@@ -39,7 +37,7 @@ class App extends React.Component {
             loggedInUser: false
           });
         });
-    }
+    }}
   }
 
   setUser = () => {
@@ -123,13 +121,6 @@ class App extends React.Component {
             exact
             path='/login'
             render={props => <Login {...props} getUser={this.getTheUser} />}
-          />
-          <Route
-            exact
-            path='/profile'
-            render={props => (
-              <Profile {...props} users={this.state.loggedInUser} />
-            )}
           />
           <Route exact path='/create' render={props => <Create {...props} />} />
           <Route exact path='/view' component={View} />

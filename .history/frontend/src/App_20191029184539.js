@@ -8,7 +8,6 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Create from './components/Create';
 import View from './components/View';
-import Profile from './components/Profile';
 import Navbar from './components/Navbar';
 
 import AuthService from './components/auth/auth-service';
@@ -31,7 +30,7 @@ class App extends React.Component {
           console.log('RESPONSE:', response);
           this.setState({
             loggedInUser: response,
-            message: `Welcome back, ${response.username}`
+            message: `Hello ${response.username}`
           });
         })
         .catch(err => {
@@ -123,13 +122,6 @@ class App extends React.Component {
             exact
             path='/login'
             render={props => <Login {...props} getUser={this.getTheUser} />}
-          />
-          <Route
-            exact
-            path='/profile'
-            render={props => (
-              <Profile {...props} users={this.state.loggedInUser} />
-            )}
           />
           <Route exact path='/create' render={props => <Create {...props} />} />
           <Route exact path='/view' component={View} />
