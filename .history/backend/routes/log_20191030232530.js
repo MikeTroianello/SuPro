@@ -190,7 +190,7 @@ router.get('/date/:year/:day', (req, res, next) => {
         return (log.year = req.params.year);
       });
       console.log('THIS IS THE CORRECT YEAR', specificDay);
-      res.json(specificDay);
+      res.json(dayLogs);
     })
     .catch(err => {
       next(err);

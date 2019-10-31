@@ -38,14 +38,17 @@ export default class View extends Component {
     return this.state.logs.map((log, key) => {
       return (
         <div key={key}>
-          {/* <h1>User's name: {lo}</h1> */}
+          <h1>User's name: {log}</h1>
           <h2>Weather: {log.weatherType}</h2>
           <h2>
             Location: {log.county}, {log.state}
           </h2>
           <h3>Mood: {log.mood}</h3>
           <h3>Productivity: {log.productivity}</h3>
-          <h3>Log: {log.journal}</h3>
+          {/* <h3>
+            (!log.privateJournal ? Journal: {log.journal} : The user has chosen
+            too keep this jounal private)
+          </h3> */}
         </div>
       );
     });

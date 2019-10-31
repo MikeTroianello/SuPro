@@ -32,9 +32,7 @@ class AuthService {
   };
 
   getDate = (year, dayOfYear) => {
-    return this.service
-      .get(`/log/date/${year}/${dayOfYear}`)
-      .then(response => response.data);
+    return this.service.get(`/log/date/${year}/${dayOfYear}`);
   };
 
   // logout = () => {

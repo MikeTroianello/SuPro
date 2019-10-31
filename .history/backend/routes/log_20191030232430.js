@@ -189,8 +189,7 @@ router.get('/date/:year/:day', (req, res, next) => {
       let specificDay = dayLogs.filter(log => {
         return (log.year = req.params.year);
       });
-      console.log('THIS IS THE CORRECT YEAR', specificDay);
-      res.json(specificDay);
+      res.send(dayLogs);
     })
     .catch(err => {
       next(err);

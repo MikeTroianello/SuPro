@@ -35,20 +35,13 @@ export default class View extends Component {
   }
 
   showLogs = () => {
-    return this.state.logs.map((log, key) => {
-      return (
-        <div key={key}>
-          {/* <h1>User's name: {lo}</h1> */}
-          <h2>Weather: {log.weatherType}</h2>
-          <h2>
-            Location: {log.county}, {log.state}
-          </h2>
-          <h3>Mood: {log.mood}</h3>
-          <h3>Productivity: {log.productivity}</h3>
-          <h3>Log: {log.journal}</h3>
-        </div>
-      );
+    return this.state.logs.map(log => {
+      return <h3>{log.journal}</h3>;
     });
+    // let theLogs = this.state.logs.map(log => {
+    //   return <h3>{log.journal}</h3>;
+    // });
+    // return theLogs;
   };
 
   render() {

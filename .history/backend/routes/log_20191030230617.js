@@ -185,12 +185,11 @@ router.get('/date/:year/:day', (req, res, next) => {
 
   Log.find({ dayOfYear: req.params.day })
     .then(dayLogs => {
-      console.log('THESE ARE THE DAY LOGS: ', dayLogs);
+      console.log(dayLogs);
       let specificDay = dayLogs.filter(log => {
         return (log.year = req.params.year);
       });
-      console.log('THIS IS THE CORRECT YEAR', specificDay);
-      res.json(specificDay);
+      res.send(dayLogs);
     })
     .catch(err => {
       next(err);

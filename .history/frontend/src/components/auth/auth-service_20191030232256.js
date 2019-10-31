@@ -32,6 +32,7 @@ class AuthService {
   };
 
   getDate = (year, dayOfYear) => {
+    console.log('WE ARE GETTING DATE');
     return this.service
       .get(`/log/date/${year}/${dayOfYear}`)
       .then(response => response.data);

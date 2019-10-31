@@ -38,7 +38,6 @@ export default class View extends Component {
     return this.state.logs.map((log, key) => {
       return (
         <div key={key}>
-          {/* <h1>User's name: {lo}</h1> */}
           <h2>Weather: {log.weatherType}</h2>
           <h2>
             Location: {log.county}, {log.state}
