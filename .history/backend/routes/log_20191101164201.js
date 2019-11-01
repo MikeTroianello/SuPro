@@ -155,7 +155,7 @@ router.get('/all/my-posts', ensureLogin.ensureLoggedIn(), (req, res, next) => {
       //   Math.round(100 * (moodAvg.reduce(reducer) / moodAvg.length)) / 100;
       // console.log('MOOD', mood);
       // const profile = { userLogs, mood };
-      res.send(userLogs);
+      res.send(userlogs);
     })
     .catch(err => {
       next(err);

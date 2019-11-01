@@ -28,7 +28,7 @@ export default class Profile extends Component {
           const reducer = (accumulator, currentValue) =>
             accumulator + currentValue;
           let moodArr = [];
-          let theLogs = results.map((log, key) => {
+          let theLogs = results.userLogs.map((log, key) => {
             moodArr.push(log.mood);
             return (
               <div key={key} className='log'>

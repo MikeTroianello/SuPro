@@ -60,7 +60,7 @@ export default class Create extends Component {
     let info = this.state;
     this.service.create(info).then(results => {
       console.log('WE DID IT', results);
-      this.props.history.push('/view');
+      this.props.history.push('/');
     });
   };
 
@@ -151,8 +151,8 @@ export default class Create extends Component {
         {/* <input type='hidden' value={latitude} name='latitude' />
         <input type='hidden' value={longitude} name='longitude' /> */}
         <button onClick={this.handleSubmit}>Log It</button>
-        {/* <div id='lat'>lat</div>
-        <div id='lon'>lon</div> */}
+        <div id='lat'>lat</div>
+        <div id='lon'>lon</div>
       </div>
     );
   }

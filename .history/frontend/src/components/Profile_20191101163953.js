@@ -7,7 +7,8 @@ export default class Profile extends Component {
     user: null,
     logs: null,
     moodAvg: [],
-    mood: 0
+    mood: 0,
+    thing: <div className='log'>HELLO</div>
   };
 
   service = new AuthService();
@@ -17,7 +18,7 @@ export default class Profile extends Component {
       .profile()
       .then(results => {
         console.log('RESULTS', results);
-        if (results.length < 1) {
+        if (results.userLogs.length < 1) {
           return (
             <div>
               No one has created a log today.{' '}
@@ -28,7 +29,7 @@ export default class Profile extends Component {
           const reducer = (accumulator, currentValue) =>
             accumulator + currentValue;
           let moodArr = [];
-          let theLogs = results.map((log, key) => {
+          let theLogs = results.userLogs.map((log, key) => {
             moodArr.push(log.mood);
             return (
               <div key={key} className='log'>

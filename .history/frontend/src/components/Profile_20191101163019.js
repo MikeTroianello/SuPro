@@ -7,7 +7,8 @@ export default class Profile extends Component {
     user: null,
     logs: null,
     moodAvg: [],
-    mood: 0
+    mood: null,
+    thing: <div className='log'>HELLO</div>
   };
 
   service = new AuthService();
@@ -17,53 +18,43 @@ export default class Profile extends Component {
       .profile()
       .then(results => {
         console.log('RESULTS', results);
-        if (results.length < 1) {
+        this.setState({
+          logs: results.userLogs,
+          mood: results.mood
+        });
+        
+        
+        if (this.state.logs.length < 1) {
           return (
             <div>
-              No one has created a log today.{' '}
-              <Link to='/create'>Why not be the first?</Link>
-            </div>
-          );
-        } else {
-          const reducer = (accumulator, currentValue) =>
-            accumulator + currentValue;
-          let moodArr = [];
-          let theLogs = results.map((log, key) => {
-            moodArr.push(log.mood);
-            return (
-              <div key={key} className='log'>
-                {/* <h1>User's name: {lo}</h1> */}
-                <h2>Weather: {log.weatherType}</h2>
-                <h2>
-                  Location: {log.county}, {log.state}
-                </h2>
-                <h3>Mood: {log.mood}</h3>
-                <h3>Productivity: {log.productivity}</h3>
-                <h3>Log: {log.journal}</h3>
-              </div>
-            );
-          });
-          let mood =
-            Math.round(100 * (moodArr.reduce(reducer) / moodArr.length)) / 100;
-          console.log('MOOD', mood);
-          // return theLogs;
-          this.setState(
-            {
-              logs: theLogs,
-              mood: mood
-            },
-            () => {
-              console.log('THE LOGS:', this.state.logs);
-              console.log('MOOD:', this.state.mood);
-            }
-          );
-        }
-      })
-      .catch(err => {
-        console.log(err);
+          No one has created a log today.{' '}
+          <Link to='/create'>Why not be the first?</Link>
+        </div>
+      );
+    } else {
+      let theLogs = this.state.logs.map((log, key) => {
+        this.state.moodAvg.push(log.mood);
+        return (
+          <div key={key} className='log'>
+            {/* <h1>User's name: {lo}</h1> */}
+            <h2>Weather: {log.weatherType}</h2>
+            <h2>
+              Location: {log.county}, {log.state}
+            </h2>
+            <h3>Mood: {log.mood}</h3>
+            <h3>Productivity: {log.productivity}</h3>
+            <h3>Log: {log.journal}</h3>
+          </div>
+        );
       });
-  }
-
+      return theLogs;
+    })
+    .catch(err => {
+      console.log(err);
+    });
+    }
+  };
+  
   //OLD WAY
   // componentDidMount() {
   //   this.service
@@ -117,8 +108,7 @@ export default class Profile extends Component {
         {this.state.thing}
         <h2>Overall Happiness: {this.state.mood}</h2>
         <br></br>
-        {/* {this.state.logs && this.showLogs()} */}
-        {this.state.logs}
+        {this.state.logs && this.showLogs()}
       </div>
     );
   }
