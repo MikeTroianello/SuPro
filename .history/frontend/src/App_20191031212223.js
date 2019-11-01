@@ -31,7 +31,7 @@ class App extends React.Component {
           console.log('RESPONSE:', response);
           this.setState({
             loggedInUser: response,
-            message: `Hello, ${response.username}!`
+            message: `Welcome back, ${response.username}`
           });
         })
         .catch(err => {

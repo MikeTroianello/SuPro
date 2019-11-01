@@ -27,18 +27,18 @@ export default class Signup extends Component {
     e.preventDefault();
     const state = this.state;
     this.service.signup(state).then(results => {
-      // this.setState(
-      //   {
-      //     message: results.username,
-      //     user: results
-      //   },
-      //   () => {
-      //     console.log(this.state);
-      //   }
-      // );
-      // debugger;
-      // localStorage.setItem('user', JSON.stringify(results.user));
-      // this.props.setUser();
+      console.log('RESULTS', results);
+      this.setState(
+        {
+          message: results.data.message,
+          user: results.data.user
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
+      localStorage.setItem('user', JSON.stringify(results.data.user));
+      this.props.setUser();
       this.props.history.push('/');
     });
   };

@@ -8,22 +8,22 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 authRoutes.post('/signup', (req, res, next) => {
-  console.log('THIS IS WHAT WE HAVE:', req.body.state.username);
-  const username = req.body.state.username;
-  const password = req.body.state.password;
+  console.log('THIS IS WHAT WE HAVE:', req.body);
+  const username = req.body.username;
+  const password = req.body.password;
 
   if (!username || !password) {
     res.status(400).json({ message: 'Provide username and password' });
     return;
   }
 
-  // if (password.length < 7) {
-  //   res.status(400).json({
-  //     message:
-  //       'Please make your password at least 8 characters long for security purposes.'
-  //   });
-  //   return;
-  // }
+  if (password.length < 7) {
+    res.status(400).json({
+      message:
+        'Please make your password at least 8 characters long for security purposes.'
+    });
+    return;
+  }
 
   User.findOne({ username }, (err, foundUser) => {
     if (err) {
