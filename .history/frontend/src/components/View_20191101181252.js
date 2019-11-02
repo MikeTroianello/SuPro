@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default class View extends Component {
   state = {
-    logs: null,
-    yours: false
+    logs: null
   };
 
   service = new AuthService();
@@ -29,8 +28,7 @@ export default class View extends Component {
       .then(results => {
         // console.log('RESULTS', results);
         this.setState({
-          logs: results.specificDay,
-          yours: results.yours
+          logs: results
         });
       })
       .catch(error => console.log(error));
@@ -46,6 +44,10 @@ export default class View extends Component {
       );
     } else {
       return this.state.logs.map((log, key) => {
+        if (log.madePrivate) {
+          console.log('THIS WAS MADE PRIVATE!!!', log);
+        }
+        console.log('madePrivate', log.madePrivate);
         //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
           weatherString = `http://openweathermap.org/img/wn/${log.weatherIcon.slice(
@@ -69,8 +71,7 @@ export default class View extends Component {
             <h3>Mood: {log.mood}</h3>
             <h3>Productivity: {log.productivity}</h3>
             <h3>Log: {log.journal}</h3>
-            {log.journal != 'This log is set to private' &&
-              log.privateJournal && <i>You made this log private</i>}
+            {log.madePrivate && <i>You made this log private</i>}
           </div>
         );
       });
@@ -81,12 +82,6 @@ export default class View extends Component {
     return (
       <div>
         <h1>PRELIMINARY: THESE ARE TODAYS LOGS:</h1>
-        {!this.state.yours && (
-          <div>
-            You haven't created a log today.{' '}
-            <Link to='/create'>Make one now!</Link>
-          </div>
-        )}
         {this.state.logs && this.showLogs()}
       </div>
     );

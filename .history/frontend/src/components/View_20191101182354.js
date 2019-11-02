@@ -70,7 +70,7 @@ export default class View extends Component {
             <h3>Productivity: {log.productivity}</h3>
             <h3>Log: {log.journal}</h3>
             {log.journal != 'This log is set to private' &&
-              log.privateJournal && <i>You made this log private</i>}
+              log.log.privateJournal && <i>You made this log private</i>}
           </div>
         );
       });

@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default class View extends Component {
   state = {
-    logs: null,
-    yours: false
+    logs: null
   };
 
   service = new AuthService();
@@ -19,18 +18,17 @@ export default class View extends Component {
       (start.getTimezoneOffset() - today.getTimezoneOffset()) * 60 * 1000;
     var oneDay = 1000 * 60 * 60 * 24;
     var day = Math.floor(diff / oneDay);
-    // console.log('Day of year: ' + day);
+    console.log('Day of year: ' + day);
     let a = today.toString().split(' ');
     let year = a[3];
-    // console.log('the year is ', year);
+    console.log('the year is ', year);
 
     this.service
       .getDate(year, day)
       .then(results => {
-        // console.log('RESULTS', results);
+        console.log('RESULTS', results);
         this.setState({
-          logs: results.specificDay,
-          yours: results.yours
+          logs: results
         });
       })
       .catch(error => console.log(error));
@@ -46,13 +44,16 @@ export default class View extends Component {
       );
     } else {
       return this.state.logs.map((log, key) => {
+        if (log.isPrivate) {
+          console.log('THIS WAS MADE PRIVATE!!!', log);
+        }
         //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
           weatherString = `http://openweathermap.org/img/wn/${log.weatherIcon.slice(
             0,
             -1
           )}d@2x.png`;
-          // console.log('WEATHER STRING', weatherString);
+          console.log('WEATHER STRING', weatherString);
         } else var weatherString = '';
         return (
           <div className='log' key={key}>
@@ -69,8 +70,7 @@ export default class View extends Component {
             <h3>Mood: {log.mood}</h3>
             <h3>Productivity: {log.productivity}</h3>
             <h3>Log: {log.journal}</h3>
-            {log.journal != 'This log is set to private' &&
-              log.privateJournal && <i>You made this log private</i>}
+            {log.madePrivate && <i>You made this log private</i>}
           </div>
         );
       });
@@ -81,12 +81,6 @@ export default class View extends Component {
     return (
       <div>
         <h1>PRELIMINARY: THESE ARE TODAYS LOGS:</h1>
-        {!this.state.yours && (
-          <div>
-            You haven't created a log today.{' '}
-            <Link to='/create'>Make one now!</Link>
-          </div>
-        )}
         {this.state.logs && this.showLogs()}
       </div>
     );

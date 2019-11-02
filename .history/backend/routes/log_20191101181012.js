@@ -197,27 +197,23 @@ router.get('/date/:year/:day', (req, res, next) => {
 
   Log.find({ dayOfYear: req.params.day })
     .then(dayLogs => {
-      let yours = false;
       // console.log('THESE ARE THE DAY LOGS: ', dayLogs);
       let specificDay = dayLogs.filter(log => {
         // if (log.privateJournal && req.user.id != log.creatorId) {
         //   log.journal = 'This log is set to private';
         // }
         if (req.user.id == log.creatorId) {
-          yours = true;
+          log.yours = true;
           if (log.privateJournal) {
             log.madePrivate = true;
           }
         } else if (log.privateJournal) {
           log.journal = 'This log is set to private';
         }
-        console.log('log', log);
-        console.log(log.madePrivate);
         return log.year == req.params.year;
       });
       console.log('THIS IS THE CORRECT YEAR', specificDay);
-      let dayOfYear = { specificDay, yours };
-      res.json(dayOfYear);
+      res.json(specificDay);
     })
     .catch(err => {
       next(err);
