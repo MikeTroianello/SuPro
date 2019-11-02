@@ -56,17 +56,19 @@ export default class View extends Component {
           )}d@2x.png`;
           // console.log('WEATHER STRING', weatherString);
         } else var weatherString = '';
-        let theTag = (
-          <Link to={`/view-profile/${log.creatorId._id}`}>
-            {log.creatorId.username}
-          </Link>
-        );
+        let theTag = log.creatorId.username;
         if (
-          log.creatorId.username ==
+          log.creatorId.username !=
             'This user has decided to keep their name private' ||
-          this.state.id == log.creatorId._id
+          (log.creatorId.username !=
+            'This user has decided to keep their name private' &&
+            log.hideCreator)
         ) {
-          theTag = log.creatorId.username;
+          theTag = (
+            <Link to={`/view-profile/${log.creatorId._id}`}>
+              {log.creatorId.username}
+            </Link>
+          );
         }
 
         return (

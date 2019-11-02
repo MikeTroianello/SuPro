@@ -177,17 +177,15 @@ router.get('/all/:id', (req, res, next) => {
         gender: userLogs[0].creatorId.gender
       };
       // console.log('CREATOR', creator);
-      let logsToSend = userLogs.filter(log => {
+      userLogs.filter(log => {
         log.creatorId = creator;
         if (log.privateJournal) {
           log.journal = `${log.creatorId.username} has chosen to keep this log hidden`;
         }
-        if (log.hideCreator) {
-          console.log('CREATOR IS HIDDEN', log);
-        }
+        if(log.hideCreator){console.log("CREATOR IS HIDDEN" log)}
         return !log.hideCreator;
       });
-      res.send(logsToSend);
+      res.send(userLogs);
     })
     .catch(err => {
       next(err);

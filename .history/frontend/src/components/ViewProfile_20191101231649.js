@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from './auth/auth-service';
-import { Link } from 'react-router-dom';
 
-export default class Profile extends Component {
-  state = {
-    user: null,
-    logs: null,
-    moodAvg: [],
-    mood: 0,
-    notToday: false
-  };
-
+export default class ViewProfile extends Component {
   service = new AuthService();
 
   componentDidMount() {
@@ -108,24 +99,6 @@ export default class Profile extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {/* This is {this.props.user.username}'s profile page: It will show previous */}
-        This is the profile page: It will show previous sunlogs, perhaps an
-        overall trend, and your average level of happiness
-        {this.state.notToday && (
-          <h1>
-            <b>
-              You have not created a mood log today!{' '}
-              <Link to='/create'>Create one now!</Link>
-            </b>
-          </h1>
-        )}
-        <h2>Overall Happiness: {this.state.mood}</h2>
-        <br></br>
-        {/* {this.state.logs && this.showLogs()} */}
-        {this.state.logs}
-      </div>
-    );
+    return <div>WE MADE IT</div>;
   }
 }

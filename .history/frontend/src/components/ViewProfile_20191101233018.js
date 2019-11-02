@@ -1,56 +1,33 @@
 import React, { Component } from 'react';
 import AuthService from './auth/auth-service';
-import { Link } from 'react-router-dom';
 
-export default class Profile extends Component {
+export default class ViewProfile extends Component {
   state = {
     user: null,
     logs: null,
     moodAvg: [],
     mood: 0,
-    notToday: false
+    name: null
   };
 
   service = new AuthService();
 
   componentDidMount() {
-    let today = new Date();
-    var start = new Date(today.getFullYear(), 0, 0);
-    var diff =
-      today -
-      start +
-      (start.getTimezoneOffset() - today.getTimezoneOffset()) * 60 * 1000;
-    var oneDay = 1000 * 60 * 60 * 24;
-    var day = Math.floor(diff / oneDay);
-    console.log('Day of year: ' + day);
-    let a = today.toString().split(' ');
-    let year = a[3];
-    console.log('the year is ', year);
-
     this.service
-      .profile()
+      .seeUser(this.props.match.params.id)
       .then(results => {
         console.log('RESULTS', results);
         if (results.length < 1) {
-          // return (
-          //   <div>
-          //     You haven't created a log yet!{' '}
-          //     <Link to='/create'>Make one now!</Link>
-          //   </div>
-          // );
           this.setState({
-            logs: (
-              <div>
-                You haven't created a log yet!{' '}
-                <Link to='/create'>Make one now!</Link>
-              </div>
-            )
+            logs: <div>They haven't created any logs...</div>
           });
         } else {
           const reducer = (accumulator, currentValue) =>
             accumulator + currentValue;
           let moodArr = [];
+          let name;
           let theLogs = results.map((log, key) => {
+            if (!name) name = log.creatorId.username;
             moodArr.push(log.mood);
             if (log.weatherIcon) {
               weatherString = `http://openweathermap.org/img/wn/${log.weatherIcon.slice(
@@ -84,22 +61,14 @@ export default class Profile extends Component {
           this.setState(
             {
               logs: theLogs,
-              mood: mood
+              mood: mood,
+              name: name
             },
             () => {
               console.log('THE LOGS:', this.state.logs);
               console.log('MOOD:', this.state.mood);
             }
           );
-          let dailyLog = results.filter(log => {
-            return log.dayOfYear == day && log.year == year;
-          });
-          console.log('DAILY LOG:', dailyLog);
-          if (dailyLog.length < 1) {
-            this.setState({
-              notToday: true
-            });
-          }
         }
       })
       .catch(err => {
@@ -110,18 +79,10 @@ export default class Profile extends Component {
   render() {
     return (
       <div>
-        {/* This is {this.props.user.username}'s profile page: It will show previous */}
-        This is the profile page: It will show previous sunlogs, perhaps an
-        overall trend, and your average level of happiness
-        {this.state.notToday && (
-          <h1>
-            <b>
-              You have not created a mood log today!{' '}
-              <Link to='/create'>Create one now!</Link>
-            </b>
-          </h1>
-        )}
-        <h2>Overall Happiness: {this.state.mood}</h2>
+        This is {this.state.name}'s page
+        <h2>
+          {this.state.name}'s Overall Happiness: {this.state.mood}
+        </h2>
         <br></br>
         {/* {this.state.logs && this.showLogs()} */}
         {this.state.logs}

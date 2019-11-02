@@ -59,14 +59,15 @@ export default class View extends Component {
         let theTag = (
           <Link to={`/view-profile/${log.creatorId._id}`}>
             {log.creatorId.username}
-          </Link>
-        );
+          </Link>)
         if (
           log.creatorId.username ==
             'This user has decided to keep their name private' ||
           this.state.id == log.creatorId._id
         ) {
-          theTag = log.creatorId.username;
+         theTag = log.creatorId.username;
+          
+          );
         }
 
         return (

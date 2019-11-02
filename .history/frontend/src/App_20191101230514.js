@@ -9,7 +9,6 @@ import Signup from './components/Signup';
 import Create from './components/Create';
 import View from './components/View';
 import Profile from './components/Profile';
-import ViewProfile from './components/ViewProfile';
 import Navbar from './components/Navbar';
 
 import AuthService from './components/auth/auth-service';

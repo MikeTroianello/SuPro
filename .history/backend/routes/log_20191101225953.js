@@ -167,27 +167,10 @@ router.get('/all/my-posts', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 // GET See all logs from one user
 router.get('/all/:id', (req, res, next) => {
-  // console.log('WE ARE LOOKING FOR A USER RIGHT NOW');
   Log.find({ creatorId: req.params.id })
-    .populate('creatorId')
     .then(userLogs => {
-      // console.log('WE FOUND SOMETHING', userLogs);
-      const creator = {
-        username: userLogs[0].creatorId.username,
-        gender: userLogs[0].creatorId.gender
-      };
-      // console.log('CREATOR', creator);
-      let logsToSend = userLogs.filter(log => {
-        log.creatorId = creator;
-        if (log.privateJournal) {
-          log.journal = `${log.creatorId.username} has chosen to keep this log hidden`;
-        }
-        if (log.hideCreator) {
-          console.log('CREATOR IS HIDDEN', log);
-        }
-        return !log.hideCreator;
-      });
-      res.send(logsToSend);
+      console.log(userLogs);
+      res.send(userLogs);
     })
     .catch(err => {
       next(err);
@@ -253,7 +236,7 @@ router.get('/date/:year/:day', (req, res, next) => {
         return log.year == req.params.year;
       });
       console.log('THIS IS THE CORRECT YEAR', specificDay);
-      let dayOfYear = { specificDay, yours, id: req.user.id };
+      let dayOfYear = { specificDay, yours };
       res.json(dayOfYear);
     })
     .catch(err => {

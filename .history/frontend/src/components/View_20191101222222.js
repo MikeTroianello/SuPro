@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 export default class View extends Component {
   state = {
     logs: null,
-    yours: false,
-    id: null
+    yours: false
   };
 
   service = new AuthService();
@@ -31,8 +30,7 @@ export default class View extends Component {
         // console.log('RESULTS', results);
         this.setState({
           logs: results.specificDay,
-          yours: results.yours,
-          id: results.id
+          yours: results.yours
         });
       })
       .catch(error => console.log(error));
@@ -56,34 +54,9 @@ export default class View extends Component {
           )}d@2x.png`;
           // console.log('WEATHER STRING', weatherString);
         } else var weatherString = '';
-        let theTag = (
-          <Link to={`/view-profile/${log.creatorId._id}`}>
-            {log.creatorId.username}
-          </Link>
-        );
-        if (
-          log.creatorId.username ==
-            'This user has decided to keep their name private' ||
-          this.state.id == log.creatorId._id
-        ) {
-          theTag = log.creatorId.username;
-        }
-
         return (
           <div className='log' key={key}>
-            <span>
-              <h2>
-                {/* <Link to={`/view-profile/${log.creatorId._id}`}>
-                  {log.creatorId.username}
-                </Link> */}
-                {theTag}
-              </h2>
-              {log.creatorId.username !=
-                'This user has decided to keep their name private' &&
-                log.hideCreator && (
-                  <i>You have hidden your name for this log</i>
-                )}
-            </span>
+            <h1>User's name: {log.creatorId.username}</h1>
             <h2>
               Weather: {log.weatherType}
               <span>
