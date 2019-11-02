@@ -18,9 +18,6 @@ const logSchema = new Schema({
   weatherCode: {
     type: Number
   },
-  weatherIcon: {
-    type: String
-  },
   externalFactors: {
     type: String
   },
@@ -30,7 +27,7 @@ const logSchema = new Schema({
   },
   privateJournal: {
     type: Boolean,
-    default: false
+    default: true
   },
   latitude: Number,
   longitude: Number,
@@ -39,7 +36,7 @@ const logSchema = new Schema({
   creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
   hideCreator: {
     type: Boolean,
-    default: false
+    default: true
   },
   dayOfWeek: String,
   month: String,

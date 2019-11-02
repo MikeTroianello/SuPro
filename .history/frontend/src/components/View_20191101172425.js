@@ -44,12 +44,9 @@ export default class View extends Component {
       );
     } else {
       return this.state.logs.map((log, key) => {
-        //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
-          weatherString = `http://openweathermap.org/img/wn/${log.weatherIcon.slice(
-            0,
-            -1
-          )}d@2x.png`;
+          let icon = parseFloat(log.weatherIcon).toString();
+          weatherString = `http://openweathermap.org/img/wn/${icon}d@2x.png`;
           console.log('WEATHER STRING', weatherString);
         } else var weatherString = '';
         return (

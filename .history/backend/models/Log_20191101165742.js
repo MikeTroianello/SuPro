@@ -18,9 +18,6 @@ const logSchema = new Schema({
   weatherCode: {
     type: Number
   },
-  weatherIcon: {
-    type: String
-  },
   externalFactors: {
     type: String
   },

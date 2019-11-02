@@ -52,8 +52,7 @@ router.post('/create', (req, res, next) => {
           console.log(response.data.weather[0].main); //USE THIS ONE
           const weatherStuff = {
             type: response.data.weather[0].main,
-            code: response.data.weather[0].id,
-            icon: response.data.weather[0].icon
+            code: response.data.weather[0].id
           };
           console.log('WEATHER STUFF', weatherStuff);
           countAddress(weatherStuff);
@@ -67,7 +66,6 @@ router.post('/create', (req, res, next) => {
     const countAddress = async weatherStuff => {
       const weatherType = weatherStuff.type;
       const weatherCode = weatherStuff.code;
-      const weatherIcon = weatherStuff.icon;
       console.log('=-=-=-=-=-=-=-', weatherType, weatherCode);
       const address = getAddress()
         .then(response => {
@@ -95,7 +93,6 @@ router.post('/create', (req, res, next) => {
             productivity: productivity,
             weatherType: weatherType,
             weatherCode: weatherCode,
-            weatherIcon: weatherIcon,
             // externalFactors: externalFactors,
             journal: journal,
             privateJournal: privateJournal,
@@ -199,10 +196,10 @@ router.get('/date/:year/:day', (req, res, next) => {
     .then(dayLogs => {
       console.log('THESE ARE THE DAY LOGS: ', dayLogs);
       let specificDay = dayLogs.filter(log => {
-        if (log.privateJournal && req.user.id != log.creatorId) {
+        if (log.privateJournal) {
           log.journal = 'This log is set to private';
         }
-        return log.year == req.params.year;
+        return log.year === req.params.year;
       });
       console.log('THIS IS THE CORRECT YEAR', specificDay);
       res.json(specificDay);

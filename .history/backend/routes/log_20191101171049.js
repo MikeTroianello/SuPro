@@ -67,7 +67,6 @@ router.post('/create', (req, res, next) => {
     const countAddress = async weatherStuff => {
       const weatherType = weatherStuff.type;
       const weatherCode = weatherStuff.code;
-      const weatherIcon = weatherStuff.icon;
       console.log('=-=-=-=-=-=-=-', weatherType, weatherCode);
       const address = getAddress()
         .then(response => {
@@ -95,7 +94,6 @@ router.post('/create', (req, res, next) => {
             productivity: productivity,
             weatherType: weatherType,
             weatherCode: weatherCode,
-            weatherIcon: weatherIcon,
             // externalFactors: externalFactors,
             journal: journal,
             privateJournal: privateJournal,
