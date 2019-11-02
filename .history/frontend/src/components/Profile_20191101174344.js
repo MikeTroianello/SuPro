@@ -32,42 +32,22 @@ export default class Profile extends Component {
       .then(results => {
         console.log('RESULTS', results);
         if (results.length < 1) {
-          // return (
-          //   <div>
-          //     You haven't created a log yet!{' '}
-          //     <Link to='/create'>Make one now!</Link>
-          //   </div>
-          // );
-          this.setState({
-            logs: (
-              <div>
-                You haven't created a log yet!{' '}
-                <Link to='/create'>Make one now!</Link>
-              </div>
-            )
-          });
+          return (
+            <div>
+              You haven't created a log yet!{' '}
+              <Link to='/create'>Make one now!</Link>
+            </div>
+          );
         } else {
           const reducer = (accumulator, currentValue) =>
             accumulator + currentValue;
           let moodArr = [];
           let theLogs = results.map((log, key) => {
             moodArr.push(log.mood);
-            if (log.weatherIcon) {
-              weatherString = `http://openweathermap.org/img/wn/${log.weatherIcon.slice(
-                0,
-                -1
-              )}d@2x.png`;
-              console.log('WEATHER STRING', weatherString);
-            } else var weatherString = '';
             return (
               <div key={key} className='log'>
                 {/* <h1>User's name: {lo}</h1> */}
-                <h2>
-                  Weather: {log.weatherType}
-                  <span>
-                    <img src={weatherString} />
-                  </span>
-                </h2>
+                <h2>Weather: {log.weatherType}</h2>
                 <h2>
                   Location: {log.county}, {log.state}
                 </h2>
@@ -157,14 +137,7 @@ export default class Profile extends Component {
         {/* This is {this.props.user.username}'s profile page: It will show previous */}
         This is the profile page: It will show previous sunlogs, perhaps an
         overall trend, and your average level of happiness
-        {this.state.notToday && (
-          <h1>
-            <b>
-              You have not created a mood log today!{' '}
-              <Link to='/create'>Create one now!</Link>
-            </b>
-          </h1>
-        )}
+        {this.state.thing}
         <h2>Overall Happiness: {this.state.mood}</h2>
         <br></br>
         {/* {this.state.logs && this.showLogs()} */}

@@ -62,12 +62,7 @@ export default class Profile extends Component {
             return (
               <div key={key} className='log'>
                 {/* <h1>User's name: {lo}</h1> */}
-                <h2>
-                  Weather: {log.weatherType}
-                  <span>
-                    <img src={weatherString} />
-                  </span>
-                </h2>
+                <h2>Weather: {log.weatherType}</h2>
                 <h2>
                   Location: {log.county}, {log.state}
                 </h2>

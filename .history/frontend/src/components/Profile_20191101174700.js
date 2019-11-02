@@ -52,22 +52,10 @@ export default class Profile extends Component {
           let moodArr = [];
           let theLogs = results.map((log, key) => {
             moodArr.push(log.mood);
-            if (log.weatherIcon) {
-              weatherString = `http://openweathermap.org/img/wn/${log.weatherIcon.slice(
-                0,
-                -1
-              )}d@2x.png`;
-              console.log('WEATHER STRING', weatherString);
-            } else var weatherString = '';
             return (
               <div key={key} className='log'>
                 {/* <h1>User's name: {lo}</h1> */}
-                <h2>
-                  Weather: {log.weatherType}
-                  <span>
-                    <img src={weatherString} />
-                  </span>
-                </h2>
+                <h2>Weather: {log.weatherType}</h2>
                 <h2>
                   Location: {log.county}, {log.state}
                 </h2>
