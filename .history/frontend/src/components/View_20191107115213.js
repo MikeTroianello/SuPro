@@ -3,8 +3,6 @@ import AuthService from './auth/auth-service';
 import { Link } from 'react-router-dom';
 import DatePicker from 'react-date-picker';
 
-import StateFilter from './fiterByLocation/StateFilter';
-
 export default class View extends Component {
   state = {
     today: new Date(),
@@ -14,7 +12,7 @@ export default class View extends Component {
     id: null,
     day: null,
     year: null,
-    states: []
+    state: new Set()
   };
 
   service = new AuthService();
@@ -27,7 +25,7 @@ export default class View extends Component {
   }
 
   sanitizeDate = (dateToLookFor, message) => {
-    // console.log(message, dateToLookFor);
+    console.log(message, dateToLookFor);
     var start = new Date(dateToLookFor.getFullYear(), 0, 0);
     var diff =
       dateToLookFor -
@@ -43,22 +41,17 @@ export default class View extends Component {
     this.service
       .getDate(year, day)
       .then(results => {
-        const states = results.specificDay.map(log => {
-          return log.state;
-        });
-
         this.setState({
           logs: results.specificDay,
           yours: results.yours,
-          id: results.id,
-          states: [...new Set(states)]
+          id: results.id
         });
       })
       .catch(error => console.log(error));
   };
 
   showLogs = () => {
-    if (this.state.logs.length < 1 && this.state.today === new Date()) {
+    if (this.state.logs.length < 1 && this.state.today == new Date()) {
       return (
         <div>
           No one has created a log today.{' '}
@@ -73,6 +66,7 @@ export default class View extends Component {
       );
     } else {
       return this.state.logs.map((log, key) => {
+        this.state.state.add(log.state);
         let weatherString;
         //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
@@ -138,18 +132,16 @@ export default class View extends Component {
     );
   };
 
-  showState = () => [console.log('This is the state:', this.state.states)];
+  showState = () => [console.log('This is the state:', [...this.state.state])];
 
   render() {
-    console.log('states', this.state.states);
     return (
       <div>
         <button onClick={this.showState}>Show the states in the logs</button>
         <h1>PRELIMINARY: THESE ARE TODAYS LOGS:</h1>
 
-        <div className='logFilter'>
+        <div>
           <DatePicker onChange={this.onChange} value={this.state.date} />
-          <StateFilter states={this.state.states} />
         </div>
         {!this.state.yours && this.state.today === new Date() && (
           <div>

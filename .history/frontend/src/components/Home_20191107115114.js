@@ -8,8 +8,7 @@ export default class Home extends Component {
   // }
 
   state = {
-    date: new Date(),
-    testArr: ['a', 'be', 's', 'w']
+    date: new Date()
   };
 
   service = new AuthService();

@@ -28,6 +28,12 @@ export default class Home extends Component {
       <div>
         Home Page
         <button onClick={this.checkIfLoggedIn}>Check if logged in</button>
+        <h1>WORKING</h1>
+        <select name='yeet'>
+          {this.state.testArr.map(z => {
+            return <option value={z}>{z}</option>;
+          })}
+        </select>
       </div>
     );
   }

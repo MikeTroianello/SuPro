@@ -14,7 +14,7 @@ export default class View extends Component {
     id: null,
     day: null,
     year: null,
-    states: []
+    state: []
   };
 
   service = new AuthService();
@@ -51,7 +51,7 @@ export default class View extends Component {
           logs: results.specificDay,
           yours: results.yours,
           id: results.id,
-          states: [...new Set(states)]
+          state: [...new Set(states)]
         });
       })
       .catch(error => console.log(error));
@@ -138,10 +138,10 @@ export default class View extends Component {
     );
   };
 
-  showState = () => [console.log('This is the state:', this.state.states)];
+  showState = () => [console.log('This is the state:', this.state.state)];
 
   render() {
-    console.log('states', this.state.states);
+    console.log('states', this.state.state);
     return (
       <div>
         <button onClick={this.showState}>Show the states in the logs</button>
@@ -149,7 +149,7 @@ export default class View extends Component {
 
         <div className='logFilter'>
           <DatePicker onChange={this.onChange} value={this.state.date} />
-          <StateFilter states={this.state.states} />
+          <StateFilter />
         </div>
         {!this.state.yours && this.state.today === new Date() && (
           <div>

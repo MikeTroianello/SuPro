@@ -147,8 +147,8 @@ class App extends React.Component {
               />
             )}
           />
-          <Route exact path='/view' render={props => <View {...props} />} />
-          {/* <Route exact path='/view' component={View} /> */}
+          {/* <Route exact path='/view' render={props => <View {...props} />} /> */}
+          <Route exact path='/view' component={View} />
           <Route
             path='/view-profile/:id'
             render={props => <ViewProfile {...props} setUser={this.setUser} />}

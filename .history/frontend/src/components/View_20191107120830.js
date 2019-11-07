@@ -3,8 +3,6 @@ import AuthService from './auth/auth-service';
 import { Link } from 'react-router-dom';
 import DatePicker from 'react-date-picker';
 
-import StateFilter from './fiterByLocation/StateFilter';
-
 export default class View extends Component {
   state = {
     today: new Date(),
@@ -14,7 +12,7 @@ export default class View extends Component {
     id: null,
     day: null,
     year: null,
-    states: []
+    state: []
   };
 
   service = new AuthService();
@@ -43,21 +41,18 @@ export default class View extends Component {
     this.service
       .getDate(year, day)
       .then(results => {
-        const states = results.specificDay.map(log => {
-          return log.state;
-        });
-
         this.setState({
           logs: results.specificDay,
           yours: results.yours,
-          id: results.id,
-          states: [...new Set(states)]
+          id: results.id
         });
       })
       .catch(error => console.log(error));
   };
 
   showLogs = () => {
+    // console.log(new Date());
+    // console.log(this.state.today, new Date());
     if (this.state.logs.length < 1 && this.state.today === new Date()) {
       return (
         <div>
@@ -72,7 +67,9 @@ export default class View extends Component {
         </div>
       );
     } else {
-      return this.state.logs.map((log, key) => {
+      const states = new Set();
+      let theLogs = this.state.logs.map((log, key) => {
+        states.add(log.state);
         let weatherString;
         //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
@@ -127,6 +124,10 @@ export default class View extends Component {
           </div>
         );
       });
+      this.setState({
+        state: [...states]
+      });
+      return theLogs;
     }
   };
 
@@ -138,10 +139,10 @@ export default class View extends Component {
     );
   };
 
-  showState = () => [console.log('This is the state:', this.state.states)];
+  showState = () => [console.log('This is the state:', [...this.state.state])];
 
   render() {
-    console.log('states', this.state.states);
+    console.log('Greater than 0', [...this.state.state].length);
     return (
       <div>
         <button onClick={this.showState}>Show the states in the logs</button>
@@ -149,7 +150,13 @@ export default class View extends Component {
 
         <div className='logFilter'>
           <DatePicker onChange={this.onChange} value={this.state.date} />
-          <StateFilter states={this.state.states} />
+          {[...this.state.state].length > 0 && (
+            <select name='theState'>
+              {this.state.state.map(state => {
+                return <option value={state}>{state}</option>;
+              })}
+            </select>
+          )}
         </div>
         {!this.state.yours && this.state.today === new Date() && (
           <div>
