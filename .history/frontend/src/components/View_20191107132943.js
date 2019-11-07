@@ -153,12 +153,20 @@ export default class View extends Component {
 
   showState = () => [console.log('This is the state:', this.state.states)];
 
+  // chosenState = e => {
+  //   console.log(e.target.value);
+  //   this.setState({
+  //     state: e.target.value
+  //   });
+  //   this.showLogs(e);
+  // };
+
   chosenState = e => {
     console.log(e.target.value);
     this.setState({
       state: e.target.value
     });
-    this.showLogs();
+    this.showLogs(e.target.value);
   };
 
   chosenCounty = e => {

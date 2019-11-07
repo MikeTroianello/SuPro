@@ -61,7 +61,7 @@ export default class View extends Component {
       .catch(error => console.log(error));
   };
 
-  showLogs = () => {
+  showLogs = state => {
     if (this.state.logs.length < 1 && this.state.today === new Date()) {
       return (
         <div>
@@ -77,13 +77,11 @@ export default class View extends Component {
       );
     } else {
       let stateLogs = this.state.logs;
-      if (this.state.state) {
-        console.log('WE HAVE THE STATE', this.state.state);
-        console.log('statelogs before filter', stateLogs);
+      if (state) {
+        console.log('WE HAVE THE STATE', state);
         stateLogs = this.state.logs.filter(log => {
-          return log.state == this.state.state;
+          return log.state == state;
         });
-        console.log('statelogs after', stateLogs);
       }
       return stateLogs.map((log, key) => {
         let weatherString;
@@ -158,7 +156,7 @@ export default class View extends Component {
     this.setState({
       state: e.target.value
     });
-    this.showLogs();
+    this.showLogs(e.target.value);
   };
 
   chosenCounty = e => {

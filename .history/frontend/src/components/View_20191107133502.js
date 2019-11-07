@@ -158,7 +158,8 @@ export default class View extends Component {
     this.setState({
       state: e.target.value
     });
-    this.showLogs();
+    console.log(typeof e.target.value);
+    this.showLogs(e.target.value);
   };
 
   chosenCounty = e => {

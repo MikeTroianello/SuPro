@@ -16,9 +16,7 @@ export default class View extends Component {
     day: null,
     year: null,
     states: [],
-    counties: [],
-    state: undefined,
-    county: undefined
+    counties: []
   };
 
   service = new AuthService();
@@ -76,16 +74,7 @@ export default class View extends Component {
         </div>
       );
     } else {
-      let stateLogs = this.state.logs;
-      if (this.state.state) {
-        console.log('WE HAVE THE STATE', this.state.state);
-        console.log('statelogs before filter', stateLogs);
-        stateLogs = this.state.logs.filter(log => {
-          return log.state == this.state.state;
-        });
-        console.log('statelogs after', stateLogs);
-      }
-      return stateLogs.map((log, key) => {
+      return this.state.logs.map((log, key) => {
         let weatherString;
         //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
@@ -155,10 +144,6 @@ export default class View extends Component {
 
   chosenState = e => {
     console.log(e.target.value);
-    this.setState({
-      state: e.target.value
-    });
-    this.showLogs();
   };
 
   chosenCounty = e => {

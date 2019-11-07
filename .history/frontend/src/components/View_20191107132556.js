@@ -78,7 +78,7 @@ export default class View extends Component {
     } else {
       let stateLogs = this.state.logs;
       if (this.state.state) {
-        console.log('WE HAVE THE STATE', this.state.state);
+        console.log('WE HAVE THE STATE', state);
         console.log('statelogs before filter', stateLogs);
         stateLogs = this.state.logs.filter(log => {
           return log.state == this.state.state;

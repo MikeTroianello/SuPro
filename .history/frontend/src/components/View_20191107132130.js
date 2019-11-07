@@ -18,7 +18,8 @@ export default class View extends Component {
     states: [],
     counties: [],
     state: undefined,
-    county: undefined
+    county: undefined,
+    properLogs: null
   };
 
   service = new AuthService();
@@ -59,9 +60,11 @@ export default class View extends Component {
         });
       })
       .catch(error => console.log(error));
+    //THIS IS THE CHANGE
+    this.showLogs();
   };
 
-  showLogs = () => {
+  showLogs = state => {
     if (this.state.logs.length < 1 && this.state.today === new Date()) {
       return (
         <div>
@@ -77,15 +80,15 @@ export default class View extends Component {
       );
     } else {
       let stateLogs = this.state.logs;
-      if (this.state.state) {
-        console.log('WE HAVE THE STATE', this.state.state);
+      if (state) {
+        console.log('WE HAVE THE STATE', state);
         console.log('statelogs before filter', stateLogs);
         stateLogs = this.state.logs.filter(log => {
-          return log.state == this.state.state;
+          return log.state == state;
         });
         console.log('statelogs after', stateLogs);
       }
-      return stateLogs.map((log, key) => {
+      let properLogs = stateLogs.map((log, key) => {
         let weatherString;
         //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
@@ -140,6 +143,9 @@ export default class View extends Component {
           </div>
         );
       });
+      this.setState({
+        properLogs: properLogs
+      });
     }
   };
 
@@ -158,7 +164,7 @@ export default class View extends Component {
     this.setState({
       state: e.target.value
     });
-    this.showLogs();
+    this.showLogs(e.target.value);
   };
 
   chosenCounty = e => {
@@ -189,7 +195,8 @@ export default class View extends Component {
             <Link to='/create'>Make one now!</Link>
           </div>
         )}
-        {this.state.logs && this.showLogs()}
+        {/* {this.state.logs && this.showLogs()} */}
+        {this.state.properLogs}
       </div>
     );
   }
