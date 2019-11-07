@@ -50,17 +50,13 @@ export default class View extends Component {
   };
 
   showLogs = () => {
-    if (this.state.logs.length < 1 && this.state.today == new Date()) {
+    if (this.state.logs.length < 1) {
       return (
         <div>
           No one has created a log today.{' '}
-          <Link to='/create'>Why not be the first?</Link>
-        </div>
-      );
-    } else if (this.state.logs.length < 1) {
-      return (
-        <div>
-          <h2>There were no logs recorded on this day...</h2>
+          {this.state.today == new Date() && (
+            <Link to='/create'>Why not be the first?</Link>
+          )}
         </div>
       );
     } else {

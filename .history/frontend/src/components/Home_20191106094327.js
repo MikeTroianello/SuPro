@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import Calendar from 'react-calendar';
-import DatePicker from 'react-date-picker';
+import Calendar from 'react-calendar';
 import AuthService from './auth/auth-service';
 
 export default class Home extends Component {
@@ -8,10 +7,6 @@ export default class Home extends Component {
   //   super(props);
   //   this.service = new AuthService();
   // }
-
-  state = {
-    date: new Date()
-  };
 
   service = new AuthService();
 
@@ -29,19 +24,13 @@ export default class Home extends Component {
   //   });
   // };
 
-  onChange = date =>
-    this.setState({ date }, () => console.log(this.state.date));
-
   render() {
     return (
       <div>
         Home Page
         <button onClick={this.checkIfLoggedIn}>Check if logged in</button>
-        {/* <div>
-          <Calendar />
-        </div> */}
         <div>
-          <DatePicker onChange={this.onChange} value={this.state.date} />
+          <Calendar />
         </div>
       </div>
     );

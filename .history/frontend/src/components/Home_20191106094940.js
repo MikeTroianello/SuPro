@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Calendar from 'react-calendar';
+import Calendar from 'react-calendar';
 import DatePicker from 'react-date-picker';
 import AuthService from './auth/auth-service';
 
@@ -37,9 +37,9 @@ export default class Home extends Component {
       <div>
         Home Page
         <button onClick={this.checkIfLoggedIn}>Check if logged in</button>
-        {/* <div>
+        <div>
           <Calendar />
-        </div> */}
+        </div>
         <div>
           <DatePicker onChange={this.onChange} value={this.state.date} />
         </div>

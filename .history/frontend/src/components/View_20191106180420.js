@@ -50,17 +50,11 @@ export default class View extends Component {
   };
 
   showLogs = () => {
-    if (this.state.logs.length < 1 && this.state.today == new Date()) {
+    if (this.state.logs.length < 1) {
       return (
         <div>
           No one has created a log today.{' '}
           <Link to='/create'>Why not be the first?</Link>
-        </div>
-      );
-    } else if (this.state.logs.length < 1) {
-      return (
-        <div>
-          <h2>There were no logs recorded on this day...</h2>
         </div>
       );
     } else {
@@ -138,7 +132,7 @@ export default class View extends Component {
         <div>
           <DatePicker onChange={this.onChange} value={this.state.date} />
         </div>
-        {!this.state.yours && this.state.today == new Date() && (
+        {!this.state.yours && (
           <div>
             You haven't created a log today.{' '}
             <Link to='/create'>Make one now!</Link>

@@ -29,7 +29,7 @@ class App extends React.Component {
       this.service
         .loggedin()
         .then(response => {
-          // console.log('RESPONSE:', response);
+          console.log('RESPONSE:', response);
           this.setState({
             loggedInUser: response,
             message: `Hello, ${response.username}!`

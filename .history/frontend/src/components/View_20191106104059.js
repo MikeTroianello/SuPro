@@ -16,6 +16,34 @@ export default class View extends Component {
 
   service = new AuthService();
 
+  //OLD WAY
+  // componentDidMount() {
+  //   let today = new Date();
+  //   var start = new Date(today.getFullYear(), 0, 0);
+  //   var diff =
+  //     today -
+  //     start +
+  //     (start.getTimezoneOffset() - today.getTimezoneOffset()) * 60 * 1000;
+  //   var oneDay = 1000 * 60 * 60 * 24;
+  //   var day = Math.floor(diff / oneDay);
+  //   // console.log('Day of year: ' + day);
+  //   let a = today.toString().split(' ');
+  //   let year = a[3];
+  //   // console.log('the year is ', year);
+
+  //   this.service
+  //     .getDate(year, day)
+  //     .then(results => {
+  //       // console.log('RESULTS', results);
+  //       this.setState({
+  //         logs: results.specificDay,
+  //         yours: results.yours,
+  //         id: results.id
+  //       });
+  //     })
+  //     .catch(error => console.log(error));
+  // }
+
   //NEW WAY
   componentDidMount() {
     console.log('TODAY', this.state.today);
@@ -34,12 +62,24 @@ export default class View extends Component {
         1000;
     var oneDay = 1000 * 60 * 60 * 24;
     var day = Math.floor(diff / oneDay);
+    // console.log('Day of year: ' + day);
     let a = dateToLookFor.toString().split(' ');
     let year = a[3];
+
+    // this.setState(
+    //   {
+    //     day: day,
+    //     year: year
+    //   },
+    //   () => {
+    //     console.log('STATE', this.state);
+    //   }
+    // );
 
     this.service
       .getDate(year, day)
       .then(results => {
+        // console.log('RESULTS', results);
         this.setState({
           logs: results.specificDay,
           yours: results.yours,
@@ -50,17 +90,11 @@ export default class View extends Component {
   };
 
   showLogs = () => {
-    if (this.state.logs.length < 1 && this.state.today == new Date()) {
+    if (this.state.logs.length < 1) {
       return (
         <div>
           No one has created a log today.{' '}
           <Link to='/create'>Why not be the first?</Link>
-        </div>
-      );
-    } else if (this.state.logs.length < 1) {
-      return (
-        <div>
-          <h2>There were no logs recorded on this day...</h2>
         </div>
       );
     } else {
@@ -126,7 +160,7 @@ export default class View extends Component {
     this.setState(
       { date },
       () => console.log(this.state.date),
-      this.sanitizeDate(date, 'NEW DATE')
+      this.sanitizeDate(date, 'WHY ISTHIS NOT WORKING')
     );
   };
 
@@ -138,7 +172,7 @@ export default class View extends Component {
         <div>
           <DatePicker onChange={this.onChange} value={this.state.date} />
         </div>
-        {!this.state.yours && this.state.today == new Date() && (
+        {!this.state.yours && (
           <div>
             You haven't created a log today.{' '}
             <Link to='/create'>Make one now!</Link>

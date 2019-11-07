@@ -57,12 +57,6 @@ export default class View extends Component {
           <Link to='/create'>Why not be the first?</Link>
         </div>
       );
-    } else if (this.state.logs.length < 1) {
-      return (
-        <div>
-          <h2>There were no logs recorded on this day...</h2>
-        </div>
-      );
     } else {
       return this.state.logs.map((log, key) => {
         let weatherString;

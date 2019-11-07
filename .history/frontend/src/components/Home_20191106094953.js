@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Calendar from 'react-calendar';
+import Calendar from 'react-calendar';
 import DatePicker from 'react-date-picker';
 import AuthService from './auth/auth-service';
 

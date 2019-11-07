@@ -57,12 +57,6 @@ export default class View extends Component {
           <Link to='/create'>Why not be the first?</Link>
         </div>
       );
-    } else if (this.state.logs.length < 1) {
-      return (
-        <div>
-          <h2>There were no logs recorded on this day...</h2>
-        </div>
-      );
     } else {
       return this.state.logs.map((log, key) => {
         let weatherString;
@@ -138,7 +132,7 @@ export default class View extends Component {
         <div>
           <DatePicker onChange={this.onChange} value={this.state.date} />
         </div>
-        {!this.state.yours && this.state.today == new Date() && (
+        {!this.state.yours && (
           <div>
             You haven't created a log today.{' '}
             <Link to='/create'>Make one now!</Link>
