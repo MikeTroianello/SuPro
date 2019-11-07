@@ -96,7 +96,8 @@ export default class View extends Component {
                 {/* <Link to={`/view-profile/${log.creatorId._id}`}>
                   {log.creatorId.username}
                 </Link> */}
-                {theTag} {this.state.id === log.creatorId._id && <b>(You!)</b>}
+                {theTag}
+                {(this.state.id = this.creatorId._id && <b>(You!)</b>)}
               </h2>
               {log.creatorId.username !==
                 'This user has decided to keep their name private' &&

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Navbar(props) {
-  console.log('NAVBAR PROPS', props.info.createdLogToday);
   return (
     <div>
       <div className='navbar'>

@@ -99,7 +99,11 @@ export default class Profile extends Component {
             }
           );
           let dailyLog = results.filter(log => {
-            return log.dayOfYear === day && log.year === Number(year);
+            console.log(typeof log.dayOfYear);
+            console.log(typeof log.dayyear);
+            console.log(typeof day);
+            console.log(typeof year);
+            return log.dayOfYear == day && log.year == year;
           });
           console.log('DAILY LOG:', dailyLog);
           if (dailyLog.length < 1) {

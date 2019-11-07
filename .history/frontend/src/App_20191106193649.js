@@ -60,7 +60,6 @@ class App extends React.Component {
   };
 
   logCreated = () => {
-    console.log('THE LOG HAS BEEN CREATED');
     this.setState(
       {
         createdLogToday: true

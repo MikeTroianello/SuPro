@@ -78,9 +78,6 @@ export default class Profile extends Component {
                 <h3>Mood: {log.mood}</h3>
                 <h3>Productivity: {log.productivity}</h3>
                 <h3>Log: {log.journal}</h3>
-                {log.privateJournal && (
-                  <i>You have hidden this journal from public viewing</i>
-                )}
               </div>
             );
           });
@@ -99,20 +96,13 @@ export default class Profile extends Component {
             }
           );
           let dailyLog = results.filter(log => {
-            return log.dayOfYear === day && log.year === Number(year);
+            return log.dayOfYear === day && log.year === year;
           });
           console.log('DAILY LOG:', dailyLog);
           if (dailyLog.length < 1) {
-            this.setState(
-              {
-                notToday: true
-              },
-              () =>
-                console.log(
-                  'there has not been a log today',
-                  this.state.notToday
-                )
-            );
+            this.setState({
+              notToday: true
+            });
           }
         }
       })

@@ -51,7 +51,7 @@ export default class View extends Component {
   };
 
   showLogs = () => {
-    if (this.state.logs.length < 1 && this.state.today === new Date()) {
+    if (this.state.logs.length < 1 && this.state.today == new Date()) {
       return (
         <div>
           No one has created a log today.{' '}
@@ -96,7 +96,7 @@ export default class View extends Component {
                 {/* <Link to={`/view-profile/${log.creatorId._id}`}>
                   {log.creatorId.username}
                 </Link> */}
-                {theTag} {this.state.id === log.creatorId._id && <b>(You!)</b>}
+                {theTag}
               </h2>
               {log.creatorId.username !==
                 'This user has decided to keep their name private' &&
@@ -132,18 +132,20 @@ export default class View extends Component {
     );
   };
 
-  showState = () => [console.log('This is the state:', [...this.state.state])];
+  showState = () => [
+    console.log("This is the state:", this.state.state)
+  ]
 
   render() {
     return (
       <div>
-        <button onClick={this.showState}>Show the states in the logs</button>
+        <button onClick={this.showState}
         <h1>PRELIMINARY: THESE ARE TODAYS LOGS:</h1>
 
         <div>
           <DatePicker onChange={this.onChange} value={this.state.date} />
         </div>
-        {!this.state.yours && this.state.today === new Date() && (
+        {!this.state.yours && this.state.today == new Date() && (
           <div>
             You haven't created a log today.{' '}
             <Link to='/create'>Make one now!</Link>

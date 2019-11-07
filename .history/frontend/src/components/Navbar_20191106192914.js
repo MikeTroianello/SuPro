@@ -24,7 +24,7 @@ export default function Navbar(props) {
             <Link to='/profile'>Profile</Link>
           </div>
         )}
-        {props.info.loggedInUser && !props.info.createdLogToday && (
+        {props.info.loggedInUser && props.info.createdLogToday && (
           <div>
             <Link to='/create'>Create</Link>
           </div>

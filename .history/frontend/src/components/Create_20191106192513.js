@@ -60,7 +60,7 @@ export default class Create extends Component {
     let info = this.state;
     this.service.create(info).then(results => {
       console.log('WE DID IT', results);
-      this.props.logCreated();
+
       this.props.history.push('/view');
     });
   };

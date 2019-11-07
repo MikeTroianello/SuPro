@@ -60,14 +60,32 @@ class App extends React.Component {
   };
 
   logCreated = () => {
-    console.log('THE LOG HAS BEEN CREATED');
-    this.setState(
-      {
-        createdLogToday: true
-      },
-      () => console.log('Have created a log!', this.state.createdLogToday)
-    );
+    this.setState({
+      createdLogToday: true
+    });
   };
+
+  // login = storedUser => {
+  //   console.log('LOGIN');
+  //   axios
+  //     .get(`http://localhost:5000/login`, {
+  //       theUser: storedUser,
+  //       withCredentials: true
+  //     })
+  //     .then(result => {
+  //       console.log(result.data);
+  //       // if (result.data.user) {
+  //       this.setState(
+  //         {
+  //           user: result.data.user || null,
+  //           message: result.data.message
+  //         },
+  //         () => {
+  //           console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-', this.state);
+  //         }
+  //       );
+  //     });
+  // };
 
   logout = () => {
     this.setState(

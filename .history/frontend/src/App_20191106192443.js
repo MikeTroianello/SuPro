@@ -59,15 +59,33 @@ class App extends React.Component {
     );
   };
 
-  logCreated = () => {
-    console.log('THE LOG HAS BEEN CREATED');
-    this.setState(
-      {
-        createdLogToday: true
-      },
-      () => console.log('Have created a log!', this.state.createdLogToday)
-    );
+  createdLogToday = () => {
+    this.setState({
+      createdLogToday: true
+    });
   };
+
+  // login = storedUser => {
+  //   console.log('LOGIN');
+  //   axios
+  //     .get(`http://localhost:5000/login`, {
+  //       theUser: storedUser,
+  //       withCredentials: true
+  //     })
+  //     .then(result => {
+  //       console.log(result.data);
+  //       // if (result.data.user) {
+  //       this.setState(
+  //         {
+  //           user: result.data.user || null,
+  //           message: result.data.message
+  //         },
+  //         () => {
+  //           console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-', this.state);
+  //         }
+  //       );
+  //     });
+  // };
 
   logout = () => {
     this.setState(
@@ -103,6 +121,7 @@ class App extends React.Component {
             info={this.state}
             logout={this.logout}
             history={this.history}
+            createdLogToday={this.state.createdLogToday}
           />
           <h1 className='frontend'>THIS IS THE FRONTEND</h1>
         </div>
@@ -136,17 +155,7 @@ class App extends React.Component {
               />
             )}
           />
-          <Route
-            exact
-            path='/create'
-            render={props => (
-              <Create
-                {...props}
-                logCreated={this.logCreated}
-                createdLogToday={this.state.createdLogToday}
-              />
-            )}
-          />
+          <Route exact path='/create' render={props => <Create {...props} />} />
           <Route exact path='/view' render={props => <View {...props} />} />
           <Route
             path='/view-profile/:id'
