@@ -1,11 +1,10 @@
 import React from 'react';
 
 export default function CountyFilter(props) {
-  console.log('COUNTIES PROP', props.counties);
   return (
     <div>
       This is the dropdown for counties
-      <select name='county' onChange={props.filter}>
+      <select name='county' onChange={props.chosenCounty}>
         <option selected disabled>
           Filter by County:
         </option>

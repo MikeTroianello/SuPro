@@ -56,8 +56,7 @@ export default class View extends Component {
           logs: results.specificDay,
           yours: results.yours,
           id: results.id,
-          states: [...new Set(states)],
-          counties: []
+          states: [...new Set(states)]
         });
       })
       .catch(error => console.log(error));
@@ -74,16 +73,6 @@ export default class View extends Component {
     stateLogs.map(log => {
       counties.add(log.county);
     });
-
-    this.setState(
-      {
-        logs: stateLogs,
-        counties: [...counties]
-      },
-      () => {
-        console.log('THIS IS THE STATE NOW:', this.state);
-      }
-    );
     console.log('statelogs after', stateLogs);
     console.log('counties', counties);
   };

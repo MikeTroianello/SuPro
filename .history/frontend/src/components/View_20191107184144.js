@@ -56,8 +56,7 @@ export default class View extends Component {
           logs: results.specificDay,
           yours: results.yours,
           id: results.id,
-          states: [...new Set(states)],
-          counties: []
+          states: [...new Set(states)]
         });
       })
       .catch(error => console.log(error));

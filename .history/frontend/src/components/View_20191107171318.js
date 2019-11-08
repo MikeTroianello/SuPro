@@ -18,7 +18,6 @@ export default class View extends Component {
     states: [],
     counties: [],
     state: undefined,
-    stateFiltered: false,
     county: undefined
   };
 
@@ -56,36 +55,10 @@ export default class View extends Component {
           logs: results.specificDay,
           yours: results.yours,
           id: results.id,
-          states: [...new Set(states)],
-          counties: []
+          states: [...new Set(states)]
         });
       })
       .catch(error => console.log(error));
-  };
-
-  filterByState = () => {
-    console.log('WE HAVE THE STATE', this.state.state);
-
-    let stateLogs = this.state.logs.filter(log => {
-      return log.state == this.state.state;
-    });
-
-    let counties = new Set();
-    stateLogs.map(log => {
-      counties.add(log.county);
-    });
-
-    this.setState(
-      {
-        logs: stateLogs,
-        counties: [...counties]
-      },
-      () => {
-        console.log('THIS IS THE STATE NOW:', this.state);
-      }
-    );
-    console.log('statelogs after', stateLogs);
-    console.log('counties', counties);
   };
 
   showLogs = () => {
@@ -103,7 +76,16 @@ export default class View extends Component {
         </div>
       );
     } else {
-      return this.state.logs.map((log, key) => {
+      let stateLogs = this.state.logs;
+      if (this.state.state) {
+        console.log('WE HAVE THE STATE', this.state.state);
+        console.log('statelogs before filter', stateLogs);
+        stateLogs = this.state.logs.filter(log => {
+          return log.state == this.state.state;
+        });
+        console.log('statelogs after', stateLogs);
+      }
+      return stateLogs.map((log, key) => {
         let weatherString;
         //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
@@ -171,16 +153,16 @@ export default class View extends Component {
 
   showState = () => [console.log('This is the state:', this.state.states)];
 
-  filter = e => {
+  chosenState = e => {
     console.log(e.target.value);
-    this.setState(
-      {
-        [e.target.name]: e.target.value
-      },
-      () => {
-        this.filterByState();
-      }
-    );
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    this.showLogs();
+  };
+
+  chosenCounty = e => {
+    console.log(e.target.value);
   };
 
   render() {
@@ -192,10 +174,14 @@ export default class View extends Component {
 
         <div className='logFilter'>
           <DatePicker onChange={this.onChange} value={this.state.date} />
-          <StateFilter states={this.state.states} filter={this.filter} />
-          {this.state.counties.length > 0 && (
-            <CountyFilter counties={this.state.counties} filter={this.filter} />
-          )}
+          <StateFilter
+            states={this.state.states}
+            chosenState={this.chosenState}
+          />
+          <CountyFilter
+            counties={this.state.counties}
+            chosenCounty={this.chosenCounty}
+          />
         </div>
         {!this.state.yours && this.state.today === new Date() && (
           <div>

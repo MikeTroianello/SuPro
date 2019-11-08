@@ -56,8 +56,7 @@ export default class View extends Component {
           logs: results.specificDay,
           yours: results.yours,
           id: results.id,
-          states: [...new Set(states)],
-          counties: []
+          states: [...new Set(states)]
         });
       })
       .catch(error => console.log(error));
@@ -69,23 +68,21 @@ export default class View extends Component {
     let stateLogs = this.state.logs.filter(log => {
       return log.state == this.state.state;
     });
-
-    let counties = new Set();
+    let counties = stateLogs;
     stateLogs.map(log => {
-      counties.add(log.county);
-    });
-
-    this.setState(
-      {
-        logs: stateLogs,
-        counties: [...counties]
-      },
-      () => {
-        console.log('THIS IS THE STATE NOW:', this.state);
+      if (!this.state.counties.includes(log.county)) {
+        console.log('NEW COUNTY', log.county);
+        this.setState(
+          prevState => {
+            counties: prevState.counties.push(log.county);
+          },
+          () => {
+            console.log(this.state.counties);
+          }
+        );
       }
-    );
+    });
     console.log('statelogs after', stateLogs);
-    console.log('counties', counties);
   };
 
   showLogs = () => {
@@ -173,14 +170,10 @@ export default class View extends Component {
 
   filter = e => {
     console.log(e.target.value);
-    this.setState(
-      {
-        [e.target.name]: e.target.value
-      },
-      () => {
-        this.filterByState();
-      }
-    );
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    this.filterByState();
   };
 
   render() {
