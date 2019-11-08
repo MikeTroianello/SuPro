@@ -117,9 +117,7 @@ router.post('/create', (req, res, next) => {
 
           Log.create(log)
             .then(createdLog => {
-              req.user.createdToday = true;
-              const infoToSendBack = { createdLog, user: req.user };
-              res.json(infoToSendBack);
+              res.json(createdLog);
             })
             .catch(err => {
               res.send(err);

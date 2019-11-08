@@ -87,8 +87,7 @@ class App extends React.Component {
     this.setState(
       {
         loggedInUser: userObj,
-        message: `Hello, ${userObj.username}!`,
-        createdLogToday: userObj.createdToday
+        message: `Hello, ${userObj.username}!`
       },
       () => {
         console.log(this.state);
@@ -150,7 +149,7 @@ class App extends React.Component {
             )}
           />
 
-          {/* <Route exact path='/view' component={View} /> */}
+          <Route exact path='/view' component={View} />
           <Route
             path='/view'
             render={props => (

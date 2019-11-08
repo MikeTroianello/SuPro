@@ -20,10 +20,6 @@ const userSchema = new Schema({
     type: String,
     enum: ['male', 'female', 'non-binary']
   },
-  createdToday: {
-    type: Boolean,
-    default: false
-  },
   time: { type: Date, default: Date.now }
 });
 

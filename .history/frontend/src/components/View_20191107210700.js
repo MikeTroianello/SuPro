@@ -51,7 +51,6 @@ export default class View extends Component {
     this.service
       .getDate(year, day)
       .then(results => {
-        console.log('LOGS', results);
         const states = results.specificDay.map(log => {
           return log.state;
         });
@@ -121,8 +120,7 @@ export default class View extends Component {
     });
     this.setState(
       {
-        filteredLogs: genderLogs,
-        genderSearchMessage: `Showing all ${e.target.value} logs`
+        filteredLogs: genderLogs
       },
       () => {
         console.log('the new logs:', this.state.filteredLogs);
@@ -205,13 +203,11 @@ export default class View extends Component {
   };
 
   onChange = date => {
-    if (date) {
-      this.setState(
-        { date },
-        () => console.log(this.state.date),
-        this.sanitizeDate(date, 'NEW DATE')
-      );
-    }
+    this.setState(
+      { date },
+      () => console.log(this.state.date),
+      this.sanitizeDate(date, 'NEW DATE')
+    );
   };
 
   showState = () => [console.log('This is the state:', this.state.states)];
@@ -241,7 +237,7 @@ export default class View extends Component {
   };
 
   render() {
-    console.log(' created today?', this.props);
+    console.log('states', this.state.states);
     return (
       <div>
         <button onClick={this.showState}>Show the states in the logs</button>
@@ -259,7 +255,6 @@ export default class View extends Component {
             <button onClick={this.filterByGender} value='non-binary'>
               non-binary
             </button>
-            {'    '}
             {this.state.genderSearchMessage}
           </div>
           <br />
@@ -272,7 +267,7 @@ export default class View extends Component {
             />
           )}
         </div>
-        {!this.props.createdToday && (
+        {!this.state.yours && this.state.today === new Date() && (
           <div>
             You haven't created a log today.{' '}
             <Link to='/create'>Make one now!</Link>

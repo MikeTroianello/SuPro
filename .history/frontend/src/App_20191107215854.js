@@ -31,11 +31,16 @@ class App extends React.Component {
         .loggedin()
         .then(response => {
           console.log('RESPONSE:', response);
-          this.setState({
-            loggedInUser: response,
-            message: `Hello, ${response.username}!`,
-            createdLogToday: response.createdToday
-          });
+          this.setState(
+            {
+              loggedInUser: response,
+              message: `Hello, ${response.user.username}!`,
+              createdLogToday: response.createdToday
+            },
+            () => {
+              console.log('THIS IS THE STATE', this.state);
+            }
+          );
         })
         .catch(err => {
           this.setState({
@@ -87,8 +92,7 @@ class App extends React.Component {
     this.setState(
       {
         loggedInUser: userObj,
-        message: `Hello, ${userObj.username}!`,
-        createdLogToday: userObj.createdToday
+        message: `Hello, ${userObj.username}!`
       },
       () => {
         console.log(this.state);
@@ -149,14 +153,8 @@ class App extends React.Component {
               />
             )}
           />
-
+          <Route exact path='/view' render={props => <View {...props} />} />
           {/* <Route exact path='/view' component={View} /> */}
-          <Route
-            path='/view'
-            render={props => (
-              <View {...props} createdToday={this.state.createdLogToday} />
-            )}
-          />
           <Route
             path='/view-profile/:id'
             render={props => <ViewProfile {...props} setUser={this.setUser} />}

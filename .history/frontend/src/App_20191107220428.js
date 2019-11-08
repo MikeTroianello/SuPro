@@ -33,8 +33,7 @@ class App extends React.Component {
           console.log('RESPONSE:', response);
           this.setState({
             loggedInUser: response,
-            message: `Hello, ${response.username}!`,
-            createdLogToday: response.createdToday
+            message: `Hello, ${response.username}!`
           });
         })
         .catch(err => {
@@ -87,8 +86,7 @@ class App extends React.Component {
     this.setState(
       {
         loggedInUser: userObj,
-        message: `Hello, ${userObj.username}!`,
-        createdLogToday: userObj.createdToday
+        message: `Hello, ${userObj.username}!`
       },
       () => {
         console.log(this.state);
@@ -151,12 +149,6 @@ class App extends React.Component {
           />
 
           {/* <Route exact path='/view' component={View} /> */}
-          <Route
-            path='/view'
-            render={props => (
-              <View {...props} createdToday={this.state.createdLogToday} />
-            )}
-          />
           <Route
             path='/view-profile/:id'
             render={props => <ViewProfile {...props} setUser={this.setUser} />}

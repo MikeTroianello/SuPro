@@ -154,7 +154,7 @@ class App extends React.Component {
           <Route
             path='/view'
             render={props => (
-              <View {...props} createdToday={this.state.createdLogToday} />
+              <View {...props} user={this.state.createdLogToday} />
             )}
           />
           <Route

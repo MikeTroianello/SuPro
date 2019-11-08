@@ -93,40 +93,10 @@ authRoutes.post('/login', (req, res, next) => {
         res.status(500).json({ message: 'Session save went bad.' });
         return;
       }
-
-      Log.find({ creatorId: req.user.id }).then(results => {
-        console.log('THE LOGS', results);
-
-        //FIX THIS LATER, THIS IS JUST A PLACEHOLDER
-        var now = new Date();
-        var start = new Date(now.getFullYear(), 0, 0);
-        var diff =
-          now -
-          start +
-          (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-        var oneDay = 1000 * 60 * 60 * 24;
-        var day = Math.floor(diff / oneDay);
-        console.log('Day of year: ' + day);
-
-        // day if the dayOfYear
-
-        let a = now.toString().split(' ');
-        let year = Number(a[3]);
-
-        results.map(log => {
-          if (log.dayOfYear == day && log.year == year) {
-            req.user.createdToday = true;
-          }
-        });
-        console.log('CREATED A LOG TODAY?', req.user.createdToday);
-        res.json(req.user);
-        return;
-      });
-
-      // console.log('here');
-      // // We are now logged in (that's why we can also send req.user)
-      // res.status(200).json(theUser);
-      // // res.redirect('/api/loggedin');
+      console.log('here');
+      // We are now logged in (that's why we can also send req.user)
+      res.status(200).json(theUser);
+      // res.redirect('/api/loggedin');
     });
   })(req, res, next);
 });
@@ -171,12 +141,10 @@ authRoutes.get('/loggedin', (req, res, next) => {
       });
       console.log('CREATED A LOG TODAY?', req.user.createdToday);
       res.json(req.user);
-      return;
     });
-  } else {
-    console.log('FAILED');
-    res.status(403).json({ message: 'Unauthorized' });
   }
+  console.log('FAILED');
+  res.status(403).json({ message: 'Unauthorized' });
 });
 
 module.exports = authRoutes;

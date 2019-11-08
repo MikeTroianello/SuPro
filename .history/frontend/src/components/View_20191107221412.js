@@ -241,7 +241,7 @@ export default class View extends Component {
   };
 
   render() {
-    console.log(' created today?', this.props);
+    console.log(' created today?', this.props.user);
     return (
       <div>
         <button onClick={this.showState}>Show the states in the logs</button>

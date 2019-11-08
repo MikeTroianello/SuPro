@@ -123,10 +123,10 @@ authRoutes.post('/login', (req, res, next) => {
         return;
       });
 
-      // console.log('here');
-      // // We are now logged in (that's why we can also send req.user)
-      // res.status(200).json(theUser);
-      // // res.redirect('/api/loggedin');
+      console.log('here');
+      // We are now logged in (that's why we can also send req.user)
+      res.status(200).json(theUser);
+      // res.redirect('/api/loggedin');
     });
   })(req, res, next);
 });

@@ -88,7 +88,7 @@ class App extends React.Component {
       {
         loggedInUser: userObj,
         message: `Hello, ${userObj.username}!`,
-        createdLogToday: userObj.createdToday
+        createdLogToday: response.createdToday
       },
       () => {
         console.log(this.state);
@@ -153,9 +153,7 @@ class App extends React.Component {
           {/* <Route exact path='/view' component={View} /> */}
           <Route
             path='/view'
-            render={props => (
-              <View {...props} createdToday={this.state.createdLogToday} />
-            )}
+            render={props => <View {...props} user={'42'} />}
           />
           <Route
             path='/view-profile/:id'
