@@ -91,20 +91,28 @@ export default class View extends Component {
   };
 
   filterByCounty = () => {
-    console.log('WE HAVE THE County', this.state.county);
+    console.log('WE HAVE THE STATE', this.state.state);
 
-    let countyLogs = this.state.logs.filter(log => {
-      return log.county == this.state.county;
+    let stateLogs = this.state.logs.filter(log => {
+      return log.state == this.state.state;
+    });
+
+    let counties = new Set();
+    stateLogs.map(log => {
+      counties.add(log.county);
     });
 
     this.setState(
       {
-        filteredLogs: countyLogs
+        filteredLogs: stateLogs,
+        counties: [...counties]
       },
       () => {
         console.log('THIS IS THE STATE NOW:', this.state);
       }
     );
+    console.log('statelogs after', stateLogs);
+    console.log('counties', counties);
   };
 
   showLogs = () => {

@@ -90,23 +90,6 @@ export default class View extends Component {
     console.log('counties', counties);
   };
 
-  filterByCounty = () => {
-    console.log('WE HAVE THE County', this.state.county);
-
-    let countyLogs = this.state.logs.filter(log => {
-      return log.county == this.state.county;
-    });
-
-    this.setState(
-      {
-        filteredLogs: countyLogs
-      },
-      () => {
-        console.log('THIS IS THE STATE NOW:', this.state);
-      }
-    );
-  };
-
   showLogs = () => {
     if (this.state.filteredLogs.length < 1 && this.state.today === new Date()) {
       return (
@@ -190,7 +173,7 @@ export default class View extends Component {
 
   showState = () => [console.log('This is the state:', this.state.states)];
 
-  filterState = e => {
+  filter = e => {
     console.log(e.target.value);
     this.setState(
       {
@@ -198,18 +181,6 @@ export default class View extends Component {
       },
       () => {
         this.filterByState();
-      }
-    );
-  };
-
-  filterCounty = e => {
-    console.log(e.target.value);
-    this.setState(
-      {
-        [e.target.name]: e.target.value
-      },
-      () => {
-        this.filterByCounty();
       }
     );
   };
@@ -223,12 +194,9 @@ export default class View extends Component {
 
         <div className='logFilter'>
           <DatePicker onChange={this.onChange} value={this.state.date} />
-          <StateFilter states={this.state.states} filter={this.filterState} />
+          <StateFilter states={this.state.states} filter={this.filter} />
           {this.state.counties.length > 0 && (
-            <CountyFilter
-              counties={this.state.counties}
-              filter={this.filterCounty}
-            />
+            <CountyFilter counties={this.state.counties} filter={this.filter} />
           )}
         </div>
         {!this.state.yours && this.state.today === new Date() && (

@@ -93,7 +93,7 @@ export default class View extends Component {
   filterByCounty = () => {
     console.log('WE HAVE THE County', this.state.county);
 
-    let countyLogs = this.state.logs.filter(log => {
+    let countyLogs = this.state.filteredLogs.filter(log => {
       return log.county == this.state.county;
     });
 
