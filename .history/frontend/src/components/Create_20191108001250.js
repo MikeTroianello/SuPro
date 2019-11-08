@@ -49,10 +49,10 @@ export default class Create extends Component {
       console.log('not going through');
       this.setState(
         {
-          err: true
+          err: 'something went wrong'
         },
 
-        this.props.setError('You already created a log today!')
+        this.props.setError(this.state.err)
       );
     } else {
       let info = this.state;

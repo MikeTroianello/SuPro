@@ -114,21 +114,11 @@ class App extends React.Component {
             logout={this.logout}
             history={this.history}
           />
+          {this.state.errMessage}
           <h1 className='frontend'>THIS IS THE FRONTEND</h1>
         </div>
         <Switch>
-          {/* <Route exact path='/' component={Home} /> */}
-          <Route
-            exact
-            path='/'
-            render={props => (
-              <Home
-                {...props}
-                err={this.state.errMessage}
-                setError={this.setError}
-              />
-            )}
-          />
+          <Route exact path='/' component={Home} />
           <Route
             exact
             path='/signup'

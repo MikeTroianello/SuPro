@@ -46,14 +46,9 @@ export default class Create extends Component {
     e.preventDefault();
     console.log('SUBMITTING');
     if (this.props.createdToday !== false) {
-      console.log('not going through');
-      this.setState(
-        {
-          err: true
-        },
-
-        this.props.setError('You already created a log today!')
-      );
+      this.setState({
+        err: 'something went wrong'
+      });
     } else {
       let info = this.state;
       this.service.create(info).then(results => {

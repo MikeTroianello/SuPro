@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AuthService from '../components/auth/auth-service';
-import { Redirect } from 'react-router-dom';
 
 export default class Create extends Component {
   // constructor(props) {
@@ -24,8 +23,7 @@ export default class Create extends Component {
     privateJournal: false,
     hideCreator: false,
     latitude: null,
-    longitude: null,
-    err: null
+    longitude: null
   };
 
   service = new AuthService();
@@ -45,31 +43,16 @@ export default class Create extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log('SUBMITTING');
-    if (this.props.createdToday !== false) {
-      console.log('not going through');
-      this.setState(
-        {
-          err: true
-        },
-
-        this.props.setError('You already created a log today!')
-      );
-    } else {
-      let info = this.state;
-      this.service.create(info).then(results => {
-        console.log('WE DID IT', results);
-        this.props.logCreated();
-        this.props.history.push('/view');
-      });
-    }
+    let info = this.state;
+    this.service.create(info).then(results => {
+      console.log('WE DID IT', results);
+      this.props.logCreated();
+      this.props.history.push('/view');
+    });
   };
 
   render() {
     //THIS FINDS LATITUDE AND LONGITUDE
-
-    if (this.state.err) {
-      return <Redirect to='/' />;
-    }
 
     console.log('DID YOU CREATE?', this.props.createdToday);
 

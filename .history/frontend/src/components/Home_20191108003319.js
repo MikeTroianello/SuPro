@@ -23,8 +23,11 @@ export default class Home extends Component {
         message: 'You already created a log today!',
         err: true
       });
+    } else {
+      this.setState({
+        message: 'This is the Home Page'
+      });
     }
-    this.props.setError(null);
     console.log(this.state.message);
     return <div>this.state.message</div>;
   }

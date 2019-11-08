@@ -12,7 +12,7 @@ const axios = require('axios');
 router.post('/create', (req, res, next) => {
   // console.log(req.body);
   console.log('LOGGING!!!! user', req.user);
-  if (req.isAuthenticated()) {
+  if (!req.user.createdToday && req.isAuthenticated()) {
     const {
       mood,
       productivity,
@@ -119,8 +119,6 @@ router.post('/create', (req, res, next) => {
             .then(createdLog => {
               req.user.createdToday = true;
               const infoToSendBack = { createdLog, user: req.user };
-              console.log('??????', req.user.createdToday);
-              console.log('!!!!!!!!!', user.createdToday);
               res.json(infoToSendBack);
             })
             .catch(err => {

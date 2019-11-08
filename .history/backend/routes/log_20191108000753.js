@@ -120,7 +120,6 @@ router.post('/create', (req, res, next) => {
               req.user.createdToday = true;
               const infoToSendBack = { createdLog, user: req.user };
               console.log('??????', req.user.createdToday);
-              console.log('!!!!!!!!!', user.createdToday);
               res.json(infoToSendBack);
             })
             .catch(err => {

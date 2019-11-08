@@ -16,19 +16,6 @@ export default class Home extends Component {
 
   service = new AuthService();
 
-  componentDidMount() {
-    console.log('=-=-=-=-=-==-=-=-=-=-=-');
-    if (this.props.err && !this.state.err) {
-      this.setState({
-        message: 'You already created a log today!',
-        err: true
-      });
-    }
-    this.props.setError(null);
-    console.log(this.state.message);
-    return <div>this.state.message</div>;
-  }
-
   checkIfLoggedIn = () => {
     this.service
       .loggedin()
@@ -38,12 +25,27 @@ export default class Home extends Component {
       .catch(error => console.log(error));
   };
 
+  message = () => {
+    if (this.props.err && !this.state.err) {
+      this.setState({
+        message: 'You already created a log today!',
+        err: true
+      });
+    } else {
+      this.setState({
+        message: 'This is the Home Page'
+      });
+    }
+    console.log(this.state.message);
+    return <div>this.state.message</div>;
+  };
+
   render() {
     console.log(this.props.err);
 
     return (
       <div>
-        <h1>{this.state.message}</h1>
+        <h1>{this.message}</h1>
         Home Page
         <button onClick={this.checkIfLoggedIn}>Check if logged in</button>
       </div>

@@ -121,13 +121,7 @@ class App extends React.Component {
           <Route
             exact
             path='/'
-            render={props => (
-              <Home
-                {...props}
-                err={this.state.errMessage}
-                setError={this.setError}
-              />
-            )}
+            render={props => <Home {...props} err={this.state.errMessage} />}
           />
           <Route
             exact

@@ -21,7 +21,7 @@ class App extends React.Component {
     loggedInUser: null,
     message: 'Not logged in',
     createdLogToday: false,
-    errMessage: null
+    errMessage: 'This is the Home Page'
   };
 
   service = new AuthService();
@@ -121,13 +121,7 @@ class App extends React.Component {
           <Route
             exact
             path='/'
-            render={props => (
-              <Home
-                {...props}
-                err={this.state.errMessage}
-                setError={this.setError}
-              />
-            )}
+            render={props => <Home {...props} err={this.state.errMessage} />}
           />
           <Route
             exact

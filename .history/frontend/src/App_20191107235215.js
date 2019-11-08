@@ -61,10 +61,9 @@ class App extends React.Component {
     );
   };
 
-  setError = err => {
-    console.log('SETTING THE ERROR', err);
+  setError = () => {
     this.setState({
-      errMessage: err
+      errMessage: 'something went wrong'
     });
   };
 
@@ -117,18 +116,7 @@ class App extends React.Component {
           <h1 className='frontend'>THIS IS THE FRONTEND</h1>
         </div>
         <Switch>
-          {/* <Route exact path='/' component={Home} /> */}
-          <Route
-            exact
-            path='/'
-            render={props => (
-              <Home
-                {...props}
-                err={this.state.errMessage}
-                setError={this.setError}
-              />
-            )}
-          />
+          <Route exact path='/' component={Home} />
           <Route
             exact
             path='/signup'
@@ -164,8 +152,7 @@ class App extends React.Component {
               <Create
                 {...props}
                 logCreated={this.logCreated}
-                createdToday={this.state.createdLogToday}
-                setError={this.setError}
+                createdLogToday={this.state.createdLogToday}
               />
             )}
           />
