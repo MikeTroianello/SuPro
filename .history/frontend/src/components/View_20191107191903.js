@@ -12,7 +12,6 @@ export default class View extends Component {
     date: new Date(),
     logs: null,
     filteredLogs: null,
-    filteredLogsCopy: null,
     yours: false,
     id: null,
     day: null,
@@ -57,7 +56,6 @@ export default class View extends Component {
         this.setState({
           logs: results.specificDay,
           filteredLogs: results.specificDay,
-          filteredLogsCopy: results.specificDay,
           yours: results.yours,
           id: results.id,
           states: [...new Set(states)],
@@ -111,7 +109,7 @@ export default class View extends Component {
 
   filterByGender = e => {
     console.log('WE ARE FILTERING BY GENDER', e.target.value);
-    let genderLogs = this.state.filteredLogsCopy.filter(log => {
+    let genderLogs = this.state.filteredLogs.filter(log => {
       return log.creatorId.gender == e.target.value;
     });
     this.setState(

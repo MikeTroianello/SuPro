@@ -12,7 +12,6 @@ export default class View extends Component {
     date: new Date(),
     logs: null,
     filteredLogs: null,
-    filteredLogsCopy: null,
     yours: false,
     id: null,
     day: null,
@@ -57,7 +56,6 @@ export default class View extends Component {
         this.setState({
           logs: results.specificDay,
           filteredLogs: results.specificDay,
-          filteredLogsCopy: results.specificDay,
           yours: results.yours,
           id: results.id,
           states: [...new Set(states)],
@@ -109,21 +107,6 @@ export default class View extends Component {
     );
   };
 
-  filterByGender = e => {
-    console.log('WE ARE FILTERING BY GENDER', e.target.value);
-    let genderLogs = this.state.filteredLogsCopy.filter(log => {
-      return log.creatorId.gender == e.target.value;
-    });
-    this.setState(
-      {
-        filteredLogs: genderLogs
-      },
-      () => {
-        console.log('the new logs:', this.state.filteredLogs);
-      }
-    );
-  };
-
   showLogs = () => {
     if (this.state.filteredLogs.length < 1 && this.state.today === new Date()) {
       return (
@@ -140,6 +123,7 @@ export default class View extends Component {
       );
     } else {
       return this.state.filteredLogs.map((log, key) => {
+        console.log('LOG-=-=-=-=-=-=-=-=', log);
         let weatherString;
         //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
@@ -177,7 +161,7 @@ export default class View extends Component {
                   <i>You have hidden your name for this log</i>
                 )}
             </span>
-            <h3>Gender: {log.creatorId.gender}</h3>
+            <h3>Gender: {log.gender}</h3>
             <h2>
               Weather: {log.weatherType}
               <span>
@@ -240,16 +224,6 @@ export default class View extends Component {
         <h1>PRELIMINARY: THESE ARE TODAYS LOGS:</h1>
 
         <div className='logFilter'>
-          <label htmlFor='gender'>Filter by gender:</label>
-          <select name='gender' onChange={e => this.filterByGender(e)}>
-            <option selected disabled>
-              Choose:
-            </option>
-            <option value='male'>Male</option>
-            <option value='female'>Female</option>
-            <option value='non-binary'>Non-binary</option>
-          </select>
-          <br />
           <DatePicker onChange={this.onChange} value={this.state.date} />
           <StateFilter states={this.state.states} filter={this.filterState} />
           {this.state.counties.length > 0 && (

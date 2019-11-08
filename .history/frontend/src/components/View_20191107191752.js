@@ -12,7 +12,6 @@ export default class View extends Component {
     date: new Date(),
     logs: null,
     filteredLogs: null,
-    filteredLogsCopy: null,
     yours: false,
     id: null,
     day: null,
@@ -57,7 +56,6 @@ export default class View extends Component {
         this.setState({
           logs: results.specificDay,
           filteredLogs: results.specificDay,
-          filteredLogsCopy: results.specificDay,
           yours: results.yours,
           id: results.id,
           states: [...new Set(states)],
@@ -109,10 +107,9 @@ export default class View extends Component {
     );
   };
 
-  filterByGender = e => {
-    console.log('WE ARE FILTERING BY GENDER', e.target.value);
-    let genderLogs = this.state.filteredLogsCopy.filter(log => {
-      return log.creatorId.gender == e.target.value;
+  filterByGender = gender => {
+    let genderLogs = this.state.filteredLogs.filter(log => {
+      return log.creatorId.gender == gender;
     });
     this.setState(
       {
@@ -241,7 +238,7 @@ export default class View extends Component {
 
         <div className='logFilter'>
           <label htmlFor='gender'>Filter by gender:</label>
-          <select name='gender' onChange={e => this.filterByGender(e)}>
+          <select name='gender' onChange={this.handleChange}>
             <option selected disabled>
               Choose:
             </option>
