@@ -86,8 +86,8 @@ export default class ViewProfile extends Component {
         This is {this.state.name}'s page
         <h2>
           {this.state.name}'s Overall Happiness: {this.state.mood}
+          {this.state.logs && <WeatherAudit logs={this.state.rawLogs} />}
         </h2>
-        {this.state.logs && <WeatherAudit logs={this.state.rawLogs} />}
         <br></br>
         {/* {this.state.logs && this.showLogs()} */}
         {this.state.logs}

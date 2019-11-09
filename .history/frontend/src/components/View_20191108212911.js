@@ -242,7 +242,6 @@ export default class View extends Component {
   };
 
   weatherAudit = () => {
-    console.log('HEEELLLLPPPPPP', this.state.filteredLogs);
     return <WeatherAudit logs={this.state.filteredLogs} />;
   };
 

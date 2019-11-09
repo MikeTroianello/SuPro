@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AuthService from './auth/auth-service';
-import WeatherAudit from './weather/WeatherAudit';
 
 export default class ViewProfile extends Component {
   state = {
@@ -63,7 +62,6 @@ export default class ViewProfile extends Component {
           // return theLogs;
           this.setState(
             {
-              rawLogs: results,
               logs: theLogs,
               mood: mood,
               name: name
@@ -87,7 +85,6 @@ export default class ViewProfile extends Component {
         <h2>
           {this.state.name}'s Overall Happiness: {this.state.mood}
         </h2>
-        {this.state.logs && <WeatherAudit logs={this.state.rawLogs} />}
         <br></br>
         {/* {this.state.logs && this.showLogs()} */}
         {this.state.logs}

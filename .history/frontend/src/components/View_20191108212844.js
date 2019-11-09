@@ -242,9 +242,8 @@ export default class View extends Component {
   };
 
   weatherAudit = () => {
-    console.log('HEEELLLLPPPPPP', this.state.filteredLogs);
-    return <WeatherAudit logs={this.state.filteredLogs} />;
-  };
+    return <WeatherAudit logs={this.state.filteredLogs} 
+  }
 
   render() {
     console.log(' created today?', this.props);
@@ -252,7 +251,9 @@ export default class View extends Component {
       <div>
         <button onClick={this.showState}>Show the states in the logs</button>
         <h1>PRELIMINARY: THESE ARE TODAYS LOGS:</h1>
-        {this.state.filteredLogs && this.weatherAudit()}
+        {this.state.filteredLogs && 
+          this.weatherAudit()
+        }
 
         <div className='logFilter'>
           <div className='gender-filter'>

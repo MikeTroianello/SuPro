@@ -139,7 +139,7 @@ export default class Profile extends Component {
           </h1>
         )}
         <h2>Overall Happiness: {this.state.mood}</h2>
-        {this.state.logs && <WeatherAudit logs={this.state.rawLogs} />}
+        {this.state.logs && <WeatherAudit logs={this.state.logs} />}
         <br></br>
         {/* {this.state.logs && this.showLogs()} */}
         {this.state.logs}
