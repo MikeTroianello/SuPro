@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function CountyFilter(props) {
-  console.log('COUNTIES PROP', props.counties);
   return (
     <div>
       This is the dropdown for counties

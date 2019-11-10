@@ -2,14 +2,8 @@ import React, { Component } from 'react';
 import AuthService from './auth/auth-service';
 
 export default class Home extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.service = new AuthService();
-  // }
-
   state = {
     date: new Date(),
-    testArr: ['a', 'be', 's', 'w'],
     message: 'This is the Home Page',
     err: false
   };
@@ -17,7 +11,6 @@ export default class Home extends Component {
   service = new AuthService();
 
   componentDidMount() {
-    console.log('=-=-=-=-=-==-=-=-=-=-=-');
     if (this.props.err && !this.state.err) {
       this.setState({
         message: 'You already created a log today!',
@@ -25,22 +18,18 @@ export default class Home extends Component {
       });
     }
     this.props.setError(null);
-    console.log(this.state.message);
+
     return <div>this.state.message</div>;
   }
 
   checkIfLoggedIn = () => {
     this.service
       .loggedin()
-      .then(results => {
-        console.log(results);
-      })
+      .then(results => {})
       .catch(error => console.log(error));
   };
 
   render() {
-    console.log(this.props.err);
-
     return (
       <div>
         <h1>{this.state.message}</h1>

@@ -36,7 +36,6 @@ export default class View extends Component {
   }
 
   sanitizeDate = (dateToLookFor, message) => {
-    // console.log(message, dateToLookFor);
     var start = new Date(dateToLookFor.getFullYear(), 0, 0);
     var diff =
       dateToLookFor -
@@ -52,7 +51,6 @@ export default class View extends Component {
     this.service
       .getDate(year, day)
       .then(results => {
-        console.log('LOGS', results);
         const states = results.specificDay.map(log => {
           return log.state;
         });
@@ -72,8 +70,6 @@ export default class View extends Component {
   };
 
   filterByState = () => {
-    console.log('WE HAVE THE STATE', this.state.state);
-
     let stateLogs = this.state.logs.filter(log => {
       return log.state == this.state.state;
     });
@@ -83,52 +79,32 @@ export default class View extends Component {
       counties.add(log.county);
     });
 
-    this.setState(
-      {
-        filteredLogs: stateLogs,
-        counties: [...counties],
-        genderSearchMessage: null
-      },
-      () => {
-        console.log('THIS IS THE STATE NOW:', this.state);
-      }
-    );
-    console.log('statelogs after', stateLogs);
-    console.log('counties', counties);
+    this.setState({
+      filteredLogs: stateLogs,
+      counties: [...counties],
+      genderSearchMessage: null
+    });
   };
 
   filterByCounty = () => {
-    console.log('WE HAVE THE County', this.state.county);
-
     let countyLogs = this.state.logs.filter(log => {
       return log.county == this.state.county;
     });
 
-    this.setState(
-      {
-        filteredLogs: countyLogs,
-        genderSearchMessage: null
-      },
-      () => {
-        console.log('THIS IS THE STATE NOW:', this.state);
-      }
-    );
+    this.setState({
+      filteredLogs: countyLogs,
+      genderSearchMessage: null
+    });
   };
 
   filterByGender = e => {
-    console.log('WE ARE FILTERING BY GENDER', e.target.value);
     let genderLogs = this.state.filteredLogsCopy.filter(log => {
       return log.creatorId.gender == e.target.value;
     });
-    this.setState(
-      {
-        filteredLogs: genderLogs,
-        genderSearchMessage: `Showing all ${e.target.value} logs`
-      },
-      () => {
-        console.log('the new logs:', this.state.filteredLogs);
-      }
-    );
+    this.setState({
+      filteredLogs: genderLogs,
+      genderSearchMessage: `Showing all ${e.target.value} logs`
+    });
   };
 
   showLogs = () => {
@@ -154,7 +130,6 @@ export default class View extends Component {
             0,
             -1
           )}d@2x.png`;
-          // console.log('WEATHER STRING', weatherString);
         } else weatherString = '';
         let theTag = (
           <Link to={`/view-profile/${log.creatorId._id}`}>
@@ -173,9 +148,6 @@ export default class View extends Component {
           <div className='log' key={key}>
             <span>
               <h2>
-                {/* <Link to={`/view-profile/${log.creatorId._id}`}>
-                  {log.creatorId.username}
-                </Link> */}
                 {theTag} {this.state.id === log.creatorId._id && <b>(You!)</b>}
               </h2>
               {log.creatorId.username !==
@@ -188,7 +160,11 @@ export default class View extends Component {
             <h2>
               Weather: {log.weatherType}
               <span>
-                <img src={weatherString} alt='CHANGE THIS LATER' />
+                <img
+                  className='weather-icon'
+                  src={weatherString}
+                  alt={log.weatherType}
+                />
               </span>
             </h2>
             <h2>
@@ -218,7 +194,6 @@ export default class View extends Component {
   showState = () => [console.log('This is the state:', this.state.states)];
 
   filterState = e => {
-    console.log(e.target.value);
     this.setState(
       {
         [e.target.name]: e.target.value
@@ -230,7 +205,6 @@ export default class View extends Component {
   };
 
   filterCounty = e => {
-    console.log(e.target.value);
     this.setState(
       {
         [e.target.name]: e.target.value
@@ -242,16 +216,13 @@ export default class View extends Component {
   };
 
   weatherAudit = () => {
-    console.log('HEEELLLLPPPPPP', this.state.filteredLogs);
     return <WeatherAudit logs={this.state.filteredLogs} />;
   };
 
   render() {
-    console.log(' created today?', this.props);
     return (
       <div>
-        <button onClick={this.showState}>Show the states in the logs</button>
-        <h1>PRELIMINARY: THESE ARE TODAYS LOGS:</h1>
+        <h1>THESE ARE TODAYS LOGS:</h1>
         {this.state.filteredLogs && this.weatherAudit()}
 
         <div className='logFilter'>

@@ -1,19 +1,28 @@
 import React from 'react';
 
 export default function WeatherAvg(props) {
-  console.log('WEATHER AVERAGE PROPS', props);
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  let mood;
+  let mood = [];
+  let productivity = [];
   if (props.logs.length > 0) {
-    mood =
-      Math.round(100 * (props.logs.reduce(reducer) / props.logs.length)) / 100;
+    props.logs.forEach(log => {
+      mood.push(log.mood);
+      productivity.push(log.productivity);
+    });
+    mood = Math.round(100 * (mood.reduce(reducer) / props.logs.length)) / 100;
+    productivity =
+      Math.round(100 * (productivity.reduce(reducer) / props.logs.length)) /
+      100;
   } else {
     mood = 0;
+    productivity = 0;
   }
 
   return (
     <div>
-      {props.weather}: {mood}
+      <span className='header'>
+        {props.weather}: <span>{mood}</span> <span>{productivity}</span>
+      </span>
     </div>
   );
 }

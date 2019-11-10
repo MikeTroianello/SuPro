@@ -3,20 +3,6 @@ import AuthService from '../components/auth/auth-service';
 import { Redirect } from 'react-router-dom';
 
 export default class Create extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     mood: null,
-  //     productivity: null,
-  //     journal: null,
-  //     privateJournal: false,
-  //     hideCreator: false,
-  //     latitude: null,
-  //     longitude: null
-  //   };
-  //   this.service = new AuthService();
-  // }
-
   state = {
     mood: null,
     productivity: null,
@@ -31,7 +17,6 @@ export default class Create extends Component {
   service = new AuthService();
 
   handleChange = e => {
-    console.log('E', e.target.value);
     this.setState(
       {
         [e.target.name]: e.target.value
@@ -44,9 +29,7 @@ export default class Create extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('SUBMITTING');
     if (this.props.createdToday !== false) {
-      console.log('not going through');
       this.setState(
         {
           err: true
@@ -57,7 +40,6 @@ export default class Create extends Component {
     } else {
       let info = this.state;
       this.service.create(info).then(results => {
-        console.log('WE DID IT', results);
         this.props.logCreated();
         this.props.history.push('/view');
       });
@@ -71,15 +53,11 @@ export default class Create extends Component {
       return <Redirect to='/' />;
     }
 
-    console.log('DID YOU CREATE?', this.props.createdToday);
-
     if ('geolocation' in navigator) {
       console.log('Geolocation is available');
       navigator.geolocation.getCurrentPosition(position => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        // document.getElementById('lat').textContent = latitude;
-        // document.getElementById('lon').textContent = longitude;
 
         this.setState({
           latitude: latitude,
@@ -92,6 +70,7 @@ export default class Create extends Component {
 
     return (
       <div>
+        <h1>Create a Mood Log</h1>
         <div>
           <label htmlFor='mood'>What is your mood?</label>
           <input
@@ -121,8 +100,8 @@ export default class Create extends Component {
             name='journal'
             rows='7'
             cols='80'
-            maxLength='500'
-            placeholder='max length 500 characters'
+            maxLength='400'
+            placeholder='max length 400 characters'
             onChange={this.handleChange}
           />
         </div>
@@ -154,11 +133,7 @@ export default class Create extends Component {
             will be unable to know you created it)
           </p>
         </div>
-        {/* <input type='hidden' value={latitude} name='latitude' />
-        <input type='hidden' value={longitude} name='longitude' /> */}
         <button onClick={this.handleSubmit}>Log It</button>
-        {/* <div id='lat'>lat</div>
-        <div id='lon'>lon</div> */}
       </div>
     );
   }

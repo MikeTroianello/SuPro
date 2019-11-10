@@ -51,7 +51,6 @@ class AuthService {
   };
 
   logout = () => {
-    console.log('LOGGING OUT NOW');
     return this.service.post('/logout', {}).then(response => response.data);
   };
 }

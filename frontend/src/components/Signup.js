@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Redirect } from 'react-router-dom';
 import AuthService from './auth/auth-service';
 
 export default class Signup extends Component {
@@ -26,26 +25,11 @@ export default class Signup extends Component {
     e.preventDefault();
     const state = this.state;
     this.service.signup(state).then(results => {
-      // this.setState(
-      //   {
-      //     message: results.username,
-      //     user: results
-      //   },
-      //   () => {
-      //     console.log(this.state);
-      //   }
-      // );
-      // debugger;
-      // localStorage.setItem('user', JSON.stringify(results.user));
-      // this.props.setUser();
       this.props.history.push('/');
     });
   };
 
   render() {
-    // if (this.state.user) {
-    //   return <Redirect to='/' />;
-    // }
     return (
       <div>
         This is the Signup Page

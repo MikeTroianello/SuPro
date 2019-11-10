@@ -18,7 +18,6 @@ export default class ViewProfile extends Component {
     this.service
       .seeUser(this.props.match.params.id)
       .then(results => {
-        console.log('RESULTS', results);
         if (results.length < 1) {
           this.setState({
             logs: <div>They haven't created any logs...</div>
@@ -41,11 +40,14 @@ export default class ViewProfile extends Component {
             } else weatherString = '';
             return (
               <div key={key} className='log'>
-                {/* <h1>User's name: {lo}</h1> */}
                 <h2>
                   Weather: {log.weatherType}
                   <span>
-                    <img src={weatherString} alt='CHANGE THIS LATER' />
+                    <img
+                      className='weather-icon'
+                      src={weatherString}
+                      alt={log.weatherType}
+                    />
                   </span>
                 </h2>
                 <h2>
@@ -59,20 +61,13 @@ export default class ViewProfile extends Component {
           });
           let mood =
             Math.round(100 * (moodArr.reduce(reducer) / moodArr.length)) / 100;
-          console.log('MOOD', mood);
-          // return theLogs;
-          this.setState(
-            {
-              rawLogs: results,
-              logs: theLogs,
-              mood: mood,
-              name: name
-            },
-            () => {
-              console.log('THE LOGS:', this.state.logs);
-              console.log('MOOD:', this.state.mood);
-            }
-          );
+
+          this.setState({
+            rawLogs: results,
+            logs: theLogs,
+            mood: mood,
+            name: name
+          });
         }
       })
       .catch(err => {
@@ -89,7 +84,6 @@ export default class ViewProfile extends Component {
         </h2>
         {this.state.logs && <WeatherAudit logs={this.state.rawLogs} />}
         <br></br>
-        {/* {this.state.logs && this.showLogs()} */}
         {this.state.logs}
       </div>
     );

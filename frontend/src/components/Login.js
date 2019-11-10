@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import AuthService from '../components/auth/auth-service';
 
 export default class Login extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     user: '',
-  //     username: 'mike',
-  //     password: 'mike'
-  //   };
-  //   this.service = new AuthService();
-  // }
-
   state = {
     user: '',
     username: 'mike',
@@ -34,15 +24,13 @@ export default class Login extends Component {
       .login(username, password)
       .then(results => {
         this.setState({ username: '', password: '' });
-        console.log('RESULTS', results);
-        console.log('RESULTS.USERNAME', results.username);
+
         this.props.getUser(results);
         localStorage.setItem('user', JSON.stringify(results));
-        // this.props.setUser();
+
         this.props.history.push('/');
       })
       .catch(error => console.log(error));
-    // );
   };
 
   render() {

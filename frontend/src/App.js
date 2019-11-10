@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import ProtectedRoute from './components/auth/protected-route';
 
 import Home from './components/Home';
 import Login from './components/Login';
@@ -31,7 +30,6 @@ class App extends React.Component {
       this.service
         .loggedin()
         .then(response => {
-          console.log('RESPONSE:', response);
           this.setState({
             loggedInUser: response,
             message: `Hello, ${response.username}!`,
@@ -47,9 +45,7 @@ class App extends React.Component {
   }
 
   setUser = () => {
-    console.log('SETTING USER');
     let storedUser = JSON.parse(localStorage.getItem('user'));
-    console.log('LOCAL STORAGE: ', storedUser);
     this.setState(
       {
         username: storedUser.username,
@@ -62,50 +58,34 @@ class App extends React.Component {
   };
 
   setError = err => {
-    console.log('SETTING THE ERROR', err);
     this.setState({
       errMessage: err
     });
   };
 
   logCreated = () => {
-    console.log('THE LOG HAS BEEN CREATED');
-    this.setState(
-      {
-        createdLogToday: true
-      },
-      () => console.log('Have created a log!', this.state.createdLogToday)
-    );
+    this.setState({
+      createdLogToday: true
+    });
   };
 
   logout = () => {
-    this.setState(
-      {
-        loggedInUser: null,
-        message: 'Have a great day!'
-      },
-      () => {
-        console.log('WE Have Logged out! ', this.state);
-      }
-    );
+    this.setState({
+      loggedInUser: null,
+      message: 'Have a great day!'
+    });
     localStorage.removeItem('user');
   };
 
   getTheUser = userObj => {
-    this.setState(
-      {
-        loggedInUser: userObj,
-        message: `Hello, ${userObj.username}!`,
-        createdLogToday: userObj.createdToday
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      loggedInUser: userObj,
+      message: `Hello, ${userObj.username}!`,
+      createdLogToday: userObj.createdToday
+    });
   };
 
   render() {
-    // console.log(this.state.user);
     return (
       <Router>
         <div className='App'>
@@ -114,10 +94,8 @@ class App extends React.Component {
             logout={this.logout}
             history={this.history}
           />
-          <h1 className='frontend'>THIS IS THE FRONTEND</h1>
         </div>
         <Switch>
-          {/* <Route exact path='/' component={Home} /> */}
           <Route
             exact
             path='/'
@@ -169,8 +147,6 @@ class App extends React.Component {
               />
             )}
           />
-
-          {/* <Route exact path='/view' component={View} /> */}
           <Route
             path='/view'
             render={props => (
