@@ -51,4 +51,5 @@
   border: 1px solid black;
   margin: 1vh;
   padding: 0 1vw;
+  max-width: 500px;
 }

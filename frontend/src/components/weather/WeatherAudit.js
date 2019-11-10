@@ -44,10 +44,12 @@ export default function WeatherAudit(props) {
 
   return (
     <div className='weather-audit'>
-      <div className='header'>
-        <span>Weather</span>
-        <span>Mood Average</span>
-        <span>Productivity Average</span>
+      <table className='header'>
+        <tr>
+          <th>Weather</th>
+          <th>Mood Average</th>
+          <th>Productivity Average</th>
+        </tr>
         {/* {start && (
           <div className='weatherAvg'>
             <WeatherAvg weather={'Clear'} logs={this.clear} />
@@ -62,7 +64,7 @@ export default function WeatherAudit(props) {
           <WeatherAvg weather={'Rain'} logs={rain} />
           <WeatherAvg weather={'Snow'} logs={snow} />
         </div>
-      </div>
+      </table>
     </div>
   );
 }
