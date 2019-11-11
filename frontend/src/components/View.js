@@ -146,33 +146,47 @@ export default class View extends Component {
 
         return (
           <div className='log' key={key}>
-            <span>
-              <h2>
-                {theTag} {this.state.id === log.creatorId._id && <b>(You!)</b>}
-              </h2>
-              {log.creatorId.username !==
-                'This user has decided to keep their name private' &&
-                log.hideCreator && (
-                  <i>You have hidden your name for this log</i>
-                )}
-            </span>
-            <h3>Gender: {log.creatorId.gender}</h3>
-            <h2>
-              Weather: {log.weatherType}
+            <div className='log-head '>
               <span>
-                <img
-                  className='weather-icon'
-                  src={weatherString}
-                  alt={log.weatherType}
-                />
+                <h3 className='name-and-gender'>
+                  <div className='name-box'>
+                    {this.state.id === log.creatorId._id ? (
+                      <i>~(You!)~</i>
+                    ) : (
+                      theTag
+                    )}
+                    <p className='gender'>{log.creatorId.gender}</p>
+                  </div>
+                  <div className='weather-box'>
+                    <span>
+                      <img
+                        className='weather-icon'
+                        src={weatherString}
+                        alt={log.weatherType}
+                      />
+                    </span>
+                    <p> {log.weatherType}</p>
+                  </div>
+                </h3>
+                {log.creatorId.username !==
+                  'This user has decided to keep their name private' &&
+                  log.hideCreator && (
+                    <i>You have hidden your name for this log</i>
+                  )}
               </span>
-            </h2>
+            </div>
             <h2>
-              Location: {log.county}, {log.state}
+              {log.county}, {log.state}
             </h2>
-            <h3>Mood: {log.mood}</h3>
-            <h3>Productivity: {log.productivity}</h3>
-            <h3>Log: {log.journal}</h3>
+            <div className='mood-and-productivity'>
+              <h3>
+                Mood: <p>{log.mood}</p>
+              </h3>
+              <h3>
+                Productivity: <p>{log.productivity}</p>
+              </h3>
+            </div>
+            <h4>Log: {log.journal}</h4>
             {log.journal !== 'This log is set to private' &&
               log.privateJournal && <i>You made this log private</i>}
           </div>

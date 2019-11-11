@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -21,6 +17,10 @@
   color: #09d3ac;
 }
 
+h1 {
+  text-align: center;
+}
+
 .navbar {
   display: flex;
   justify-content: space-around;
@@ -28,8 +28,53 @@
 
 .log {
   border: 1px solid black;
-  margin: 1vh;
+  margin: 5vh 1vh;
   padding: 0 1vw;
+  border-radius: 2%;
+}
+
+.log-head {
+  /* display: flex; */
+  border-bottom: 1px solid black;
+}
+
+.log-head > span {
+  justify-content: space-between;
+  margin: -21px 0px 0px;
+}
+
+.weather-box {
+  text-align: center;
+  /* max-width: 45%; */
+  /* border-bottom: 1px solid black; */
+  /* border-left: 1px solid black; */
+  /* border-radius: 2%; */
+}
+
+.name-and-gender {
+  display: flex;
+  /* justify-content: space-between; */
+  /* border: 1px solid black; */
+  /* justify-content: space-evenly; */
+}
+
+.name-box {
+  min-width: 45%;
+  text-align: center;
+}
+
+.weather-box > p {
+  /* max-width: 45%; */
+  font-size: 0.75em;
+  margin-top: 15px;
+  margin-bottom: 2px;
+}
+
+.weather-icon {
+  margin: -28px 0px -36px;
+  /* margin: -41px 15px -36px; */
+  /* border: 1px solid black; */
+  /* FOR MOBILE margin:-6.7vh 4.98vw */
 }
 
 .gradient {
@@ -43,6 +88,8 @@
   );
 }
 
+/* VIEW PAGE */
+
 .weather-audit {
   border: 1px solid black;
   margin: 1vh;
@@ -55,9 +102,26 @@
   justify-content: space-between;
 }
 
-.weather-icon {
-  margin: -42px 15px;
-  /* FOR MOBILE margin:-6.7vh 4.98vw */
+.gender {
+  /* margin-left: -100px; */
+  /* text-align: end; */
+}
+
+.mood-and-productivity {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.mood-and-productivity > h3 {
+  width: 40%;
+  /* display: flex;
+  justify-content: space-between; */
+  border: 1px solid black;
+}
+
+.mood-and-productivity > h3 > p {
+  color: red;
 }
 
 @media (min-width: 750px) {
