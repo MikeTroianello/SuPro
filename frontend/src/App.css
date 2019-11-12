@@ -26,13 +26,6 @@ h1 {
   justify-content: space-around;
 }
 
-.log {
-  border: 1px solid black;
-  margin: 5vh 1vh;
-  padding: 0 1vw;
-  border-radius: 2%;
-}
-
 .log-head {
   /* display: flex; */
   border-bottom: 1px solid black;
@@ -88,7 +81,20 @@ h1 {
   );
 }
 
-/* VIEW PAGE */
+/* VIEW ALL LOGS PAGE */
+
+.log-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.log {
+  border: 1px solid black;
+  margin: 5vh 1vh;
+  padding: 0 1vw;
+  border-radius: 10px;
+  width: 550px;
+}
 
 .weather-audit {
   border: 1px solid black;
@@ -125,4 +131,55 @@ h1 {
 }
 
 @media (min-width: 750px) {
+}
+
+/* SIGNUP */
+.signup {
+  border: 2px solid black;
+  border-radius: 17px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-end; */
+  min-height: 300px;
+  max-width: 400px;
+  margin: 0 2vw;
+  padding: 2vh 1vw;
+}
+
+/* .signup > form {
+  min-height: 280px;
+} */
+
+.signup-button {
+  display: flex;
+  /* align-items: flex-end; */
+  justify-content: center;
+}
+
+.signup-button > button {
+  margin-top: 5vh;
+  font-size: 2em;
+  height: 50px;
+  width: 60%;
+  border-radius: 1ch;
+  margin-bottom: 2vh;
+  margin-top: 8vh;
+}
+
+.signup-header {
+  text-align: center;
+  font-size: 1.66em;
+  margin-bottom: 2vh;
+}
+
+.form-piece {
+  display: flex;
+  justify-content: space-between;
+  margin: 2vh 0;
+}
+
+.signup-message {
+  /* margin: 5vh 0; */
+  color: red;
+  text-align: center;
 }

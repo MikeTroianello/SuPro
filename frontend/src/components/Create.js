@@ -98,10 +98,10 @@ export default class Create extends Component {
           <textarea
             type='textbox'
             name='journal'
-            rows='7'
-            cols='80'
-            maxLength='400'
-            placeholder='max length 400 characters'
+            rows='6'
+            cols='70'
+            maxLength='300'
+            placeholder='max length 300 characters'
             onChange={this.handleChange}
           />
         </div>

@@ -10,8 +10,9 @@ const Log = require('../models/Log');
 
 authRoutes.post('/signup', (req, res, next) => {
   console.log('THIS IS WHAT WE HAVE:', req.body.state.username);
-  const username = req.body.state.username;
-  const password = req.body.state.password;
+  // const username = req.body.state.username;
+  // const password = req.body.state.password;
+  const { username, password, gender, email, phone } = req.body.state;
 
   if (!username || !password) {
     res.status(400).json({ message: 'Provide username and password' });
@@ -42,7 +43,10 @@ authRoutes.post('/signup', (req, res, next) => {
 
     const aNewUser = new User({
       username: username,
-      password: hashPass
+      password: hashPass,
+      gender,
+      email,
+      phone
     });
 
     aNewUser.save(err => {

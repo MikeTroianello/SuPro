@@ -270,7 +270,9 @@ export default class View extends Component {
             <Link to='/create'>Make one now!</Link>
           </div>
         )}
-        {this.state.filteredLogs && this.showLogs()}
+        <div className='log-box'>
+          {this.state.filteredLogs && this.showLogs()}
+        </div>
       </div>
     );
   }
