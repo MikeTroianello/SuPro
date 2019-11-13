@@ -69,7 +69,7 @@ export default class Create extends Component {
     }
 
     return (
-      <div>
+      <div className='create-log'>
         <h1>Create a Mood Log</h1>
         <div>
           <label htmlFor='mood'>What is your mood?</label>
@@ -99,9 +99,9 @@ export default class Create extends Component {
             type='textbox'
             name='journal'
             rows='6'
-            cols='70'
-            maxLength='300'
-            placeholder='max length 300 characters'
+            cols='49'
+            maxLength='250'
+            placeholder='max length 250 characters'
             onChange={this.handleChange}
           />
         </div>

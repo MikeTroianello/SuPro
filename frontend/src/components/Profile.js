@@ -55,21 +55,32 @@ export default class Profile extends Component {
             } else weatherString = '';
             return (
               <div key={key} className='log'>
-                <h2>
-                  Weather: {log.weatherType}
-                  <span>
-                    <img
-                      className='weather-icon'
-                      src={weatherString}
-                      alt={log.weatherType}
-                    />
-                  </span>
-                </h2>
-                <h2>
-                  Location: {log.county}, {log.state}
-                </h2>
-                <h3>Mood: {log.mood}</h3>
-                <h3>Productivity: {log.productivity}</h3>
+                <div className='profile-log-head'>
+                  <div>
+                    <h2>
+                      {log.county}, {log.state}
+                    </h2>
+                  </div>
+                  <div className='weather-box weather-box-profile'>
+                    <span>
+                      <img
+                        className='weather-icon'
+                        src={weatherString}
+                        alt={log.weatherType}
+                      />
+                    </span>
+                    <p> {log.weatherType}</p>
+                  </div>
+                </div>
+
+                <div className='mood-and-productivity'>
+                  <h3>
+                    Mood: <p>{log.mood}</p>
+                  </h3>
+                  <h3>
+                    Productivity: <p>{log.productivity}</p>
+                  </h3>
+                </div>
                 <h3>Log: {log.journal}</h3>
                 {log.hideCreator && (
                   <i>You have hidden your name for this log</i>
@@ -119,7 +130,7 @@ export default class Profile extends Component {
         <h2>Overall Happiness: {this.state.mood}</h2>
         {this.state.logs && <WeatherAudit logs={this.state.rawLogs} />}
         <br></br>
-        {this.state.logs}
+        <div className='log-box'>{this.state.logs}</div>
       </div>
     );
   }

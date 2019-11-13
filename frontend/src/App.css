@@ -241,3 +241,22 @@ i {
   color: red;
   text-align: center;
 }
+
+/* THIS IS YOUR PROFILE PAGE */
+
+.profile-log-head {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.weather-box-profile {
+  margin-top: -0.5%;
+}
+
+/* CREATE A LOG */
+
+.create-log {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 1%;
+}
