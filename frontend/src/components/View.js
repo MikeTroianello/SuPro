@@ -3,6 +3,13 @@ import AuthService from './auth/auth-service';
 import { Link } from 'react-router-dom';
 import DatePicker from 'react-date-picker';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faGenderless as nonbinary,
+  faVenus as female,
+  faMars as male
+} from '@fortawesome/free-solid-svg-icons';
+
 import StateFilter from './fiterByLocation/StateFilter';
 import CountyFilter from './fiterByLocation/CountyFilter';
 import WeatherAudit from './weather/WeatherAudit';
@@ -75,8 +82,17 @@ export default class View extends Component {
     });
 
     let counties = new Set();
+
+    //this was the original function, but it resulted in a warning
+
+    // stateLogs.map(log => {
+    //   counties.add(log.county);
+    // });
+
+    // New version with return
+
     stateLogs.map(log => {
-      counties.add(log.county);
+      return counties.add(log.county);
     });
 
     this.setState({
@@ -124,6 +140,7 @@ export default class View extends Component {
     } else {
       return this.state.filteredLogs.map((log, key) => {
         let weatherString;
+        let genderIcon;
         //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
           weatherString = `http://openweathermap.org/img/wn/${log.weatherIcon.slice(
@@ -144,6 +161,17 @@ export default class View extends Component {
           theTag = log.creatorId.username;
         }
 
+        switch (log.creatorId.gender) {
+          case 'male':
+            genderIcon = male;
+            break;
+          case 'female':
+            genderIcon = female;
+            break;
+          default:
+            genderIcon = nonbinary;
+            break;
+        }
         return (
           <div className='log' key={key}>
             <div className='log-head '>
@@ -155,7 +183,9 @@ export default class View extends Component {
                     ) : (
                       theTag
                     )}
-                    <p className='gender'>{log.creatorId.gender}</p>
+                  </div>
+                  <div className='gender'>
+                    <FontAwesomeIcon icon={genderIcon} size='2x' />
                   </div>
                   <div className='weather-box'>
                     <span>
@@ -234,42 +264,58 @@ export default class View extends Component {
   };
 
   render() {
+    console.log('ARE YOU LOGGED IN?????', this.props.loggedInUser);
     return (
       <div>
-        <h1>THESE ARE TODAYS LOGS:</h1>
-        {this.state.filteredLogs && this.weatherAudit()}
-
-        <div className='logFilter'>
+        <div className='view-header'>
+          <div>
+            <h1>THESE ARE TODAYS LOGS:</h1>
+            {!this.props.createdToday && this.props.loggedInUser && (
+              <div className='create-log-link'>
+                You haven't created a log today.{' '}
+                <Link to='/create'>Make one now!</Link>
+              </div>
+            )}
+          </div>
+          {this.state.filteredLogs && this.weatherAudit()}
+        </div>
+        <div className='filter-box'>
           <div className='gender-filter'>
             Filter By Gender:
+            <br />
             <button onClick={this.filterByGender} value='male'>
               male
             </button>
             <button onClick={this.filterByGender} value='female'>
               female
             </button>
-            <button onClick={this.filterByGender} value='non-binary'>
+            <button onClick={this.filterByGender} value='nonbinary'>
               non-binary
             </button>
-            {'    '}
+            <br />
             {this.state.genderSearchMessage}
           </div>
-          <br />
-          <DatePicker onChange={this.onChange} value={this.state.date} />
-          <StateFilter states={this.state.states} filter={this.filterState} />
-          {this.state.counties.length > 0 && (
+          {/* <br /> */}
+          <div>
+            Search Logs By Day:
+            <br />
+            <DatePicker onChange={this.onChange} value={this.state.date} />
+          </div>
+          <div>
+            Filter By State:
+            <br />
+            <StateFilter states={this.state.states} filter={this.filterState} />
+          </div>
+          <div>
+            Filter By County:
+            <br />
             <CountyFilter
               counties={this.state.counties}
               filter={this.filterCounty}
             />
-          )}
-        </div>
-        {!this.props.createdToday && (
-          <div>
-            You haven't created a log today.{' '}
-            <Link to='/create'>Make one now!</Link>
           </div>
-        )}
+        </div>
+
         <div className='log-box'>
           {this.state.filteredLogs && this.showLogs()}
         </div>

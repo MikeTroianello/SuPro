@@ -3,7 +3,6 @@ import React from 'react';
 export default function CountyFilter(props) {
   return (
     <div>
-      This is the dropdown for counties
       <select name='county' onChange={props.filter}>
         <option selected disabled>
           Filter by County:

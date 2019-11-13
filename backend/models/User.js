@@ -18,7 +18,7 @@ const userSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['male', 'female', 'non-binary']
+    enum: ['male', 'female', 'nonbinary']
   },
   createdToday: {
     type: Boolean,
