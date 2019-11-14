@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin-top: 10vh;
 }
 
 .App-header {
@@ -28,6 +29,13 @@ i {
 .navbar {
   display: flex;
   justify-content: space-around;
+  border-bottom: 1px solid black;
+  height: 10vh;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: #ffffff;
+  /* overflow: hidden; */
 }
 
 .log-head {

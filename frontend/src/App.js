@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 
 import Home from './components/Home';
 import Login from './components/Login';
@@ -86,8 +91,11 @@ class App extends React.Component {
   };
 
   render() {
+    // if (this.state.loggedInUser) {
+    //   return <Redirect to='/profile' />;
+    // }
     return (
-      <Router>
+      <div>
         <div className='App'>
           <Navbar
             info={this.state}
@@ -163,7 +171,7 @@ class App extends React.Component {
             render={props => <ViewProfile {...props} setUser={this.setUser} />}
           />
         </Switch>
-      </Router>
+      </div>
     );
   }
 }

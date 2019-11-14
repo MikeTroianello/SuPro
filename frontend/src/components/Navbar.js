@@ -5,17 +5,9 @@ export default function Navbar(props) {
   return (
     <div>
       <div className='navbar'>
-        <div>
-          <Link to='/'>Home</Link>
-        </div>
         {!props.info.loggedInUser && (
           <div>
-            <Link to='/login'>Login</Link>
-          </div>
-        )}
-        {!props.info.loggedInUser && (
-          <div>
-            <Link to='/signup'>Signup</Link>
+            <Link to='/'>Home</Link>
           </div>
         )}
         {props.info.loggedInUser && (

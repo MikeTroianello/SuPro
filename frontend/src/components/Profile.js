@@ -122,6 +122,7 @@ export default class Profile extends Component {
   }
 
   render() {
+    console.log('PROFILE PAGE');
     return (
       <div>
         <h1>Your Profile Page</h1>
