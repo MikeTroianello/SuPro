@@ -2,28 +2,65 @@ import React, { Component } from 'react';
 import AuthService from '../components/auth/auth-service';
 import { Redirect } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faFrown as frown,
+  faLaugh as happiest,
+  faSmile as smile,
+  faMeh as middlin,
+  faSadTear as crying,
+  faGrin as grin
+} from '@fortawesome/free-solid-svg-icons';
+
 export default class Create extends Component {
   state = {
     mood: null,
+    moodEmoji: null,
     productivity: null,
     journal: null,
     privateJournal: false,
     hideCreator: false,
     latitude: null,
     longitude: null,
-    err: null
+    err: null,
+    message: null
   };
 
   service = new AuthService();
 
   handleChange = e => {
+    this.setState({
+      [e.target.id]: e.target.innerText || e.target.value
+    });
+  };
+
+  setMood = num => {
+    console.log('SETTING MOOD', num);
+    let emoji;
+    switch (num) {
+      case 1:
+        emoji = <FontAwesomeIcon icon={crying} />;
+        break;
+      case 2:
+        emoji = <FontAwesomeIcon icon={frown} />;
+        break;
+      case 3:
+        emoji = <FontAwesomeIcon icon={middlin} />;
+        break;
+      case 4:
+        emoji = <FontAwesomeIcon icon={smile} />;
+        break;
+      case 5:
+        emoji = <FontAwesomeIcon icon={happiest} />;
+        break;
+    }
+
     this.setState(
       {
-        [e.target.name]: e.target.value
+        mood: num,
+        moodEmoji: emoji
       },
-      () => {
-        console.log('THE NEW STATE', this.state);
-      }
+      () => console.log(this.state)
     );
   };
 
@@ -37,6 +74,15 @@ export default class Create extends Component {
 
         this.props.setError('You already created a log today!')
       );
+    }
+    if (!this.state.mood) {
+      this.setState({
+        message: `You didn't select your mood`
+      });
+    } else if (!this.state.productivity) {
+      this.setState({
+        message: `You didn't select your productivity`
+      });
     } else {
       let info = this.state;
       this.service.create(info).then(results => {
@@ -71,25 +117,60 @@ export default class Create extends Component {
     return (
       <div className='create-log'>
         <h1>Create a Mood Log</h1>
-        <div>
-          <label htmlFor='mood'>What is your mood?</label>
-          <input
-            type='number'
-            name='mood'
-            placeholder='1 to 5'
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor='productivity'>
-            How productive do you think you were today?
+        <div className='create-mood-box'>
+          <label htmlFor='mood'>
+            What is your mood? {this.state.moodEmoji}
           </label>
-          <input
-            type='number'
-            name='productivity'
-            placeholder='1 to 5'
-            onChange={this.handleChange}
-          />
+          <br />
+          <div className='one-through-five'>
+            <FontAwesomeIcon
+              id='mood'
+              className='emotion'
+              icon={crying}
+              size='2x'
+              onClick={() => this.setMood(1)}
+            />
+            <FontAwesomeIcon
+              id='mood'
+              icon={frown}
+              size='2x'
+              onClick={() => this.setMood(2)}
+            />
+            <FontAwesomeIcon
+              id='mood'
+              icon={middlin}
+              size='2x'
+              onClick={() => this.setMood(3)}
+            />
+            <FontAwesomeIcon
+              id='mood'
+              icon={smile}
+              size='2x'
+              onClick={() => this.setMood(4)}
+            />
+            <FontAwesomeIcon
+              id='mood'
+              icon={happiest}
+              size='2x'
+              onClick={() => this.setMood(5)}
+            />
+          </div>
+        </div>
+        <div className='create-productivity-box'>
+          <label htmlFor='productivity'>
+            How productive do you think you were today?{' '}
+            <span className='one-through-five-box'>
+              {this.state.productivity}
+            </span>
+          </label>
+          <br />
+          <div className='one-through-five' onClick={this.handleChange}>
+            <span id='productivity'>1</span>
+            <span id='productivity'>2</span>
+            <span id='productivity'>3</span>
+            <span id='productivity'>4</span>
+            <span id='productivity'>5</span>
+          </div>
         </div>
         <div>
           <label htmlFor='journal'>
@@ -98,8 +179,9 @@ export default class Create extends Component {
           <textarea
             type='textbox'
             name='journal'
+            id='journal'
             rows='6'
-            cols='49'
+            cols='48'
             maxLength='250'
             placeholder='max length 250 characters'
             onChange={this.handleChange}
@@ -133,7 +215,11 @@ export default class Create extends Component {
             will be unable to know you created it)
           </p>
         </div>
-        <button onClick={this.handleSubmit}>Log It</button>
+        <button className='create-button' onClick={this.handleSubmit}>
+          Log It
+        </button>
+        <br></br>
+        <b className='signup-message'>{this.state.message}</b>
       </div>
     );
   }
