@@ -37,10 +37,11 @@ export default class Login extends Component {
         .then(results => {
           this.setState({ username: '', password: '' });
 
-          this.props.getUser(results);
+          // this.props.getUser(results);
           localStorage.setItem('user', JSON.stringify(results));
-
-          this.props.history.push('/');
+          console.log('ABOUT TO PASS PROPS UP');
+          this.props.logIt(results);
+          // this.props.history.push('/profile');
         })
         .catch(error => {
           console.log(error);
@@ -61,7 +62,7 @@ export default class Login extends Component {
               <label htmlFor='username'>Username:</label>
               <input
                 type='text'
-                style={{ 'font-size': '1em', width: '55%' }}
+                style={{ fontSize: '1em', width: '55%' }}
                 name='username'
                 placeholder='Your name...'
                 onChange={this.handleChange}
@@ -71,7 +72,7 @@ export default class Login extends Component {
               <label htmlFor='password'>Password:</label>
               <input
                 name='password'
-                style={{ 'font-size': '1em', width: '55%' }}
+                style={{ fontSize: '1em', width: '55%' }}
                 placeholder='******'
                 type='password'
                 onChange={this.handleChange}
@@ -84,7 +85,7 @@ export default class Login extends Component {
           <b className='signup-message'>{this.state.message}</b>
         </div>
         <div className='switch-button'>
-          <button className=''>Click to Create an Account</button>
+          {/* <button className=''>Click to Create an Account</button> */}
         </div>
       </div>
     );

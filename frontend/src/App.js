@@ -104,6 +104,7 @@ class App extends React.Component {
                 {...props}
                 err={this.state.errMessage}
                 setError={this.setError}
+                getUser={this.getTheUser}
               />
             )}
           />

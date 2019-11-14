@@ -46,7 +46,7 @@ export default class Signup extends Component {
     } else {
       const state = this.state;
       this.service.signup(state).then(results => {
-        this.props.history.push('/');
+        this.props.logIt(results);
       });
     }
   };
@@ -112,7 +112,7 @@ export default class Signup extends Component {
           <b className='signup-message'>{this.state.message}</b>
         </div>
         <div className='switch-button'>
-          <button className=''>Click to Create an Account</button>
+          {/* <button className=''>Click to Create an Account</button> */}
         </div>
       </div>
     );

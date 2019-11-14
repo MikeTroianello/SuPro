@@ -10,7 +10,8 @@ export default class Profile extends Component {
     logs: null,
     moodAvg: [],
     mood: 0,
-    notToday: false
+    notToday: false,
+    block: false
   };
 
   service = new AuthService();
@@ -31,15 +32,20 @@ export default class Profile extends Component {
     this.service
       .profile()
       .then(results => {
+        console.log('-=-=-=-=-=-=-=-=-=-', results);
         if (results.length < 1) {
-          this.setState({
-            logs: (
-              <div>
-                You haven't created a log yet!{' '}
-                <Link to='/create'>Make one now!</Link>
-              </div>
-            )
-          });
+          this.setState(
+            {
+              logs: (
+                <div>
+                  You haven't created a log yet!{' '}
+                  <Link to='/create'>Make one now!</Link>
+                </div>
+              ),
+              block: true
+            },
+            () => console.log('LOOKING FOR THIS!!!', this.state.logs.length)
+          );
         } else {
           const reducer = (accumulator, currentValue) =>
             accumulator + currentValue;
@@ -128,7 +134,9 @@ export default class Profile extends Component {
           </h1>
         )}
         <h2>Overall Happiness: {this.state.mood}</h2>
-        {this.state.logs && <WeatherAudit logs={this.state.rawLogs} />}
+        {this.state.logs && !this.state.block && (
+          <WeatherAudit logs={this.state.rawLogs} />
+        )}
         <br></br>
         <div className='log-box'>{this.state.logs}</div>
       </div>
