@@ -7,9 +7,9 @@ import {
 } from 'react-router-dom';
 
 import Home from './components/Home';
-import Login from './components/Login';
-import Logout from './components/Logout';
-import Signup from './components/Signup';
+import Login from './components/account/Login';
+import Logout from './components/account/Logout';
+import Signup from './components/account/Signup';
 import Create from './components/Create';
 import View from './components/View';
 import Profile from './components/Profile';

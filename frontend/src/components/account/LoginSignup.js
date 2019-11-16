@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import AuthService from './auth/auth-service';
+import AuthService from '../auth/auth-service';
 
-export default class Signup extends Component {
+export default class LoginSignup extends Component {
   state = {
+    login: this.props.isLogin,
     message: null,
     user: '',
     username: '',
@@ -16,17 +17,13 @@ export default class Signup extends Component {
 
   handleChange = e => {
     e.preventDefault();
-    this.setState(
-      {
-        [e.target.name]: e.target.value
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('THE STATE:', this.state);
     const { username, password, gender } = this.state;
     if (!username) {
       console.log('NO username');
@@ -38,16 +35,34 @@ export default class Signup extends Component {
       this.setState({
         message: `You must include a password`
       });
-    } else if (!gender) {
+    } else if (!gender && !this.state.login) {
       console.log('NO GENDER');
       this.setState({
         message: `You must include a gender`
       });
     } else {
       const state = this.state;
-      this.service.signup(state).then(results => {
-        this.props.logIt(results);
+
+      this.setState({
+        message: 'Logging in'
       });
+      if (this.state.login) {
+        console.log('LOGGING IN');
+        this.setState({
+          message: 'Logging in'
+        });
+        this.service.login(state).then(results => {
+          this.props.logIt(results);
+        });
+      } else {
+        console.log('SIGNING UP');
+        this.setState({
+          message: 'Logging in'
+        });
+        this.service.signup(state).then(results => {
+          this.props.logIt(results);
+        });
+      }
     }
   };
 
@@ -85,7 +100,7 @@ export default class Signup extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <div className='form-piece'>
+              {/* <div className='form-piece'>
                 <label htmlFor='phone'>Phone: (optional)</label>
                 <input
                   name='phone'
@@ -93,7 +108,7 @@ export default class Signup extends Component {
                   placeholder='867-5309'
                   onChange={this.handleChange}
                 />
-              </div>
+              </div> */}
               <div className='form-piece'>
                 <label htmlFor='gender'>What is your gender?</label>
                 <select name='gender' onChange={this.handleChange}>
@@ -111,9 +126,6 @@ export default class Signup extends Component {
             </div>
           </form>
           <b className='signup-message'>{this.state.message}</b>
-        </div>
-        <div className='switch-button'>
-          {/* <button className=''>Click to Create an Account</button> */}
         </div>
       </div>
     );

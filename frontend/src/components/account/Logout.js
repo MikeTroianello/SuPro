@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AuthService from './auth/auth-service';
+import AuthService from '../auth/auth-service';
 
 export default class Logout extends Component {
   service = new AuthService();

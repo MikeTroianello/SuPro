@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import AuthService from './auth/auth-service';
 
-import Login from './Login';
-import Signup from './Signup';
+import Login from './account/Login';
+import Signup from './account/Signup';
+
+import LoginSignup from './account/LoginSignup';
 
 export default class Home extends Component {
   state = {
@@ -59,17 +61,7 @@ export default class Home extends Component {
     return (
       <div>
         <h1>{this.state.message}</h1>
-
-        {/* {this.state.signup ? (
-          <Signup logIt={this.logIt} />
-        ) : (
-          <Login logIt={this.logIt} />
-        )}
-        <button className='create-button' onClick={this.toggle}>
-          {toggle}
-        </button> */}
-
-        {/* <button onClick={this.toggle}>flip the card</button> */}
+        {/* //THIS HAS PROVEN TO WORK */}
         <section class='container'>
           <div class={thing}>
             <div class='front card-div'>
@@ -81,6 +73,17 @@ export default class Home extends Component {
             </div>
           </div>
         </section>
+        {/* <section class='container'>
+          <div class={thing}>
+            <div class='front card-div'>
+              {' '}
+              <LoginSignup logIt={this.logIt} isLogin={true} />
+            </div>
+            <div class='back card-div'>
+              <LoginSignup logIt={this.logIt} isLogin={true} />
+            </div>
+          </div>
+        </section> */}
         <button className='create-button' onClick={this.toggle}>
           {toggle}
         </button>
