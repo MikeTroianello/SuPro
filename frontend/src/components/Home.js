@@ -45,21 +45,42 @@ export default class Home extends Component {
     }));
   };
 
+  flip = () => {};
+
   render() {
     let toggle;
+    let thing;
     this.state.signup
       ? (toggle = 'Go back to Login')
       : (toggle = 'Create an Account');
+    this.state.signup ? (thing = 'card flipped') : (thing = 'card');
 
+    console.log('THING', thing);
     return (
       <div>
         <h1>{this.state.message}</h1>
 
-        {this.state.signup ? (
+        {/* {this.state.signup ? (
           <Signup logIt={this.logIt} />
         ) : (
           <Login logIt={this.logIt} />
         )}
+        <button className='create-button' onClick={this.toggle}>
+          {toggle}
+        </button> */}
+
+        {/* <button onClick={this.toggle}>flip the card</button> */}
+        <section class='container'>
+          <div class={thing}>
+            <div class='front card-div'>
+              {' '}
+              <Login logIt={this.logIt} />
+            </div>
+            <div class='back card-div'>
+              <Signup logIt={this.logIt} />
+            </div>
+          </div>
+        </section>
         <button className='create-button' onClick={this.toggle}>
           {toggle}
         </button>

@@ -55,7 +55,7 @@ export default class Signup extends Component {
     return (
       <div>
         <div className='signup'>
-          <span className='signup-header'>This is the Signup Page</span>
+          <span className='signup-header'>Create an Account!</span>
           <form className='signup-form' onSubmit={this.handleSubmit}>
             <div className='form-pieces'>
               <div className='form-piece'>
