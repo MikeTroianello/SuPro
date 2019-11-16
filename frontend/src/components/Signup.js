@@ -62,6 +62,7 @@ export default class Signup extends Component {
                 <label htmlFor='name'>Your Username:</label>
                 <input
                   name='username'
+                  maxLength='20'
                   placeholder='Your name...'
                   onChange={this.handleChange}
                 />

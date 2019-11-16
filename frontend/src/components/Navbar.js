@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 
 export default function Navbar(props) {
   return (
-    <div>
-      <div className='navbar'>
+    <div className='navbar'>
+      <h2 className='logged-in-user'>{props.info.message}</h2>
+      <div className='nav-links'>
         {!props.info.loggedInUser && (
           <div>
             <Link to='/'>Home</Link>
@@ -25,7 +26,6 @@ export default function Navbar(props) {
         </div>
         {props.info.loggedInUser && <Link to='/logout'>Logout</Link>}
       </div>
-      <h2>{props.info.message}</h2>
     </div>
   );
 }

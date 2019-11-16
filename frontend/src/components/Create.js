@@ -23,7 +23,8 @@ export default class Create extends Component {
     latitude: null,
     longitude: null,
     err: null,
-    message: null
+    message: null,
+    messageCss: 'red'
   };
 
   service = new AuthService();
@@ -77,14 +78,20 @@ export default class Create extends Component {
     }
     if (!this.state.mood) {
       this.setState({
-        message: `You didn't select your mood`
+        message: `You didn't select your mood`,
+        messageCss: 'red'
       });
     } else if (!this.state.productivity) {
       this.setState({
-        message: `You didn't select your productivity`
+        message: `You didn't select your productivity`,
+        messageCss: 'red'
       });
     } else {
       let info = this.state;
+      this.setState({
+        message: 'Submitting your log',
+        messageCss: 'black'
+      });
       this.service.create(info).then(results => {
         this.props.logCreated();
         this.props.history.push('/view');
@@ -160,7 +167,7 @@ export default class Create extends Component {
           <label htmlFor='productivity'>
             How productive do you think you were today?{' '}
             <span className='one-through-five-box'>
-              {this.state.productivity}
+              <b>{this.state.productivity}</b>
             </span>
           </label>
           <br />
@@ -219,7 +226,7 @@ export default class Create extends Component {
           Log It
         </button>
         <br></br>
-        <b className='signup-message'>{this.state.message}</b>
+        <b className={this.state.messageCss}>{this.state.message}</b>
       </div>
     );
   }

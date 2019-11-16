@@ -56,7 +56,7 @@ export default class Login extends Component {
     return (
       <div>
         <div className='signup'>
-          <span className='signup-header'>This is the Login Page</span>
+          <span className='signup-header'>Login</span>
           <form onSubmit={this.handleSubmit}>
             <div className='form-piece login-form-piece'>
               <label htmlFor='username'>Username:</label>

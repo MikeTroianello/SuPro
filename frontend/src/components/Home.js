@@ -54,8 +54,7 @@ export default class Home extends Component {
     return (
       <div>
         <h1>{this.state.message}</h1>
-        Home Page
-        <button onClick={this.checkIfLoggedIn}>Check if logged in</button>
+
         {this.state.signup ? (
           <Signup logIt={this.logIt} />
         ) : (
