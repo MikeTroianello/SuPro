@@ -4,7 +4,9 @@ import AuthService from './auth/auth-service';
 import Login from './account/Login';
 import Signup from './account/Signup';
 
-import LoginSignup from './account/LoginSignup';
+import video from './video/Pexels Videos 1893623.mp4';
+
+import '../css/homepage.css';
 
 export default class Home extends Component {
   state = {
@@ -60,33 +62,32 @@ export default class Home extends Component {
     console.log('THING', thing);
     return (
       <div>
-        <h1>{this.state.message}</h1>
-        {/* //THIS HAS PROVEN TO WORK */}
-        <section class='container'>
-          <div class={thing}>
-            <div class='front card-div'>
-              {' '}
-              <Login logIt={this.logIt} />
-            </div>
-            <div class='back card-div'>
-              <Signup logIt={this.logIt} />
-            </div>
+        {/* <video autoplay muted loop id='myVideo'>
+          <source src={video} type='video/mp4' />
+        </video> */}
+        {/* <h1>{this.state.message}</h1> */}
+        <div className='homepage-top'>
+          <div className='homepage-greet'>
+            <h1>SUNLOGS</h1>
+            <p>How much does the weather affect your life?</p>
           </div>
-        </section>
-        {/* <section class='container'>
-          <div class={thing}>
-            <div class='front card-div'>
-              {' '}
-              <LoginSignup logIt={this.logIt} isLogin={true} />
-            </div>
-            <div class='back card-div'>
-              <LoginSignup logIt={this.logIt} isLogin={true} />
-            </div>
+          <div className='signup-login-container'>
+            <section class='container'>
+              <div class={thing}>
+                <div class='front card-div'>
+                  {' '}
+                  <Login logIt={this.logIt} />
+                </div>
+                <div class='back card-div'>
+                  <Signup logIt={this.logIt} />
+                </div>
+              </div>
+            </section>
+            <button className='create-button' onClick={this.toggle}>
+              {toggle}
+            </button>
           </div>
-        </section> */}
-        <button className='create-button' onClick={this.toggle}>
-          {toggle}
-        </button>
+        </div>
       </div>
     );
   }

@@ -19,6 +19,7 @@ import Navbar from './components/Navbar';
 import AuthService from './components/auth/auth-service';
 
 import './App.css';
+import './css/homepage.css';
 
 class App extends React.Component {
   state = {

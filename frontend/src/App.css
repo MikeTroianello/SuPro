@@ -200,6 +200,8 @@ i {
 /* SIGNUP */
 .signup {
   border: 2px solid black;
+  overflow: hidden;
+  background-color: rgba(250, 250, 250, 0.55);
   border-radius: 17px;
   display: flex;
   flex-direction: column;
@@ -207,7 +209,7 @@ i {
   min-height: 300px;
   height: 305px;
   max-width: 400px;
-  margin: 0 2vw;
+  /* margin: 0 2vw; */
   padding: 2vh 1vw;
 }
 
@@ -222,7 +224,7 @@ i {
 }
 
 .signup-button > button {
-  margin-top: 5vh;
+  margin-top: 1vh;
   font-size: 2em;
   height: 50px;
   width: 60%;
@@ -237,12 +239,12 @@ i {
 }
 
 .login-button > button {
-  margin-top: 6vh;
+  margin-top: 8vh;
   font-size: 2em;
   height: 50px;
   width: 60%;
   border-radius: 1ch;
-  margin-bottom: 5vh;
+  margin-bottom: 3vh;
 }
 
 .signup-header {
@@ -353,19 +355,19 @@ i {
 #mood:target {
   background-color: black;
 }
-
+/* 
 .create-button {
   width: 45%;
   height: 50px;
   border-radius: 1ch;
   font-size: 1.8em;
-  margin: 1vh 0 5vh;
+  margin: 6vh 0 5vh;
 }
 
 .create-button:hover {
   transition: 0.3s;
   background-color: rgba(93, 87, 87, 0.4);
-}
+} */
 
 :target {
   background-color: black;
@@ -395,7 +397,7 @@ i {
 
   .create-button {
     width: 90%;
-    margin: 2% 5%;
+    margin: 8% 5% 2%;
   }
 }
 
@@ -455,7 +457,7 @@ i {
   transform: rotateY(180deg);
 } */
 
-.container {
+/* .container {
   max-width: 400px;
   height: 345px;
   position: relative;
@@ -477,36 +479,33 @@ i {
   -o-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transform-origin: 50% 50%;
-}
+} */
 
-.card-div {
+/* .card-div {
   display: block;
   height: 100%;
   width: 100%;
-  /*     line-height: 260px; */
-  /*     color: white; */
   text-align: center;
   font-weight: bold;
-  /*     font-size: 140px; */
   position: absolute;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -o-backface-visibility: hidden;
   backface-visibility: hidden;
-}
-.card .front {
-  /* background: red; */
-}
-.card .back {
-  /* background: blue; */
+} */
+/* .card .front {
+
+} */
+/* .card .back {
+
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
-}
-.card.flipped {
+} */
+/* .card.flipped {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
-}
+} */
