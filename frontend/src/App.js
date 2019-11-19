@@ -10,6 +10,7 @@ import Home from './components/Home';
 import Login from './components/account/Login';
 import Logout from './components/account/Logout';
 import Signup from './components/account/Signup';
+import Settings from './components/account/Settings';
 import Create from './components/Create';
 import View from './components/View';
 import Profile from './components/Profile';
@@ -165,6 +166,12 @@ class App extends React.Component {
                 createdToday={this.state.createdLogToday}
                 loggedInUser={this.state.loggedInUser}
               />
+            )}
+          />
+          <Route
+            path='/settings'
+            render={props => (
+              <Settings {...props} loggedInUser={this.state.loggedInUser} />
             )}
           />
           <Route

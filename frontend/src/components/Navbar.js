@@ -26,6 +26,11 @@ export default function Navbar(props) {
         <div>
           <Link to='/view'>View</Link>
         </div>
+        {props.info.loggedInUser && (
+          <div>
+            <Link to='/settings'>Settings</Link>
+          </div>
+        )}
         {props.info.loggedInUser && <Link to='/logout'>Logout</Link>}
       </div>
     </div>
