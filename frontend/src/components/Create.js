@@ -122,111 +122,113 @@ export default class Create extends Component {
     }
 
     return (
-      <div className='create-log'>
-        <h1>Create a Mood Log</h1>
-        <div className='create-mood-box'>
-          <label htmlFor='mood'>
-            What is your mood? {this.state.moodEmoji}
-          </label>
-          <br />
-          <div className='one-through-five'>
-            <FontAwesomeIcon
-              id='mood'
-              className='emotion'
-              icon={crying}
-              size='2x'
-              onClick={() => this.setMood(1)}
-            />
-            <FontAwesomeIcon
-              id='mood'
-              icon={frown}
-              size='2x'
-              onClick={() => this.setMood(2)}
-            />
-            <FontAwesomeIcon
-              id='mood'
-              icon={middlin}
-              size='2x'
-              onClick={() => this.setMood(3)}
-            />
-            <FontAwesomeIcon
-              id='mood'
-              icon={smile}
-              size='2x'
-              onClick={() => this.setMood(4)}
-            />
-            <FontAwesomeIcon
-              id='mood'
-              icon={happiest}
-              size='2x'
-              onClick={() => this.setMood(5)}
+      <div className='create-log-page'>
+        <div className='create-log'>
+          <h1>Create a Mood Log</h1>
+          <div className='create-mood-box'>
+            <label htmlFor='mood'>
+              What is your mood? {this.state.moodEmoji}
+            </label>
+            <br />
+            <div className='one-through-five'>
+              <FontAwesomeIcon
+                id='mood'
+                className='emotion'
+                icon={crying}
+                size='2x'
+                onClick={() => this.setMood(1)}
+              />
+              <FontAwesomeIcon
+                id='mood'
+                icon={frown}
+                size='2x'
+                onClick={() => this.setMood(2)}
+              />
+              <FontAwesomeIcon
+                id='mood'
+                icon={middlin}
+                size='2x'
+                onClick={() => this.setMood(3)}
+              />
+              <FontAwesomeIcon
+                id='mood'
+                icon={smile}
+                size='2x'
+                onClick={() => this.setMood(4)}
+              />
+              <FontAwesomeIcon
+                id='mood'
+                icon={happiest}
+                size='2x'
+                onClick={() => this.setMood(5)}
+              />
+            </div>
+          </div>
+          <div className='create-productivity-box'>
+            <label htmlFor='productivity'>
+              How productive do you think you were today?{' '}
+              <span className='one-through-five-box'>
+                <b>{this.state.productivity}</b>
+              </span>
+            </label>
+            <br />
+            <div className='one-through-five' onClick={this.handleChange}>
+              <span id='productivity'>1</span>
+              <span id='productivity'>2</span>
+              <span id='productivity'>3</span>
+              <span id='productivity'>4</span>
+              <span id='productivity'>5</span>
+            </div>
+          </div>
+          <div>
+            <label htmlFor='journal'>
+              What were some of your thoughts about today?
+            </label>
+            <textarea
+              type='textbox'
+              name='journal'
+              id='journal'
+              rows='6'
+              cols='48'
+              maxLength='250'
+              placeholder='max length 250 characters'
+              onChange={this.handleChange}
             />
           </div>
-        </div>
-        <div className='create-productivity-box'>
-          <label htmlFor='productivity'>
-            How productive do you think you were today?{' '}
-            <span className='one-through-five-box'>
-              <b>{this.state.productivity}</b>
-            </span>
-          </label>
-          <br />
-          <div className='one-through-five' onClick={this.handleChange}>
-            <span id='productivity'>1</span>
-            <span id='productivity'>2</span>
-            <span id='productivity'>3</span>
-            <span id='productivity'>4</span>
-            <span id='productivity'>5</span>
+          <div>
+            <label htmlFor='privateJournal'>Make this a private Log:</label>
+            <input
+              type='checkbox'
+              name='privateJournal'
+              onChange={() => {
+                this.setState({
+                  privateJournal: !this.state.privateJournal
+                });
+              }}
+            />
           </div>
+          <div>
+            <label htmlFor='hideCreator'>Hide your status as creator:</label>
+            <input
+              type='checkbox'
+              name='hideCreator'
+              onChange={() => {
+                this.setState({
+                  hideCreator: !this.state.hideCreator
+                });
+              }}
+            />
+            <p>
+              (Note: people will still see the contents of this log, they just
+              will be unable to know you created it)
+            </p>
+          </div>
+          <button className='create-log-button' onClick={this.handleSubmit}>
+            Log It
+          </button>
+          <br></br>
+          <b className={this.state.messageCss}>{this.state.message}</b>
         </div>
-        <div>
-          <label htmlFor='journal'>
-            What were some of your thoughts about today?
-          </label>
-          <textarea
-            type='textbox'
-            name='journal'
-            id='journal'
-            rows='6'
-            cols='48'
-            maxLength='250'
-            placeholder='max length 250 characters'
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor='privateJournal'>Make this a private Log:</label>
-          <input
-            type='checkbox'
-            name='privateJournal'
-            onChange={() => {
-              this.setState({
-                privateJournal: !this.state.privateJournal
-              });
-            }}
-          />
-        </div>
-        <div>
-          <label htmlFor='hideCreator'>Hide your status as creator:</label>
-          <input
-            type='checkbox'
-            name='hideCreator'
-            onChange={() => {
-              this.setState({
-                hideCreator: !this.state.hideCreator
-              });
-            }}
-          />
-          <p>
-            (Note: people will still see the contents of this log, they just
-            will be unable to know you created it)
-          </p>
-        </div>
-        <button className='create-button' onClick={this.handleSubmit}>
-          Log It
-        </button>
-        <br></br>
-        <b className={this.state.messageCss}>{this.state.message}</b>
       </div>
     );
   }

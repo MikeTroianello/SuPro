@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import AuthService from './auth/auth-service';
 import WeatherAudit from './weather/WeatherAudit';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import {
+  faGenderless as nonbinary,
+  faVenus as female,
+  faMars as male
+} from '@fortawesome/free-solid-svg-icons';
+
 export default class ViewProfile extends Component {
   state = {
     user: null,
@@ -27,7 +35,21 @@ export default class ViewProfile extends Component {
             accumulator + currentValue;
           let moodArr = [];
           let name;
+          let genderIcon;
+
           let theLogs = results.map((log, key) => {
+            switch (log.creatorId.gender) {
+              case 'male':
+                genderIcon = male;
+                break;
+              case 'female':
+                genderIcon = female;
+                break;
+              default:
+                genderIcon = nonbinary;
+                break;
+            }
+
             let weatherString;
             if (!name) name = log.creatorId.username;
             moodArr.push(log.mood);
@@ -38,6 +60,7 @@ export default class ViewProfile extends Component {
               )}d@2x.png`;
               console.log('WEATHER STRING', weatherString);
             } else weatherString = '';
+
             return (
               <div key={key} className='log'>
                 <div className='profile-log-head'>
@@ -77,7 +100,8 @@ export default class ViewProfile extends Component {
             rawLogs: results,
             logs: theLogs,
             mood: mood,
-            name: name
+            name: name,
+            gender: genderIcon
           });
         }
       })
@@ -88,12 +112,15 @@ export default class ViewProfile extends Component {
 
   render() {
     return (
-      <div>
-        This is {this.state.name}'s page
-        <h2>
-          {this.state.name}'s Overall Happiness: {this.state.mood}
-        </h2>
-        {this.state.logs && <WeatherAudit logs={this.state.rawLogs} />}
+      <div className='top-push'>
+        <h1>This is {this.state.name}'s page</h1>
+        <div className='profile-mood-box'>
+          <h2>
+            {this.state.name}'s Overall Happiness: {this.state.mood}
+          </h2>
+          <FontAwesomeIcon icon={this.state.gender} size='3x' />
+          {this.state.logs && <WeatherAudit logs={this.state.rawLogs} />}
+        </div>
         <br></br>
         <div className='log-box'>{this.state.logs}</div>
       </div>

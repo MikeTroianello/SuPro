@@ -114,6 +114,7 @@ export default class View extends Component {
   };
 
   filterByGender = e => {
+    console.log(e);
     let genderLogs = this.state.filteredLogsCopy.filter(log => {
       return log.creatorId.gender == e.target.value;
     });
@@ -227,11 +228,7 @@ export default class View extends Component {
 
   onChange = date => {
     if (date) {
-      this.setState(
-        { date },
-        () => console.log(this.state.date),
-        this.sanitizeDate(date, 'NEW DATE')
-      );
+      this.setState({ date }, this.sanitizeDate(date, 'NEW DATE'));
     }
   };
 
@@ -267,7 +264,7 @@ export default class View extends Component {
     console.log('ARE YOU LOGGED IN?????', this.props.loggedInUser);
     return (
       <div>
-        <div className='view-header'>
+        <div className='view-header top-push'>
           <div>
             <h1>THESE ARE TODAYS LOGS:</h1>
             {!this.props.createdToday && this.props.loggedInUser && (
@@ -284,12 +281,15 @@ export default class View extends Component {
             Filter By Gender:
             <br />
             <button onClick={this.filterByGender} value='male'>
+              {/* <FontAwesomeIcon icon={male} size='2x' /> */}
               male
             </button>
             <button onClick={this.filterByGender} value='female'>
+              {/* <FontAwesomeIcon icon={female} size='2x' value='female' /> */}
               female
             </button>
             <button onClick={this.filterByGender} value='nonbinary'>
+              {/* <FontAwesomeIcon icon={nonbinary} size='2x' /> */}
               non-binary
             </button>
             <br />

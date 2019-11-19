@@ -20,8 +20,9 @@ export default function WeatherAvg(props) {
 
   return (
     <div>
-      <span className='header'>
-        {props.weather}: <span>{mood}</span> <span>{productivity}</span>
+      <span className='weather-average-header'>
+        <span>{props.weather}:</span> <span>{mood}</span>{' '}
+        <span>{productivity}</span>
       </span>
     </div>
   );

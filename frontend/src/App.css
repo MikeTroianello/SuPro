@@ -26,6 +26,10 @@ i {
   text-align: center;
 }
 
+.top-push {
+  margin-top: 12.25vh;
+}
+
 /* NAVBAR */
 
 .navbar {
@@ -170,6 +174,30 @@ i {
   max-width: 500px;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed black;
+  text-align: center;
+}
+
+.header > span {
+  width: 25%;
+  font-weight: bold;
+  text-align: center;
+}
+
+.weather-average-header {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.weather-average-header span {
+  width: 22%;
+  text-align: center;
+}
+
 .filter-box {
   display: flex;
   flex-wrap: wrap;
@@ -177,9 +205,16 @@ i {
   border-top: 1px dotted black;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
+.gender-filter {
+  text-align: center;
+}
+
+.gender-filter button {
+  background-color: rgb(233, 30, 99);
+  border-radius: 50%;
+  height: 50px;
+  width: 100px;
+  font-size: 1em;
 }
 
 .gender {
@@ -302,11 +337,23 @@ i {
   justify-content: space-evenly;
 }
 
+.profile-mood-box {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .weather-box-profile {
   margin-top: -0.5%;
 }
 
 /* CREATE A LOG */
+
+.create-log-page {
+  display: flex;
+  justify-content: center;
+}
 
 .create-log {
   border: 1px solid black;
@@ -315,6 +362,16 @@ i {
   text-align: center;
   max-width: 450px;
   height: 550px;
+}
+
+.create-log-button {
+  width: 90%;
+  height: 50px;
+  border-radius: 1ch;
+  font-size: 1.8em;
+  margin: 0 0 2vh 0;
+  /* background-color: rgba(93, 87, 87, 0.7); */
+  background-color: rgba(180, 194, 60, 0.75);
 }
 
 .create-mood-box {

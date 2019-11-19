@@ -32,20 +32,16 @@ export default class Profile extends Component {
     this.service
       .profile()
       .then(results => {
-        console.log('-=-=-=-=-=-=-=-=-=-', results);
         if (results.length < 1) {
-          this.setState(
-            {
-              logs: (
-                <div>
-                  You haven't created a log yet!{' '}
-                  <Link to='/create'>Make one now!</Link>
-                </div>
-              ),
-              block: true
-            },
-            () => console.log('LOOKING FOR THIS!!!', this.state.logs.length)
-          );
+          this.setState({
+            logs: (
+              <div>
+                You haven't created a log yet!{' '}
+                <Link to='/create'>Make one now!</Link>
+              </div>
+            ),
+            block: true
+          });
         } else {
           const reducer = (accumulator, currentValue) =>
             accumulator + currentValue;
@@ -122,9 +118,8 @@ export default class Profile extends Component {
   }
 
   render() {
-    console.log('PROFILE PAGE');
     return (
-      <div>
+      <div className='top-push'>
         <h1>Your Profile Page</h1>
         {this.state.notToday && (
           <h1>
@@ -134,10 +129,12 @@ export default class Profile extends Component {
             </b>
           </h1>
         )}
-        <h2>Overall Happiness: {this.state.mood}</h2>
-        {this.state.logs && !this.state.block && (
-          <WeatherAudit logs={this.state.rawLogs} />
-        )}
+        <div className='profile-mood-box'>
+          <h2>Overall Happiness: {this.state.mood}</h2>
+          {this.state.logs && !this.state.block && (
+            <WeatherAudit logs={this.state.rawLogs} />
+          )}
+        </div>
         <br></br>
         <div className='log-box'>{this.state.logs}</div>
       </div>
