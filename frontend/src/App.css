@@ -37,7 +37,8 @@ i {
   position: fixed;
   width: 100%;
   top: 0;
-  background-color: #ffffff;
+  background-color: rgb(142, 194, 234);
+  /* background-color: rgb(180, 214, 241) */
   z-index: 1;
   /* overflow: hidden; */
 }
@@ -45,7 +46,7 @@ i {
 .nav-links {
   display: flex;
   justify-content: space-around;
-  width: 50%;
+  width: 40%;
 }
 
 .logged-in-user {
@@ -132,7 +133,7 @@ i {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  border-bottom: 1px dotted black;
+  /* border-bottom: 1px dotted black; */
 }
 
 .view-header > div > h1 {
@@ -154,7 +155,12 @@ i {
   margin: 5vh 1.4vw;
   padding: 0 1vw;
   border-radius: 10px;
-  max-width: 550px;
+  width: 550px;
+  /* width: 420px; */
+}
+
+.log h2 {
+  text-align: center;
 }
 
 .weather-audit {
@@ -168,6 +174,7 @@ i {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  border-top: 1px dotted black;
 }
 
 .header {
@@ -207,10 +214,16 @@ i {
   flex-direction: column;
   /* justify-content: flex-end; */
   min-height: 300px;
-  height: 305px;
+  height: 333px;
   max-width: 400px;
   margin: 2vw 0;
   padding: 2vh 1vw 0;
+}
+
+@media (min-height: 760px) {
+  .signup {
+    height: 365px;
+  }
 }
 
 /* .signup > form {
@@ -230,6 +243,12 @@ i {
   width: 60%;
   border-radius: 1ch;
   margin-bottom: 2vh;
+  background-color: rgba(114, 185, 240, 0.75);
+}
+
+.signup-button > button:hover {
+  transition: 0.3s;
+  background-color: rgba(114, 185, 240, 0.9);
 }
 
 .login-button {
@@ -245,6 +264,12 @@ i {
   width: 60%;
   border-radius: 1ch;
   margin-bottom: 3vh;
+  background-color: rgba(114, 185, 240, 0.75);
+}
+
+.login-button > button:hover {
+  transition: 0.3s;
+  background-color: rgba(114, 185, 240, 0.9);
 }
 
 .signup-header {

@@ -9,6 +9,38 @@
 }
 
 .homepage-greet {
+  margin-top: 6vh;
+}
+
+.homepage-greet h1 {
+  font-size: 6em;
+}
+
+.homepage-greet p {
+  font-size: 2em;
+}
+
+.homepage-separation {
+  height: 1vh;
+  width: auto;
+  background-color: rgba(148, 151, 168, 0.9);
+  margin-top: -1vh;
+}
+
+.homepage-sad {
+  margin-left: 5vw;
+}
+
+.homepage-sad h2 {
+  font-size: 5em;
+}
+
+.homepage-sad h4 {
+  font-size: 2em;
+}
+
+.homepage-sad p {
+  font-size: 1.5em;
 }
 
 .homepage-sunlog {
@@ -18,7 +50,18 @@
 }
 
 .sunlog-description {
+  margin-left: 5vw;
+  text-align: center;
   max-width: 700px;
+}
+
+.sunlog-description h2 {
+  font-size: 3em;
+}
+
+.sunlog-description p {
+  font-size: 1.3em;
+  margin: 7vh 0;
 }
 
 .sunlog-example {
@@ -32,9 +75,31 @@
 }
 
 .footer {
+  /* position: absolute; */
+  /* bottom: 0;
+  width: 100%; */
   border-top: 1px solid black;
   display: flex;
   justify-content: space-evenly;
+  background-color: rgb(119, 159, 219);
+  overflow: auto;
+}
+
+.footer-button {
+  margin: 3vh 0;
+  height: 50%;
+  width: 122px;
+  font-size: 1em;
+  background-color: rgb(224, 242, 243);
+}
+
+.footer-button:hover {
+  transition: 0.25s;
+  background-color: rgb(183, 207, 218);
+}
+
+.footer-contact {
+  text-align: center;
 }
 
 /* FOR THE FOOTER LOGO */
@@ -47,12 +112,14 @@
   font-weight: bold;
   border-style: solid;
   /* border-color: White; */
-  border-width: 2px;
+  width: 40px;
+  /* border-width: 2px; */
   margin: 30px 0;
 }
 
 .mt-logo {
-  /* margin: 3px 0; */
+  margin: 3px 0;
+  text-align: center;
 }
 
 /* EVERYTHING BELOW HERE IS FOR THE CARD FLIP ANIMATION AND POSSIBLY A VIDEO PLAYER */
@@ -72,8 +139,15 @@
   height: 50px;
   border-radius: 1ch;
   font-size: 1.8em;
-  margin: 9vh 0 0 0;
-  background-color: rgba(93, 87, 87, 0.7);
+  margin: 13vh 0 0 0;
+  /* background-color: rgba(93, 87, 87, 0.7); */
+  background-color: rgba(180, 194, 60, 0.75);
+}
+
+@media (min-height: 760px) {
+  .create-button {
+    margin: 18vh 0 0 0;
+  }
 }
 
 .create-button:hover {

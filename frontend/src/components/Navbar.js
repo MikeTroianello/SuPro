@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import '../css/navbar.css';
+
 export default function Navbar(props) {
   return (
     <div className='navbar'>
       <h2 className='logged-in-user'>{props.info.message}</h2>
       <div className='nav-links'>
         {!props.info.loggedInUser && (
-          <div>
+          <div className='yeet'>
             <Link to='/'>Home</Link>
           </div>
         )}

@@ -6,6 +6,9 @@ import Signup from './account/Signup';
 
 import Log from './view-logs/Log';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLevelUpAlt as arrow } from '@fortawesome/free-solid-svg-icons';
+
 // import video from './video/Pexels Videos 1893623.mp4';
 
 import '../css/homepage.css';
@@ -81,7 +84,7 @@ export default class Home extends Component {
     let thing;
     this.state.signup
       ? (toggle = 'Go back to Login')
-      : (toggle = 'New? Create an Account Now!');
+      : (toggle = 'or, Create an Account Now!');
     this.state.signup ? (thing = 'card flipped') : (thing = 'card');
 
     console.log('THING', thing);
@@ -113,6 +116,7 @@ export default class Home extends Component {
             </button>
           </div>
         </div>
+        <div className='homepage-separation'></div>
         <div className='homepage-sad'>
           <h2>Did you know:</h2>
           <h4>
@@ -121,18 +125,24 @@ export default class Home extends Component {
           </h4>
           <p>
             SAD can affect nearly every aspect of a person's life, from work, to
-            relationships, to personal health. It was this reason that Sunlogs
-            was created
+            relationships, to personal health. <br />
+            It was this reason that Sunlogs was created
           </p>
         </div>
         <div className='homepage-sunlog'>
           <div className='sunlog-description'>
-            <h2>What is Sunlog?</h2>
+            <h2>What is Sunlogs?</h2>
             <p>
-              Sunlog is a way to record your daily mood and how productive you
-              thought you were, as well as any feelings you might want to jot
-              down. These logs are then tied to the weather in your county, and
-              will compare correlate mood respectively
+              Sunlogs is a way to record your daily <strong>Mood</strong> and
+              how <strong>Productive</strong> you thought you were.{' '}
+            </p>
+            <p>
+              You can also create a journal for any feelings you might want to
+              jot down.
+            </p>{' '}
+            <p>
+              These logs are then tied to the weather in your county, and will
+              compare correlate mood respectively
             </p>
           </div>
           <div className='sunlog-example'>
@@ -141,14 +151,17 @@ export default class Home extends Component {
           </div>
         </div>
         <div>
-          <h1>SOMETHING ELSE WILL GO HERE</h1>
+          <h1>CREATE AN ACCOUNT AND SEE!</h1>
           <div className='footer'>
             <div>
-              <button onClick={this.backToTop}>Back to Top</button>
+              <button className='footer-button' onClick={this.backToTop}>
+                Back to Top
+                <FontAwesomeIcon icon={arrow} size='2x' />
+              </button>
             </div>
             <div className='footer-contact'>
               <p>Created by Mike Troianello</p>
-              <p>Have any questions/ concerns about the website?</p>
+              {/* <p>Have any questions/ concerns about the website?</p> */}
               <p>
                 Contact me at{' '}
                 <a href='mailto:mike@troianello.co'> mike@troianello.co</a>
