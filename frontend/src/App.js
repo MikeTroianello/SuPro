@@ -159,6 +159,7 @@ class App extends React.Component {
               <Create
                 {...props}
                 logCreated={this.logCreated}
+                user={this.state.loggedInUser}
                 createdToday={this.state.createdLogToday}
                 setError={this.setError}
               />

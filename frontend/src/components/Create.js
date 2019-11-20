@@ -29,6 +29,21 @@ export default class Create extends Component {
 
   service = new AuthService();
 
+  componentDidMount() {
+    console.log('PROPS', this.props.user);
+    if (this.props.user) {
+      this.setState(
+        {
+          privateJournal: this.props.user.privateJournalDefault,
+          hideCreator: this.props.user.hideCreatorDefault
+        },
+        () => {
+          console.log(this.state.privateJournal, this.state.hideCreator);
+        }
+      );
+    }
+  }
+
   handleChange = e => {
     this.setState({
       [e.target.id]: e.target.innerText || e.target.value
@@ -107,7 +122,6 @@ export default class Create extends Component {
     }
 
     if ('geolocation' in navigator) {
-      console.log('Geolocation is available');
       navigator.geolocation.getCurrentPosition(position => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
@@ -200,6 +214,7 @@ export default class Create extends Component {
             <input
               type='checkbox'
               name='privateJournal'
+              checked={this.state.privateJournal}
               onChange={() => {
                 this.setState({
                   privateJournal: !this.state.privateJournal
@@ -212,6 +227,7 @@ export default class Create extends Component {
             <input
               type='checkbox'
               name='hideCreator'
+              checked={this.state.hideCreator}
               onChange={() => {
                 this.setState({
                   hideCreator: !this.state.hideCreator
