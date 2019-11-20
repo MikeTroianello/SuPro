@@ -8,10 +8,11 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Log = require('../models/Log');
 
+// CREATING A NEW USER
+
 authRoutes.post('/signup', (req, res, next) => {
   console.log('THIS IS WHAT WE HAVE:', req.body.state.username);
-  // const username = req.body.state.username;
-  // const password = req.body.state.password;
+
   const { username, password, gender, email, phone } = req.body.state;
 
   if (!username || !password) {
@@ -19,13 +20,13 @@ authRoutes.post('/signup', (req, res, next) => {
     return;
   }
 
-  // if (password.length < 7) {
-  //   res.status(400).json({
-  //     message:
-  //       'Please make your password at least 8 characters long for security purposes.'
-  //   });
-  //   return;
-  // }
+  if (password.length < 6) {
+    res.status(400).json({
+      message:
+        'Please make your password at least 6 characters long for security purposes.'
+    });
+    return;
+  }
 
   User.findOne({ username }, (err, foundUser) => {
     if (err) {
@@ -98,34 +99,40 @@ authRoutes.post('/login', (req, res, next) => {
         return;
       }
 
-      Log.find({ creatorId: req.user.id }).then(results => {
-        console.log('THE LOGS', results);
-
-        //FIX THIS LATER, THIS IS JUST A PLACEHOLDER
-        var now = new Date();
-        var start = new Date(now.getFullYear(), 0, 0);
-        var diff =
-          now -
-          start +
-          (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-        var oneDay = 1000 * 60 * 60 * 24;
-        var day = Math.floor(diff / oneDay);
-        console.log('Day of year: ' + day);
-
-        // day if the dayOfYear
-
-        let a = now.toString().split(' ');
-        let year = Number(a[3]);
-
-        results.map(log => {
-          if (log.dayOfYear == day && log.year == year) {
-            req.user.createdToday = true;
-          }
-        });
-        console.log('CREATED A LOG TODAY?', req.user.createdToday);
-        res.json(req.user);
+      if (req.user.deleted) {
+        console.log('DELETED USER-=-=-=-=-=-=-=');
+        res.json({ message: 'This account was deleted' });
         return;
-      });
+      } else {
+        Log.find({ creatorId: req.user.id }).then(results => {
+          console.log('THE LOGS', results);
+
+          //FIX THIS LATER, THIS IS JUST A PLACEHOLDER
+          var now = new Date();
+          var start = new Date(now.getFullYear(), 0, 0);
+          var diff =
+            now -
+            start +
+            (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
+          var oneDay = 1000 * 60 * 60 * 24;
+          var day = Math.floor(diff / oneDay);
+          console.log('Day of year: ' + day);
+
+          // day if the dayOfYear
+
+          let a = now.toString().split(' ');
+          let year = Number(a[3]);
+
+          results.map(log => {
+            if (log.dayOfYear == day && log.year == year) {
+              req.user.createdToday = true;
+            }
+          });
+          console.log('CREATED A LOG TODAY?', req.user.createdToday);
+          res.json(req.user);
+          return;
+        });
+      }
 
       // console.log('here');
       // // We are now logged in (that's why we can also send req.user)
@@ -175,9 +182,69 @@ authRoutes.get('/loggedin', (req, res, next) => {
       });
       console.log('CREATED A LOG TODAY?', req.user.createdToday);
       req.user.save();
+      req.user.password = null;
       res.json(req.user);
       return;
     });
+  } else {
+    console.log('FAILED');
+    res.status(403).json({ message: 'Unauthorized' });
+  }
+});
+
+authRoutes.post('/change-info', (req, res, next) => {
+  console.log('REQ DOT BODY', req.body.userInfo);
+  if (req.isAuthenticated()) {
+    console.log(req.user.username, 'is logged in!');
+
+    if (req.user.phone !== req.body.userInfo.phone && req.body.userInfo.phone) {
+      console.log('PHONES DONT MATCH', req.user.phone, req.body.userInfo.phone);
+      req.user.phone = req.body.userInfo.phone;
+    }
+    if (req.user.email !== req.body.userInfo.email && req.body.userInfo.email) {
+      console.log('emailS DONT MATCH', req.user.email, req.body.userInfo.email);
+      req.user.email = req.body.userInfo.email;
+    }
+
+    if (
+      req.body.userInfo.oldPass &&
+      req.body.userInfo.newPass &&
+      req.body.userInfo.oldPass.length >= 6 &&
+      req.body.userInfo.newPass.length >= 6 &&
+      req.body.userInfo.oldPass === req.body.userInfo.oldPass
+    ) {
+      const newPass = req.body.userInfo.newPass;
+      const salt = bcrypt.genSaltSync(10);
+      const hashPass = bcrypt.hashSync(newPass, salt);
+      req.user.password = hashPass;
+    }
+    req.user.hideProfile = req.body.userInfo.hideProfile;
+    req.user.privateJournalDefault = req.body.userInfo.privateJournalDefault;
+    req.user.hideCreatorDefault = req.body.userInfo.hideCreatorDefault;
+    req.user.save();
+    res.json({ message: 'Settings Changed!' });
+  } else {
+    console.log('FAILED');
+    res.status(403).json({ message: 'Unauthorized' });
+  }
+});
+
+authRoutes.post('/delete-user', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    const id = req.user.id;
+    console.log('user is authenticated');
+
+    if (req.body.confirmation === req.user.username) {
+      console.log('CONFIRMED');
+      req.user.name = 'Deleted';
+      req.user.deleted = true;
+      req.user.save();
+      req.logout();
+      res.json({ message: 'User has been deleted' });
+    } else {
+      console.log('did not enter the proper name!');
+      res.json({ message: 'You did not type the proper name!' });
+    }
   } else {
     console.log('FAILED');
     res.status(403).json({ message: 'Unauthorized' });

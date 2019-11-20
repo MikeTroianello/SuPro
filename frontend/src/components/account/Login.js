@@ -5,8 +5,8 @@ export default class Login extends Component {
   state = {
     message: null,
     user: '',
-    username: '',
-    password: ''
+    username: 'mike',
+    password: 'mike'
   };
   service = new AuthService();
 
@@ -35,13 +35,15 @@ export default class Login extends Component {
       this.service
         .login(username, password)
         .then(results => {
-          this.setState({ username: '', password: '' });
-
-          // this.props.getUser(results);
-          localStorage.setItem('user', JSON.stringify(results));
-          console.log('ABOUT TO PASS PROPS UP');
-          this.props.logIt(results);
-          // this.props.history.push('/profile');
+          this.setState({
+            username: '',
+            password: '',
+            message: results.message || null
+          });
+          if (!results.message) {
+            localStorage.setItem('user', JSON.stringify(results));
+            this.props.logIt(results);
+          }
         })
         .catch(error => {
           console.log(error);

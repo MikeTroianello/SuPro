@@ -175,23 +175,31 @@ router.get('/all/:id', (req, res, next) => {
   Log.find({ creatorId: req.params.id })
     .populate('creatorId')
     .then(userLogs => {
-      // console.log('WE FOUND SOMETHING', userLogs);
-      const creator = {
-        username: userLogs[0].creatorId.username,
-        gender: userLogs[0].creatorId.gender
-      };
-      // console.log('CREATOR', creator);
-      let logsToSend = userLogs.filter(log => {
-        log.creatorId = creator;
-        if (log.privateJournal) {
-          log.journal = `${log.creatorId.username} has chosen to keep this log hidden`;
-        }
-        if (log.hideCreator) {
-          console.log('CREATOR IS HIDDEN', log);
-        }
-        return !log.hideCreator;
-      });
-      res.send(logsToSend);
+      console.log(userLogs);
+      if (userLogs[0].creatorId.deleted) {
+        res.json({ message: 'This user has deleted their account' });
+      } else if (userLogs[0].creatorId.hideProfile) {
+        res.json({
+          message: 'This user has decided to keep their profile hidden'
+        });
+      } else {
+        const creator = {
+          username: userLogs[0].creatorId.username,
+          gender: userLogs[0].creatorId.gender
+        };
+
+        let logsToSend = userLogs.filter(log => {
+          log.creatorId = creator;
+          if (log.privateJournal) {
+            log.journal = `${log.creatorId.username} has chosen to keep this log hidden`;
+          }
+          if (log.hideCreator) {
+            console.log('CREATOR IS HIDDEN', log);
+          }
+          return !log.hideCreator;
+        });
+        res.send(logsToSend);
+      }
     })
     .catch(err => {
       next(err);
@@ -237,9 +245,11 @@ router.get('/date/:year/:day', (req, res, next) => {
           }
         } else if (log.privateJournal) {
           log.journal = 'This log is set to private';
+        } else if (log.creatorId.deleted) {
+          log.journal = 'This user has deleted their account';
         }
 
-        //THIS MAKE THE CREATOR'S NAME HIDDEN TO ALL EXCEPT THE CREATOR
+        //THIS MAKES THE CREATOR'S NAME HIDDEN TO ALL EXCEPT THE CREATOR
 
         if (
           log.hideCreator == true &&
@@ -248,6 +258,12 @@ router.get('/date/:year/:day', (req, res, next) => {
         ) {
           let hiddenCreator = {
             username: 'This user has decided to keep their name private',
+            gender: log.creatorId.gender
+          };
+          log.creatorId = hiddenCreator;
+        } else if (log.creatorId.deleted) {
+          let hiddenCreator = {
+            username: 'Deleted',
             gender: log.creatorId.gender
           };
           log.creatorId = hiddenCreator;

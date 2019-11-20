@@ -3,9 +3,9 @@ import AuthService from './auth/auth-service';
 import { Link } from 'react-router-dom';
 import WeatherAudit from './weather/WeatherAudit';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faCog as cog } from '@fortawesome/free-solid-svg-icons';
+// import { faCog as cog } from '@fortawesome/free-solid-svg-icons';
 
 export default class Profile extends Component {
   state = {

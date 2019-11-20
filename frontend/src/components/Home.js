@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import AuthService from './auth/auth-service';
 
 import Login from './account/Login';

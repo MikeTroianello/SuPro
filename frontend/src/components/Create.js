@@ -8,8 +8,8 @@ import {
   faLaugh as happiest,
   faSmile as smile,
   faMeh as middlin,
-  faSadTear as crying,
-  faGrin as grin
+  faSadTear as crying
+  // faGrin as grin
 } from '@fortawesome/free-solid-svg-icons';
 
 export default class Create extends Component {
@@ -36,7 +36,6 @@ export default class Create extends Component {
   };
 
   setMood = num => {
-    console.log('SETTING MOOD', num);
     let emoji;
     switch (num) {
       case 1:
@@ -51,12 +50,13 @@ export default class Create extends Component {
       case 4:
         emoji = <FontAwesomeIcon icon={smile} />;
         break;
-      case 5:
+      default:
         emoji = <FontAwesomeIcon icon={happiest} />;
         break;
     }
 
-    this.setState(
+    // IF SOMETHING BREAKS, IT IS PROBABLY DUE TO THIS
+    return this.setState(
       {
         mood: num,
         moodEmoji: emoji

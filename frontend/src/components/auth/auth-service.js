@@ -50,6 +50,24 @@ class AuthService {
       .then(response => response.data);
   };
 
+  changeInfo = userInfo => {
+    return this.service
+      .post(`/change-info`, { userInfo })
+      .then(response => response.data);
+  };
+
+  changePass = userInfo => {
+    return this.service
+      .post(`/change-password`, { userInfo })
+      .then(response => response.data);
+  };
+
+  deleteUser = confirmation => {
+    return this.service
+      .post(`/delete-user`, { confirmation })
+      .then(response => response.data);
+  };
+
   logout = () => {
     return this.service.post('/logout', {}).then(response => response.data);
   };

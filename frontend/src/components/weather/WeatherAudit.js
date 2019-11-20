@@ -29,6 +29,7 @@ export default function WeatherAudit(props) {
         outlier.push(log);
         break;
     }
+    return log;
   });
 
   return (

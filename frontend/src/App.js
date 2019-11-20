@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Home from './components/Home';
 import Login from './components/account/Login';
@@ -34,22 +29,33 @@ class App extends React.Component {
 
   componentDidMount() {
     if (!this.state.loggedInUser) {
-      this.service
-        .loggedin()
-        .then(response => {
-          this.setState({
-            loggedInUser: response,
-            message: `Hello, ${response.username}!`,
-            createdLogToday: response.createdToday
-          });
-        })
-        .catch(err => {
-          this.setState({
-            loggedInUser: false
-          });
-        });
+      this.isLoggedIn();
     }
   }
+
+  setNewState = results => {
+    this.setState({
+      loggedInUser: results
+    });
+  };
+
+  isLoggedIn = () => {
+    console.log('ISLOGGEDIN IS GETTING CALLED');
+    this.service
+      .loggedin()
+      .then(response => {
+        this.setState({
+          loggedInUser: response,
+          message: `Hello, ${response.username}!`,
+          createdLogToday: response.createdToday
+        });
+      })
+      .catch(err => {
+        this.setState({
+          loggedInUser: false
+        });
+      });
+  };
 
   setUser = () => {
     let storedUser = JSON.parse(localStorage.getItem('user'));
@@ -171,7 +177,11 @@ class App extends React.Component {
           <Route
             path='/settings'
             render={props => (
-              <Settings {...props} loggedInUser={this.state.loggedInUser} />
+              <Settings
+                {...props}
+                loggedInUser={this.state.loggedInUser}
+                isLoggedIn={this.isLoggedIn}
+              />
             )}
           />
           <Route

@@ -76,20 +76,14 @@ export default class View extends Component {
       .catch(error => console.log(error));
   };
 
+  // HERE
+
   filterByState = () => {
     let stateLogs = this.state.logs.filter(log => {
-      return log.state == this.state.state;
+      return log.state === this.state.state;
     });
 
     let counties = new Set();
-
-    //this was the original function, but it resulted in a warning
-
-    // stateLogs.map(log => {
-    //   counties.add(log.county);
-    // });
-
-    // New version with return
 
     stateLogs.map(log => {
       return counties.add(log.county);
@@ -102,9 +96,11 @@ export default class View extends Component {
     });
   };
 
+  // HERE
+
   filterByCounty = () => {
     let countyLogs = this.state.logs.filter(log => {
-      return log.county == this.state.county;
+      return log.county === this.state.county;
     });
 
     this.setState({
@@ -113,10 +109,11 @@ export default class View extends Component {
     });
   };
 
+  // HERE
+
   filterByGender = e => {
-    console.log(e);
     let genderLogs = this.state.filteredLogsCopy.filter(log => {
-      return log.creatorId.gender == e.target.value;
+      return log.creatorId.gender === e.target.value;
     });
     this.setState({
       filteredLogs: genderLogs,
@@ -157,7 +154,9 @@ export default class View extends Component {
         if (
           log.creatorId.username ===
             'This user has decided to keep their name private' ||
-          this.state.id === log.creatorId._id
+          this.state.id === log.creatorId._id ||
+          log.creatorId.username === 'Deleted' ||
+          log.creatorId.hideProfile
         ) {
           theTag = log.creatorId.username;
         }

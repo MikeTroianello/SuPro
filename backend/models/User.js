@@ -24,6 +24,22 @@ const userSchema = new Schema({
     type: Boolean,
     default: false
   },
+  hideProfile: {
+    type: Boolean,
+    default: false
+  },
+  privateJournalDefault: {
+    type: Boolean,
+    default: false
+  },
+  hideCreatorDefault: {
+    type: Boolean,
+    default: false
+  },
+  deleted: {
+    type: Boolean,
+    default: false
+  },
   time: { type: Date, default: Date.now }
 });
 

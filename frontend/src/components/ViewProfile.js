@@ -26,6 +26,7 @@ export default class ViewProfile extends Component {
     this.service
       .seeUser(this.props.match.params.id)
       .then(results => {
+        console.log(results);
         if (results.length < 1) {
           this.setState({
             logs: <div>They haven't created any logs...</div>
