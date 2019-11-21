@@ -148,15 +148,20 @@ export default class ViewProfile extends Component {
       <div className='top-push'>
         <h1>This is {this.state.name}'s page</h1>
         <div className='profile-mood-box'>
-          <h2>
+          <h2 className='view-profile-overall-happiness'>
             {this.state.name}'s Overall Happiness: {this.state.mood}
           </h2>
           <FontAwesomeIcon icon={this.state.gender} size='3x' />
           {this.state.logs && <WeatherAudit logs={this.state.rawLogs} />}
         </div>
-        <button className='sort-by-age' onClick={this.sortByAge}>
+        {/* <button className='sort-by-age' onClick={this.sortByAge}>
           Show {this.state.oldestFirst ? 'oldest' : 'newest'} first
-        </button>
+        </button> */}
+        <div className='sort-by-age-box'>
+          <button className='sort-by-age' onClick={this.sortByAge}>
+            Show {this.state.oldestFirst ? 'oldest' : 'newest'} first
+          </button>
+        </div>
         <br></br>
         <div className='log-box'>{this.state.logs}</div>
       </div>

@@ -50,7 +50,7 @@ export default function Log(props) {
   }
 
   return (
-    <div className='log'>
+    <div className={props.test ? 'mock-log' : 'log'}>
       <div className='log-head '>
         <span>
           <h3 className='name-and-gender'>

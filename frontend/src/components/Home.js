@@ -146,7 +146,7 @@ export default class Home extends Component {
             </p>
           </div>
           <div className='sunlog-example'>
-            <Log log={this.state.testLog} />
+            <Log log={this.state.testLog} test={true} />
             <h4>(Your logs can be as private as you want them to be)</h4>
           </div>
         </div>

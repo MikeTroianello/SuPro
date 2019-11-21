@@ -26,6 +26,10 @@ i {
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+}
+
 .top-push {
   margin-top: 12.25vh;
 }
@@ -84,6 +88,12 @@ i {
 .name-box {
   min-width: 45%;
   text-align: center;
+}
+
+@media (max-width: 375px) {
+  .name-box {
+    font-size: 0.75em;
+  }
 }
 
 .weather-box {
@@ -169,7 +179,15 @@ i {
   padding: 0 1vw;
   border-radius: 10px;
   width: 550px;
-  /* width: 420px; */
+  /* min-width: 420px; */
+}
+
+.mock-log {
+  border: 1px solid black;
+  margin: 5vh 1.4vw;
+  padding: 0 1vw;
+  border-radius: 10px;
+  max-width: 550px;
 }
 
 .log h2 {
@@ -393,8 +411,39 @@ i {
   flex-wrap: wrap;
 }
 
+.sort-by-age-box {
+  display: flex;
+  justify-content: center;
+}
+
+.sort-by-age {
+  height: 50px;
+  width: 45%;
+  border-radius: 10px;
+  font-size: 1.2em;
+  background: rgba(69, 140, 216, 0.6);
+  margin: 5% 0 0 0;
+}
+
+.sort-by-age:hover {
+  transition: 0.25s;
+  background: rgba(69, 140, 216, 0.9);
+}
+
+@media (max-width: 800px) {
+  .sort-by-age {
+    width: 75%;
+  }
+}
+
 .weather-box-profile {
   margin-top: -0.5%;
+}
+
+@media (max-width: 425px) {
+  .view-profile-overall-happiness {
+    text-align: center;
+  }
 }
 
 /* CREATE A LOG */
@@ -407,7 +456,7 @@ i {
 .create-log {
   border: 1px solid black;
   border-radius: 5px;
-  margin: 1%;
+  margin: 1% 1% 0;
   text-align: center;
   max-width: 450px;
   height: 550px;
@@ -527,7 +576,8 @@ i {
 
 .settings-change-preferences-button {
   height: 30px;
-  width: 25%;
+  width: 27%;
+  min-width: 120px;
   border-radius: 10px;
   font-size: 0.85em;
   background: rgba(224, 166, 166, 0.7);

@@ -9,6 +9,20 @@
   background-position: 0% 22%;
 }
 
+@media (min-width: 427px) and (max-width: 976px) {
+  .homepage-top {
+    height: 150vh;
+    background-position: 0% 22%;
+  }
+}
+
+/* @media (max-width: 427px) {
+  .homepage-top {
+    height: 1200px;
+    background-position: 0% 22%;
+  }
+} */
+
 .homepage-greet {
   margin-top: 6vh;
 }
@@ -68,6 +82,8 @@
 .sunlog-example {
   display: flex;
   flex-direction: column;
+  /* max-width: 98%; */
+  padding: 1%;
 }
 
 .sunlog-example h4 {
@@ -99,9 +115,9 @@
   background-color: rgb(183, 207, 218);
 }
 
-.footer-contact {
+/* .footer-contact {
   text-align: center;
-}
+} */
 
 /* FOR THE FOOTER LOGO */
 
@@ -148,6 +164,25 @@
 @media (min-height: 760px) {
   .create-button {
     margin: 18vh 0 0 0;
+  }
+}
+
+@media (min-width: 450px) and(max-width: 580px) {
+  .homepage-greet h1 {
+    font-size: 5em;
+  }
+  .homepage-greet p {
+    text-align: center;
+  }
+}
+
+@media (max-width: 450px) {
+  .homepage-greet h1 {
+    font-size: 4em;
+  }
+
+  .homepage-greet p {
+    text-align: center;
   }
 }
 
@@ -272,11 +307,41 @@
   }
 
   .homepage-top {
-    height: 95vh;
+    height: 136vh;
   }
 
   .create-button {
     width: 100%;
     height: auto;
+  }
+}
+
+@media (max-width: 375px) {
+  .homepage-sad {
+    margin: 0;
+    text-align: center;
+  }
+
+  .sunlog-description {
+    margin: 0;
+  }
+}
+
+@media (max-width: 470px) {
+  .footer-button {
+    display: none;
+  }
+
+  .footer-contact {
+    font-size: 0.8em;
+    text-align: start;
+    margin-top: 17px;
+  }
+
+  .footer-contact p {
+    margin: 7px 0 0;
+  }
+
+  .footer-logo {
   }
 }

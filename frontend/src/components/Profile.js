@@ -171,9 +171,11 @@ export default class Profile extends Component {
             <WeatherAudit logs={this.state.rawLogs} />
           )}
         </div>
-        <button className='sort-by-age' onClick={this.sortByAge}>
-          Show {this.state.oldestFirst ? 'oldest' : 'newest'} first
-        </button>
+        <div className='sort-by-age-box'>
+          <button className='sort-by-age' onClick={this.sortByAge}>
+            Show {this.state.oldestFirst ? 'oldest' : 'newest'} first
+          </button>
+        </div>
         <br></br>
         <div className='log-box'>{this.state.logs}</div>
       </div>
