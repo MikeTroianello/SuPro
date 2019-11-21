@@ -286,12 +286,6 @@
   color: black;
 }
 
-@media (min-width: 427px) and (max-width: 770px) {
-  .nav-links {
-    width: 80%;
-  }
-}
-
 @media (max-width: 426px) {
   .container {
     max-width: 315px;
