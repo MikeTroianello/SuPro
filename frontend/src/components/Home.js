@@ -63,7 +63,6 @@ export default class Home extends Component {
   };
 
   logIt = results => {
-    console.log('MOVING TO PROFILE');
     this.props.getUser(results);
     this.props.history.push('/profile');
   };
@@ -75,7 +74,6 @@ export default class Home extends Component {
   };
 
   backToTop = () => {
-    console.log('SCROLLING TO TOP');
     window.scrollTo(0, 0);
   };
 
@@ -87,26 +85,21 @@ export default class Home extends Component {
       : (toggle = 'or, Create an Account Now!');
     this.state.signup ? (thing = 'card flipped') : (thing = 'card');
 
-    console.log('THING', thing);
     return (
       <div>
-        {/* <video autoplay muted loop id='myVideo'>
-          <source src={video} type='video/mp4' />
-        </video> */}
-        {/* <h1>{this.state.message}</h1> */}
         <div className='homepage-top'>
           <div className='homepage-greet'>
             <h1>SUNLOGS</h1>
             <p>How much does weather affect your life?</p>
           </div>
           <div className='signup-login-container'>
-            <section class='container'>
-              <div class={thing}>
-                <div class='front card-div'>
+            <section className='container'>
+              <div className={thing}>
+                <div className='front card-div'>
                   {' '}
                   <Login logIt={this.logIt} />
                 </div>
-                <div class='back card-div'>
+                <div className='back card-div'>
                   <Signup logIt={this.logIt} />
                 </div>
               </div>

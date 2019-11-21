@@ -22,12 +22,10 @@ export default class Login extends Component {
     const username = this.state.username;
     const password = this.state.password;
     if (!username) {
-      console.log('NO username');
       this.setState({
         message: `You must include a username`
       });
     } else if (!password) {
-      console.log('NO PASSWORD');
       this.setState({
         message: `You must include a password`
       });
@@ -46,7 +44,6 @@ export default class Login extends Component {
           }
         })
         .catch(error => {
-          console.log(error);
           this.setState({
             message: `Incorrect Username or Password`
           });

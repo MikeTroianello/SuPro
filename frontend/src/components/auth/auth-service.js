@@ -10,7 +10,6 @@ class AuthService {
   }
 
   signup = state => {
-    console.log('SIGNUP', state);
     return this.service
       .post('/signup', { state })
       .then(response => response.data);

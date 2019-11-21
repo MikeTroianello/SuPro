@@ -60,24 +60,16 @@ export default class View extends Component {
           return log.state;
         });
 
-        this.setState(
-          {
-            logs: results.specificDay,
-            filteredLogs: results.specificDay,
-            filteredLogsCopy: results.specificDay,
-            genderSearchMessage: null,
-            yours: results.yours,
-            id: results.id,
-            states: [...new Set(states)],
-            counties: []
-          },
-          () => {
-            console.log(
-              'THIS IS THE STATE AFTER THE NEW SET',
-              this.state.states
-            );
-          }
-        );
+        this.setState({
+          logs: results.specificDay,
+          filteredLogs: results.specificDay,
+          filteredLogsCopy: results.specificDay,
+          genderSearchMessage: null,
+          yours: results.yours,
+          id: results.id,
+          states: [...new Set(states)],
+          counties: []
+        });
       })
       .catch(error => console.log(error));
   };
@@ -234,8 +226,6 @@ export default class View extends Component {
     }
   };
 
-  showState = () => [console.log('This is the state:', this.state.states)];
-
   filterState = e => {
     if (e.target.value !== 'Filter by State:') {
       this.setState(
@@ -267,18 +257,13 @@ export default class View extends Component {
   };
 
   defaultLogs = () => {
-    this.setState(
-      {
-        states: [],
-        counties: [],
-        state: undefined,
-        stateFiltered: false,
-        county: undefined
-      },
-      () => {
-        console.log('WHAT IS THE STATE NOW', this.state);
-      }
-    );
+    this.setState({
+      states: [],
+      counties: [],
+      state: undefined,
+      stateFiltered: false,
+      county: undefined
+    });
     this.sanitizeDate(this.state.today);
   };
 

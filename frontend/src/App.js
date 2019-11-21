@@ -40,7 +40,6 @@ class App extends React.Component {
   };
 
   isLoggedIn = () => {
-    console.log('ISLOGGEDIN IS GETTING CALLED');
     this.service
       .loggedin()
       .then(response => {
@@ -59,15 +58,10 @@ class App extends React.Component {
 
   setUser = () => {
     let storedUser = JSON.parse(localStorage.getItem('user'));
-    this.setState(
-      {
-        username: storedUser.username,
-        message: `Hello ${storedUser.username}`
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      username: storedUser.username,
+      message: `Hello ${storedUser.username}`
+    });
   };
 
   setError = err => {

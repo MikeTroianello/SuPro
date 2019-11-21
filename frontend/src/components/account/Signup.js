@@ -16,38 +16,38 @@ export default class Signup extends Component {
 
   handleChange = e => {
     e.preventDefault();
-    this.setState(
-      {
-        [e.target.name]: e.target.value
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('THE STATE:', this.state);
     const { username, password, gender } = this.state;
     if (!username) {
-      console.log('NO username');
       this.setState({
         message: `You must include a username`
       });
     } else if (!password) {
-      console.log('NO PASSWORD');
       this.setState({
         message: `You must include a password`
       });
     } else if (!gender) {
-      console.log('NO GENDER');
       this.setState({
         message: `You must include a gender`
       });
     } else {
       const state = this.state;
-      this.service.signup(state).then(results => {
-        this.props.logIt(results);
-      });
+      this.service
+        .signup(state)
+        .then(results => {
+          this.props.logIt(results);
+        })
+        .catch(error => {
+          this.setState({
+            message: `Username already exists!`
+          });
+        });
     }
   };
 

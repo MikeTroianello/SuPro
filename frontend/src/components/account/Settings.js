@@ -22,7 +22,6 @@ export default class Settings extends Component {
   service = new AuthService();
 
   componentDidMount() {
-    console.log(this.props.loggedInUser);
     if (this.props.loggedInUser) {
       const {
         email,
@@ -71,7 +70,6 @@ export default class Settings extends Component {
   changeInfo = () => {
     let state = this.state;
     this.service.changeInfo(state).then(results => {
-      console.log(results.message);
       this.props.isLoggedIn(results);
       this.props.history.push('/profile');
     });
@@ -79,7 +77,6 @@ export default class Settings extends Component {
 
   changePass = () => {
     this.service.changePass(this.state).then(results => {
-      console.log(results.message);
       this.props.isLoggedIn(results);
       this.props.history.push('/');
     });
@@ -87,7 +84,6 @@ export default class Settings extends Component {
 
   deleteUser = () => {
     this.service.deleteUser(this.state.confirmDelete).then(results => {
-      console.log(results.message);
       this.props.history.push('/');
     });
   };

@@ -30,17 +30,11 @@ export default class Create extends Component {
   service = new AuthService();
 
   componentDidMount() {
-    console.log('PROPS', this.props.user);
     if (this.props.user) {
-      this.setState(
-        {
-          privateJournal: this.props.user.privateJournalDefault,
-          hideCreator: this.props.user.hideCreatorDefault
-        },
-        () => {
-          console.log(this.state.privateJournal, this.state.hideCreator);
-        }
-      );
+      this.setState({
+        privateJournal: this.props.user.privateJournalDefault,
+        hideCreator: this.props.user.hideCreatorDefault
+      });
     }
   }
 
@@ -74,20 +68,15 @@ export default class Create extends Component {
     }
 
     // IF SOMETHING BREAKS, IT IS PROBABLY DUE TO THIS
-    return this.setState(
-      {
-        mood: num,
-        moodEmoji: emoji
-      },
-      () => console.log(this.state)
-    );
+    return this.setState({
+      mood: num,
+      moodEmoji: emoji
+    });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.props.createdToday);
     if (this.props.createdToday) {
-      console.log('CAUGHT');
       this.setState({
         err: true,
         message: `You already created a log today!`,
@@ -105,7 +94,6 @@ export default class Create extends Component {
         messageCss: 'red'
       });
     } else {
-      console.log('THIS LOG IS GOING TO THE BACKEND!');
       let info = this.state;
       this.setState({
         message: 'Submitting your log',

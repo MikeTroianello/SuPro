@@ -244,6 +244,7 @@ router.get('/date/:year/:day', (req, res, next) => {
             log.madePrivate = true;
           }
         } else if (log.privateJournal) {
+          console.log('LOG SET TO PRIVATE');
           log.journal = 'This log is set to private';
         } else if (log.creatorId.deleted) {
           log.journal = 'This user has deleted their account';
@@ -252,9 +253,10 @@ router.get('/date/:year/:day', (req, res, next) => {
         //THIS MAKES THE CREATOR'S NAME HIDDEN TO ALL EXCEPT THE CREATOR
 
         if (
-          log.hideCreator == true &&
-          req.user &&
-          req.user.id != log.creatorId._id
+          (log.hideCreator == true &&
+            req.user &&
+            req.user.id != log.creatorId._id) ||
+          (log.hideCreator == true && !req.user)
         ) {
           let hiddenCreator = {
             username: 'This user has decided to keep their name private',

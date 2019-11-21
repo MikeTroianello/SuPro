@@ -14,6 +14,7 @@ authRoutes.post('/signup', (req, res, next) => {
   console.log('THIS IS WHAT WE HAVE:', req.body.state.username);
 
   const { username, password, gender, email, phone } = req.body.state;
+  const usernameLowerCase = username.toLowerCase();
 
   if (!username || !password) {
     res.status(400).json({ message: 'Provide username and password' });
@@ -28,14 +29,15 @@ authRoutes.post('/signup', (req, res, next) => {
     return;
   }
 
-  User.findOne({ username }, (err, foundUser) => {
+  User.findOne({ usernameLowerCase }, (err, foundUser) => {
     if (err) {
       res.status(500).json({ message: 'Username check went bad.' });
       return;
     }
 
     if (foundUser) {
-      res.status(400).json({ message: 'Username taken. Choose another one.' });
+      console.log('THIS IS WHERE IT BROKE');
+      res.status(400).json({ error: 'Username taken. Choose another one.' });
       return;
     }
 
