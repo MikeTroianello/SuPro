@@ -37,7 +37,7 @@ export default function WeatherAudit(props) {
       <span className='header'>
         <span>Weather</span>
         <span>Mood Average</span>
-        <span>Productivity Average</span>
+        <span className='header-productivity'>Productivity Average</span>
       </span>
       <div className='weather-avg'>
         <WeatherAvg weather={'Clear'} logs={clear} />

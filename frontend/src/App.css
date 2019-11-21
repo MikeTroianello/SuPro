@@ -191,6 +191,7 @@ i {
 }
 
 .header > span {
+  font-size: 16px;
   width: 25%;
   font-weight: bold;
   text-align: center;
@@ -211,6 +212,7 @@ i {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: center;
   border-top: 1px dotted black;
 }
 
@@ -224,6 +226,25 @@ i {
   height: 50px;
   width: 100px;
   font-size: 1em;
+}
+
+.gender-filter button:hover {
+  transition: 0.2s;
+  background-color: rgb(240, 97, 130);
+}
+
+.view-default-logs {
+  background-color: rgba(234, 60, 100, 1);
+  height: 50px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 3ch;
+  margin-top: 1vh;
+}
+
+.view-default-logs:hover {
+  transition: 0.2s;
+  background-color: rgb(240, 97, 130);
 }
 
 .gender {
@@ -345,13 +366,23 @@ i {
   display: flex;
 }
 
+.profile-date > span {
+  font-size: 1.25em;
+}
+
 .cog {
   justify-content: end;
 }
 
 .profile-log-head {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+}
+
+@media (max-width: 345px) {
+  .log h2 {
+    font-size: 1em;
+  }
 }
 
 .profile-mood-box {
@@ -359,6 +390,7 @@ i {
   /* flex-direction: column; */
   justify-content: space-evenly;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .weather-box-profile {
@@ -461,27 +493,104 @@ i {
 
 /* SETTINGS PAGE */
 
-.settings {
+.settings-top {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.settings {
   /* border-left: 1px solid black;
   border-right: 1px solid black; */
-  border: 1px solid black;
+  width: 54%;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  border-bottom: 2px solid black;
+  margin-bottom: 3vh;
+  padding: 1%;
+}
+
+@media (max-width: 700px) {
+  .settings {
+    width: 93%;
+  }
 }
 
 .settings-change-preferences {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  padding-bottom: 2vh;
+  margin-top: 2vh;
+}
+
+.settings-change-preferences-button {
+  height: 30px;
+  width: 25%;
+  border-radius: 10px;
+  font-size: 0.85em;
+  background: rgba(224, 166, 166, 0.7);
+}
+
+.settings-change-preferences-button:hover {
+  transition: 0.25s;
+  background: rgba(235, 160, 160, 0.95);
+}
+
+.settings-aside {
 }
 
 .settings-change-info {
+  border-bottom: 2px solid black;
+  padding-bottom: 2vh;
+}
+
+.settings-change-password {
+  border-top: 2px solid black;
+  margin-top: 2vh;
+}
+
+.settings-change-button {
+  color: white;
+  font-size: 1em;
+  height: 35px;
+  width: 30%;
+  margin: 6vh 0 3vh;
+  border-radius: 1ch;
+  background-color: rgba(36, 100, 184, 0.8);
+}
+
+.settings-change-button:hover {
+  transition: 0.2s;
+  background-color: rgba(19, 71, 139, 0.8);
 }
 
 .settings-delete {
 }
 
+.delete {
+  background-color: rgba(255, 0, 0, 0.75);
+  font-size: 1.5em;
+  height: 52px;
+  width: 200px;
+  margin: 3%;
+  border-radius: 2ch;
+  border: 2px solid black;
+}
+
+.delete:hover {
+  transition: 0.3s;
+  background-color: rgba(255, 0, 0, 0.9);
+}
+
 /* MOBILE */
+
+@media (min-width: 425px) and (max-width: 770px) {
+  .header-productivity {
+    width: 27% !important;
+  }
+}
 
 @media (max-width: 420px) {
   .filter-box > div {
@@ -506,5 +615,15 @@ i {
   .create-button {
     width: 90%;
     margin: 8% 5% 2%;
+  }
+
+  .header-productivity {
+    width: 31% !important;
+  }
+}
+
+@media (min-width: 370px) and (max-width: 419px) {
+  .header-productivity {
+    width: 31% !important;
   }
 }

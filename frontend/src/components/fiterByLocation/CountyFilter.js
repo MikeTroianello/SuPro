@@ -4,9 +4,7 @@ export default function CountyFilter(props) {
   return (
     <div>
       <select name='county' onChange={props.filter}>
-        <option selected disabled>
-          Filter by County:
-        </option>
+        <option selected>Filter by County:</option>
         {props.counties.map((county, key) => {
           return (
             <option key={key} value={county}>

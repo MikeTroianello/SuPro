@@ -6,6 +6,7 @@
   background-image: url('../images-and-videos/images/Background-Winter.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: 0% 22%;
 }
 
 .homepage-greet {
@@ -248,6 +249,12 @@
 #myBtn:hover {
   background: #ddd;
   color: black;
+}
+
+@media (min-width: 427px) and (max-width: 770px) {
+  .nav-links {
+    width: 80%;
+  }
 }
 
 @media (max-width: 426px) {

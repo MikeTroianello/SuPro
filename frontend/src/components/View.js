@@ -37,8 +37,6 @@ export default class View extends Component {
 
   //NEW WAY
   componentDidMount() {
-    console.log('TODAY', this.state.today);
-
     this.sanitizeDate(this.state.today);
   }
 
@@ -62,21 +60,27 @@ export default class View extends Component {
           return log.state;
         });
 
-        this.setState({
-          logs: results.specificDay,
-          filteredLogs: results.specificDay,
-          filteredLogsCopy: results.specificDay,
-          genderSearchMessage: null,
-          yours: results.yours,
-          id: results.id,
-          states: [...new Set(states)],
-          counties: []
-        });
+        this.setState(
+          {
+            logs: results.specificDay,
+            filteredLogs: results.specificDay,
+            filteredLogsCopy: results.specificDay,
+            genderSearchMessage: null,
+            yours: results.yours,
+            id: results.id,
+            states: [...new Set(states)],
+            counties: []
+          },
+          () => {
+            console.log(
+              'THIS IS THE STATE AFTER THE NEW SET',
+              this.state.states
+            );
+          }
+        );
       })
       .catch(error => console.log(error));
   };
-
-  // HERE
 
   filterByState = () => {
     let stateLogs = this.state.logs.filter(log => {
@@ -95,8 +99,6 @@ export default class View extends Component {
       genderSearchMessage: null
     });
   };
-
-  // HERE
 
   filterByCounty = () => {
     let countyLogs = this.state.logs.filter(log => {
@@ -205,8 +207,9 @@ export default class View extends Component {
                   )}
               </span>
             </div>
+
             <h2>
-              {log.county}, {log.state}
+              {log.county} County, {log.state}
             </h2>
             <div className='mood-and-productivity'>
               <h3>
@@ -234,33 +237,52 @@ export default class View extends Component {
   showState = () => [console.log('This is the state:', this.state.states)];
 
   filterState = e => {
-    this.setState(
-      {
-        [e.target.name]: e.target.value
-      },
-      () => {
-        this.filterByState();
-      }
-    );
+    if (e.target.value !== 'Filter by State:') {
+      this.setState(
+        {
+          [e.target.name]: e.target.value
+        },
+        () => {
+          this.filterByState();
+        }
+      );
+    }
   };
 
   filterCounty = e => {
-    this.setState(
-      {
-        [e.target.name]: e.target.value
-      },
-      () => {
-        this.filterByCounty();
-      }
-    );
+    if (e.target.value !== 'Filter by County:') {
+      this.setState(
+        {
+          [e.target.name]: e.target.value
+        },
+        () => {
+          this.filterByCounty();
+        }
+      );
+    }
   };
 
   weatherAudit = () => {
     return <WeatherAudit logs={this.state.filteredLogs} />;
   };
 
+  defaultLogs = () => {
+    this.setState(
+      {
+        states: [],
+        counties: [],
+        state: undefined,
+        stateFiltered: false,
+        county: undefined
+      },
+      () => {
+        console.log('WHAT IS THE STATE NOW', this.state);
+      }
+    );
+    this.sanitizeDate(this.state.today);
+  };
+
   render() {
-    console.log('ARE YOU LOGGED IN?????', this.props.loggedInUser);
     return (
       <div>
         <div className='view-header top-push'>
@@ -280,21 +302,17 @@ export default class View extends Component {
             Filter By Gender:
             <br />
             <button onClick={this.filterByGender} value='male'>
-              {/* <FontAwesomeIcon icon={male} size='2x' /> */}
               male
             </button>
             <button onClick={this.filterByGender} value='female'>
-              {/* <FontAwesomeIcon icon={female} size='2x' value='female' /> */}
               female
             </button>
             <button onClick={this.filterByGender} value='nonbinary'>
-              {/* <FontAwesomeIcon icon={nonbinary} size='2x' /> */}
               non-binary
             </button>
             <br />
             {this.state.genderSearchMessage}
           </div>
-          {/* <br /> */}
           <div>
             Search Logs By Day:
             <br />
@@ -312,6 +330,11 @@ export default class View extends Component {
               counties={this.state.counties}
               filter={this.filterCounty}
             />
+          </div>
+          <div>
+            <button className='view-default-logs' onClick={this.defaultLogs}>
+              Back to Default
+            </button>
           </div>
         </div>
 

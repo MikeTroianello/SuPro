@@ -45,6 +45,9 @@ export default class Create extends Component {
   }
 
   handleChange = e => {
+    if (e.target.value) {
+      e.target.value = e.target.value.replace(/[\r\n\v]+/g, '');
+    }
     this.setState({
       [e.target.id]: e.target.innerText || e.target.value
     });
@@ -82,16 +85,16 @@ export default class Create extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.props.createdToday !== false) {
-      this.setState(
-        {
-          err: true
-        },
-
-        this.props.setError('You already created a log today!')
-      );
-    }
-    if (!this.state.mood) {
+    console.log(this.props.createdToday);
+    if (this.props.createdToday) {
+      console.log('CAUGHT');
+      this.setState({
+        err: true,
+        message: `You already created a log today!`,
+        messageCss: 'red'
+      });
+      setTimeout(function() {}, 1000);
+    } else if (!this.state.mood) {
       this.setState({
         message: `You didn't select your mood`,
         messageCss: 'red'
@@ -102,6 +105,7 @@ export default class Create extends Component {
         messageCss: 'red'
       });
     } else {
+      console.log('THIS LOG IS GOING TO THE BACKEND!');
       let info = this.state;
       this.setState({
         message: 'Submitting your log',
@@ -118,7 +122,7 @@ export default class Create extends Component {
     //THIS FINDS LATITUDE AND LONGITUDE
 
     if (this.state.err) {
-      return <Redirect to='/' />;
+      return <Redirect to='/view' />;
     }
 
     if ('geolocation' in navigator) {
