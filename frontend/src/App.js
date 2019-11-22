@@ -40,14 +40,18 @@ class App extends React.Component {
   };
 
   isLoggedIn = () => {
+    console.log('isLoggedIn was just called');
     this.service
       .loggedin()
       .then(response => {
-        this.setState({
-          loggedInUser: response,
-          message: `Hello, ${response.username}!`,
-          createdLogToday: response.createdToday
-        });
+        this.setState(
+          {
+            loggedInUser: response,
+            message: `Hello, ${response.username}!`,
+            createdLogToday: response.createdToday
+          },
+          () => console.log('THE NEW STATE', this.state)
+        );
       })
       .catch(err => {
         this.setState({
@@ -71,6 +75,7 @@ class App extends React.Component {
   };
 
   logCreated = () => {
+    console.log('logCreated has been called');
     this.setState({
       createdLogToday: true
     });
@@ -85,11 +90,17 @@ class App extends React.Component {
   };
 
   getTheUser = userObj => {
-    this.setState({
-      loggedInUser: userObj,
-      message: `Hello, ${userObj.username}!`,
-      createdLogToday: userObj.createdToday
-    });
+    console.log('getTheUser was called');
+    this.setState(
+      {
+        loggedInUser: userObj,
+        message: `Hello, ${userObj.username}!`,
+        createdLogToday: userObj.createdToday
+      },
+      () => {
+        console.log('NEW STATE', this.state);
+      }
+    );
   };
 
   render() {

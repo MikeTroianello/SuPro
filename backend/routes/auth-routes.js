@@ -17,11 +17,13 @@ authRoutes.post('/signup', (req, res, next) => {
   const usernameLowerCase = username.toLowerCase();
 
   if (!username || !password) {
+    console.log('IT IS BREAKING DUE TO NO USERNAME AND OR PASSWORD');
     res.status(400).json({ message: 'Provide username and password' });
     return;
   }
 
   if (password.length < 6) {
+    console.log('THE PASSWORD IS NOT 6 OR GREATER');
     res.status(400).json({
       message:
         'Please make your password at least 6 characters long for security purposes.'
@@ -30,7 +32,9 @@ authRoutes.post('/signup', (req, res, next) => {
   }
 
   User.findOne({ usernameLowerCase }, (err, foundUser) => {
+    console.log('USER.FINDONE HAS BEEN CALLED');
     if (err) {
+      console.log('FIRST ERROR', err);
       res.status(500).json({ message: 'Username check went bad.' });
       return;
     }
@@ -47,6 +51,7 @@ authRoutes.post('/signup', (req, res, next) => {
     const aNewUser = new User({
       username: username,
       password: hashPass,
+      usernameLowerCase,
       gender,
       email,
       phone
@@ -54,6 +59,7 @@ authRoutes.post('/signup', (req, res, next) => {
 
     aNewUser.save(err => {
       if (err) {
+        console.log('IT BROKE AT THE SAVING THE USER', err);
         res
           .status(400)
           .json({ message: 'Saving user to database went wrong.' });
@@ -61,9 +67,9 @@ authRoutes.post('/signup', (req, res, next) => {
       }
 
       // Automatically log in user after sign up
-      // .login() here is actually predefined passport method
       req.login(aNewUser, err => {
         if (err) {
+          console.log('IT BROKE AT THE LOGIN');
           res.status(500).json({ message: 'Login after signup went bad.' });
           return;
         }
@@ -77,8 +83,6 @@ authRoutes.post('/signup', (req, res, next) => {
 });
 
 authRoutes.post('/login', (req, res, next) => {
-  console.log('LOGGING IN');
-  console.log(req.body);
   passport.authenticate('local', (err, theUser, failureDetails) => {
     if (err) {
       res
@@ -135,11 +139,6 @@ authRoutes.post('/login', (req, res, next) => {
           return;
         });
       }
-
-      // console.log('here');
-      // // We are now logged in (that's why we can also send req.user)
-      // res.status(200).json(theUser);
-      // // res.redirect('/api/loggedin');
     });
   })(req, res, next);
 });

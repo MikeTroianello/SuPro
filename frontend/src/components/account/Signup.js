@@ -103,7 +103,7 @@ export default class Signup extends Component {
                   </option>
                   <option value='male'>Male</option>
                   <option value='female'>Female</option>
-                  <option value='non-binary'>Non-binary</option>
+                  <option value='nonbinary'>Non-binary</option>
                 </select>
               </div>
             </div>
