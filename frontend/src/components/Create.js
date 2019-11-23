@@ -24,16 +24,34 @@ export default class Create extends Component {
     longitude: null,
     err: null,
     message: null,
-    messageCss: 'red'
+    messageCss: 'red',
+    day: null,
+    year: null
   };
 
   service = new AuthService();
 
   componentDidMount() {
     if (this.props.user) {
+      let today = new Date();
+      var start = new Date(today.getFullYear(), 0, 0);
+      var diff =
+        today -
+        start +
+        (start.getTimezoneOffset() - today.getTimezoneOffset()) * 60 * 1000;
+      var oneDay = 1000 * 60 * 60 * 24;
+      let a = today.toString().split(' ');
+      var day = Math.floor(diff / oneDay);
+      let year = Number(a[3]);
+
       this.setState({
         privateJournal: this.props.user.privateJournalDefault,
-        hideCreator: this.props.user.hideCreatorDefault
+        hideCreator: this.props.user.hideCreatorDefault,
+        dayOfYear: day,
+        year: year,
+        dayOfWeek: a[0],
+        dayOfMonth: Number(a[2]),
+        month: a[1]
       });
     }
   }
@@ -95,14 +113,26 @@ export default class Create extends Component {
       });
     } else {
       let info = this.state;
-      this.setState({
-        message: 'Submitting your log',
-        messageCss: 'black'
-      });
-      this.service.create(info).then(results => {
-        this.props.logCreated();
-        this.props.history.push('/view');
-      });
+      this.setState(
+        {
+          message: 'Submitting your log',
+          messageCss: 'black'
+        },
+        () => console.log('ABOUT TO SUBMIT', this.state)
+      );
+      this.service
+        .create(info)
+        .then(results => {
+          console.log(results);
+          this.props.logCreated();
+          this.props.history.push('/view');
+        })
+        .catch(error => {
+          console.log(error);
+          this.setState({
+            message: `It broke at geolocation`
+          });
+        });
     }
   };
 

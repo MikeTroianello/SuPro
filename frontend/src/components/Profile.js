@@ -40,10 +40,10 @@ export default class Profile extends Component {
       start +
       (start.getTimezoneOffset() - today.getTimezoneOffset()) * 60 * 1000;
     var oneDay = 1000 * 60 * 60 * 24;
-    var day = Math.floor(diff / oneDay);
-
     let a = today.toString().split(' ');
+    var day = Math.floor(diff / oneDay);
     let year = a[3];
+
     if (results.length < 1) {
       this.setState({
         logs: (

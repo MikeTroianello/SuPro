@@ -30,20 +30,32 @@ export default class Login extends Component {
         message: `You must include a password`
       });
     } else {
+      let today = new Date();
+      var start = new Date(today.getFullYear(), 0, 0);
+      var diff =
+        today -
+        start +
+        (start.getTimezoneOffset() - today.getTimezoneOffset()) * 60 * 1000;
+      var oneDay = 1000 * 60 * 60 * 24;
+      let a = today.toString().split(' ');
+      var day = Math.floor(diff / oneDay);
+      let year = a[3];
       this.service
-        .login(username, password)
+        .login(username, password, day, year)
         .then(results => {
           this.setState({
             username: '',
             password: '',
             message: results.message || null
           });
+
           if (!results.message) {
             localStorage.setItem('user', JSON.stringify(results));
             this.props.logIt(results);
           }
         })
         .catch(error => {
+          console.log(error);
           this.setState({
             message: `Incorrect Username or Password`
           });

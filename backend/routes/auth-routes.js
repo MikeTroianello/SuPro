@@ -130,7 +130,7 @@ authRoutes.post('/login', (req, res, next) => {
           let year = Number(a[3]);
 
           results.map(log => {
-            if (log.dayOfYear == day && log.year == year) {
+            if (log.dayOfYear == req.body.day && log.year == req.body.year) {
               req.user.createdToday = true;
             }
           });
@@ -150,40 +150,45 @@ authRoutes.post('/logout', (req, res, next) => {
   res.status(200).json({ message: 'Log out success!' });
 });
 
-authRoutes.get('/loggedin', (req, res, next) => {
-  console.log('TESTING');
-  // req.isAuthenticated() is defined by passport
+// authRoutes.get('/loggedin', (req, res, next) => {
+//   console.log('LOGGED IN IS CALLED -=-=-=-=-=-=-=-=-=-=-=-=-==-=-=');
+//   console.log(req.body);
+//   console.log('DATE STUFF', req.body.dateStuff);
+//   console.log('DATE STUFF ONE MORE TIME', req.body.dateStuff.day);
+//   if (req.isAuthenticated()) {
+//     console.log(req.user.username, 'is logged in!');
+//     req.user.createdToday = false;
+//     Log.find({ creatorId: req.user.id }).then(results => {
+//       results.map(log => {
+//         if (log.dayOfYear == req.body.day && log.year == req.body.year) {
+//           req.user.createdToday = true;
+//         }
+//       });
+//       console.log('CREATED A LOG TODAY?', req.user.createdToday);
+//       req.user.save();
+//       // req.user.password = null;
+//       res.json(req.user);
+//       return;
+//     });
+//   } else {
+//     console.log('FAILED');
+//     res.status(403).json({ message: 'Unauthorized' });
+//   }
+// });
+
+authRoutes.get('/loggedin/:day/:year', (req, res, next) => {
   if (req.isAuthenticated()) {
-    console.log(req.user, 'is logged in!');
-    console.log('this worked....');
+    console.log(req.user.username, 'is logged in!');
     req.user.createdToday = false;
     Log.find({ creatorId: req.user.id }).then(results => {
-      console.log('THE LOGS', results);
-
-      //FIX THIS LATER, THIS IS JUST A PLACEHOLDER
-      var now = new Date();
-      var start = new Date(now.getFullYear(), 0, 0);
-      var diff =
-        now -
-        start +
-        (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-      var oneDay = 1000 * 60 * 60 * 24;
-      var day = Math.floor(diff / oneDay);
-      console.log('Day of year: ' + day);
-
-      // day if the dayOfYear
-
-      let a = now.toString().split(' ');
-      let year = Number(a[3]);
-
       results.map(log => {
-        if (log.dayOfYear == day && log.year == year) {
+        if (log.dayOfYear == req.params.day && log.year == req.params.year) {
           req.user.createdToday = true;
         }
       });
       console.log('CREATED A LOG TODAY?', req.user.createdToday);
       req.user.save();
-      req.user.password = null;
+      // req.user.password = null;
       res.json(req.user);
       return;
     });

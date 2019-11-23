@@ -1,9 +1,16 @@
 import axios from 'axios';
 
 class AuthService {
+  // constructor() {
+  //   let service = axios.create({
+  //     baseURL: 'http://localhost:5000/api',
+  //     withCredentials: true
+  //   });
+  //   this.service = service;
+  // }
   constructor() {
     let service = axios.create({
-      baseURL: 'http://localhost:5000/api',
+      baseURL: `${process.env.REACT_APP_API_URL}`,
       withCredentials: true
     });
     this.service = service;
@@ -15,13 +22,15 @@ class AuthService {
       .then(response => response.data);
   };
 
-  loggedin = () => {
-    return this.service.get('/loggedin').then(response => response.data);
+  loggedin = (day, year) => {
+    return this.service
+      .get(`/loggedin/${day}/${year}`)
+      .then(response => response.data);
   };
 
-  login = (username, password) => {
+  login = (username, password, day, year) => {
     return this.service
-      .post('/login', { username, password })
+      .post('/login', { username, password, day, year })
       .then(response => response.data);
   };
 

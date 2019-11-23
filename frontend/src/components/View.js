@@ -135,7 +135,7 @@ export default class View extends Component {
         let genderIcon;
         //AS OF NOW, THE ICONS WILL ONLY SHOW THE DAYTIME IMAGES, FOR SIMPLICITY. THIS CAN BE CHANGED AT THE WEATHERSTRING VARIABLE
         if (log.weatherIcon) {
-          weatherString = `http://openweathermap.org/img/wn/${log.weatherIcon.slice(
+          weatherString = `https://openweathermap.org/img/wn/${log.weatherIcon.slice(
             0,
             -1
           )}d@2x.png`;

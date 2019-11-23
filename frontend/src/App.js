@@ -33,6 +33,11 @@ class App extends React.Component {
     }
   }
 
+  testIt = thing => {
+    console.log('TESTHING THING');
+    return typeof thing === 'string' ? true : false;
+  };
+
   setNewState = results => {
     this.setState({
       loggedInUser: results
@@ -40,9 +45,19 @@ class App extends React.Component {
   };
 
   isLoggedIn = () => {
+    let today = new Date();
+    var start = new Date(today.getFullYear(), 0, 0);
+    var diff =
+      today -
+      start +
+      (start.getTimezoneOffset() - today.getTimezoneOffset()) * 60 * 1000;
+    var oneDay = 1000 * 60 * 60 * 24;
+    let a = today.toString().split(' ');
+    var day = Math.floor(diff / oneDay);
+    let year = Number(a[3]);
     console.log('isLoggedIn was just called');
     this.service
-      .loggedin()
+      .loggedin(day, year)
       .then(response => {
         this.setState(
           {
@@ -132,12 +147,24 @@ class App extends React.Component {
           <Route
             exact
             path='/signup'
-            render={props => <Signup {...props} getUser={this.getTheUser} />}
+            render={props => (
+              <Signup
+                {...props}
+                testIt={this.testIt}
+                getUser={this.getTheUser}
+              />
+            )}
           />
           <Route
             exact
             path='/login'
-            render={props => <Login {...props} getUser={this.getTheUser} />}
+            render={props => (
+              <Login
+                {...props}
+                testIt={this.testIt}
+                getUser={this.getTheUser}
+              />
+            )}
           />
           <Route
             exact
@@ -167,6 +194,7 @@ class App extends React.Component {
                 user={this.state.loggedInUser}
                 createdToday={this.state.createdLogToday}
                 setError={this.setError}
+                testIt={this.testIt}
               />
             )}
           />

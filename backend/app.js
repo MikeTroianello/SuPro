@@ -24,18 +24,7 @@ require('./configs/passport');
 
 const uri = process.env.MONGODB_URI || 'mongodb://localhost/SuPro';
 
-// mongoose
-//   .connect('mongodb://localhost/SuPro', {
-//     useNewUrlParser: true
-//   })
-//   .then(x => {
-//     console.log(
-//       `Connected to Mongo! Database name: "${x.connections[0].name}"`
-//     );
-//   })
-//   .catch(err => {
-//     console.error('Error connecting to mongo', err);
-//   });
+const live_server = process.env.MONGODB_URI;
 
 mongoose
   .connect(uri, {
@@ -76,7 +65,7 @@ app.use(
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'sun-favicon.ico')));
 
 // ADD SESSION SETTINGS HERE:
 app.use(
@@ -96,6 +85,13 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 // ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:
 
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: [live_server] // <== this will be the URL of our React app (it will be running on port 3000)
+//   })
+// );
+
 app.use(
   cors({
     credentials: true,
@@ -103,13 +99,19 @@ app.use(
   })
 );
 
+// origin: ['http://localhost:3000']
+
 // ROUTES MIDDLEWARE STARTS HERE:
 
-// const index = require('./routes/index');
 // app.use('/api', index);
 const log = require('./routes/log');
 app.use('/api/log', log);
 const authRoutes = require('./routes/auth-routes');
 app.use('/api', authRoutes);
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 module.exports = app;

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const router = express.Router();
 
@@ -20,7 +22,12 @@ router.post('/create', (req, res, next) => {
       privateJournal,
       hideCreator,
       latitude,
-      longitude
+      longitude,
+      year,
+      dayOfWeek,
+      dayOfYear,
+      dayOfMonth,
+      month
     } = req.body.info;
 
     const getAddress = () => {
@@ -28,8 +35,10 @@ router.post('/create', (req, res, next) => {
         return axios.get(
           `http://api.geonames.org/findNearestAddressJSON?lat=${latitude}&lng=${longitude}&username=${process.env.GEO_NAME}`
         );
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        // res.status(400).json(err);
+        res.json(err);
+        console.err(err);
       }
     };
 
@@ -38,8 +47,10 @@ router.post('/create', (req, res, next) => {
         return axios.get(
           `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.WEATHER_KEY}`
         );
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        // res.status(400).json(err);
+        res.json(err);
+        console.error(err);
       }
     };
 
@@ -59,8 +70,10 @@ router.post('/create', (req, res, next) => {
           countAddress(weatherStuff);
           // res.send(response.data);
         })
-        .catch(error => {
-          console.log(error);
+        .catch(err => {
+          res.json(err);
+          res.status(400).json(err);
+          console.log(err);
         });
     };
 
@@ -76,17 +89,17 @@ router.post('/create', (req, res, next) => {
 
           var now = new Date();
 
-          function dayOfYear(now) {
-            var start = new Date(now.getFullYear(), 0, 0);
-            var diff =
-              now -
-              start +
-              (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-            var oneDay = 1000 * 60 * 60 * 24;
-            var day = Math.floor(diff / oneDay);
-            console.log('Day of year: ' + day);
-            return day;
-          }
+          // function dayOfYear(now) {
+          //   var start = new Date(now.getFullYear(), 0, 0);
+          //   var diff =
+          //     now -
+          //     start +
+          //     (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
+          //   var oneDay = 1000 * 60 * 60 * 24;
+          //   var day = Math.floor(diff / oneDay);
+          //   console.log('Day of year: ' + day);
+          //   return day;
+          // }
 
           let a = now.toString().split(' ');
 
@@ -106,11 +119,11 @@ router.post('/create', (req, res, next) => {
             // zip: zip,
             hideCreator: hideCreator,
             creatorId: req.user._id,
-            dayOfWeek: a[0],
-            month: a[1],
-            dayOfMonth: Number(a[2]),
-            dayOfYear: dayOfYear(now),
-            year: Number(a[3])
+            dayOfWeek: dayOfWeek,
+            month: month,
+            dayOfMonth: dayOfMonth,
+            dayOfYear: dayOfYear,
+            year: year
           };
 
           console.log(log);
@@ -119,16 +132,16 @@ router.post('/create', (req, res, next) => {
             .then(createdLog => {
               req.user.createdToday = true;
               const infoToSendBack = { createdLog, user: req.user };
-              console.log('??????', req.user.createdToday);
-              console.log('!!!!!!!!!', user.createdToday);
+
               res.json(infoToSendBack);
             })
             .catch(err => {
               res.send(err);
             });
         })
-        .catch(error => {
-          console.log(error);
+        .catch(err => {
+          console.log(err);
+          res.json(err);
         });
     };
     axiosWeather();
@@ -153,15 +166,7 @@ router.get('/all/my-posts', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Log.find({ creatorId: req.user._id })
     .then(userLogs => {
       console.log(userLogs);
-      // const reducer = (accumulator, currentValue) => accumulator + currentValue;
-      // const moodAvg = [];
-      // userLogs.map(log => {
-      //   moodAvg.push(log.mood);
-      // });
-      // let mood =
-      //   Math.round(100 * (moodAvg.reduce(reducer) / moodAvg.length)) / 100;
-      // console.log('MOOD', mood);
-      // const profile = { userLogs, mood };
+
       res.send(userLogs);
     })
     .catch(err => {
@@ -222,7 +227,7 @@ router.get('/region/:county', (req, res, next) => {
 //GET See all posts from a certain date
 router.get('/date/:year/:day', (req, res, next) => {
   console.log('dayOfYear', req.params.day);
-  console.log('year', req.params.day);
+  console.log('year', req.params.year);
 
   Log.find({ dayOfYear: req.params.day })
     .populate('creatorId')

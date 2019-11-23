@@ -237,7 +237,6 @@ export default class Settings extends Component {
             </span>
             <br></br>
             <input
-              type='password'
               name='confirmDelete'
               placeholder='make sure this is what you want...'
               style={{ fontSize: '1em', width: '250px' }}
