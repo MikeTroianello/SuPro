@@ -168,6 +168,7 @@ export default class Settings extends Component {
               <span>Change Phone #</span>
               <input
                 type='tel'
+                autocomplete='off'
                 pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
                 name='phone'
                 placeholder='+3(141)592-6535'
@@ -180,6 +181,7 @@ export default class Settings extends Component {
               <input
                 type='email'
                 name='email'
+                autocomplete='off'
                 placeholder='name@email.com'
                 onChange={this.handleChange}
               />
@@ -196,6 +198,7 @@ export default class Settings extends Component {
               <input
                 type='password'
                 name='oldPass'
+                autocomplete='off'
                 placeholder='********'
                 onChange={this.handleChange}
               />
@@ -204,6 +207,7 @@ export default class Settings extends Component {
               <input
                 type='password'
                 name='newPass'
+                autocomplete='off'
                 placeholder='********'
                 onChange={this.handleChange}
               />
@@ -238,6 +242,7 @@ export default class Settings extends Component {
             <br></br>
             <input
               name='confirmDelete'
+              autocomplete='off'
               placeholder='make sure this is what you want...'
               style={{ fontSize: '1em', width: '250px' }}
               onChange={this.handleChange}

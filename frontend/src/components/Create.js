@@ -226,6 +226,7 @@ export default class Create extends Component {
               id='journal'
               rows='6'
               cols='48'
+              autocomplete='off'
               maxLength='250'
               placeholder='max length 250 characters'
               onChange={this.handleChange}
