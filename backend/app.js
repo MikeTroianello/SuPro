@@ -85,19 +85,19 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 // ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:
 
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: [live_server] // <== this will be the URL of our React app (it will be running on port 3000)
-//   })
-// );
-
 app.use(
   cors({
     credentials: true,
-    origin: ['http://localhost:3000'] // <== this will be the URL of our React app (it will be running on port 3000)
+    origin: ['http://sunlog.herokuapp.com'] // <== this will be the URL of our React app (it will be running on port 3000)
   })
 );
+
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: ['http://localhost:3000'] // <== this will be the URL of our React app (it will be running on port 3000)
+//   })
+// );
 
 // origin: ['http://localhost:3000']
 

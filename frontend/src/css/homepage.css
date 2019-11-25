@@ -308,6 +308,10 @@
     width: 100%;
     height: auto;
   }
+
+  .signup {
+    height: 340px;
+  }
 }
 
 @media (max-width: 375px) {
