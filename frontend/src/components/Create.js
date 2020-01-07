@@ -113,13 +113,10 @@ export default class Create extends Component {
       });
     } else {
       let info = this.state;
-      this.setState(
-        {
-          message: 'Submitting your log',
-          messageCss: 'black'
-        },
-        () => console.log('ABOUT TO SUBMIT', this.state)
-      );
+      this.setState({
+        message: 'Submitting your log',
+        messageCss: 'black'
+      });
       this.service
         .create(info)
         .then(results => {
