@@ -12,8 +12,31 @@ const axios = require('axios');
 
 //POST Create a Log *NOT FINISHED*
 router.post('/create', (req, res, next) => {
-  // console.log(req.body);
-  console.log('LOGGING!!!! user', req.user);
+  var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
+
+  console.log('LOGGING!!!! user', ip);
+
+  let latitude;
+  let longitude
+
+  axios.get(`http://api.ipstack.com/${ip}?access_key=${process.env.IPACCESSKEY}&format=1`)
+  .then(data => {
+ 
+
+    if (data.data.latitude && data.data.longitude) {
+      latitude = data.data.latitude
+      longitude = data.data.longitude
+      console.log("WE DID IT", latitude, longitude)
+      return
+    }
+    else {
+      console.log("FAILED", latitude, longitude)
+      return
+    }
+  }).catch(err => console.log(err))
+})
+
+
   if (req.isAuthenticated()) {
     const {
       mood,
@@ -21,8 +44,8 @@ router.post('/create', (req, res, next) => {
       journal,
       privateJournal,
       hideCreator,
-      latitude,
-      longitude,
+      // latitude,
+      // longitude,
       year,
       dayOfWeek,
       dayOfYear,

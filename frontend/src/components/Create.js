@@ -141,6 +141,7 @@ export default class Create extends Component {
     }
 
     if ('geolocation' in navigator) {
+      console.log('Geolocation is available');
       navigator.geolocation.getCurrentPosition(position => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;

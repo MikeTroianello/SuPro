@@ -64,7 +64,7 @@ export default class Signup extends Component {
                   name='username'
                   maxLength='20'
                   placeholder='Your name...'
-                  autocomplete='off'
+                  autoComplete='off'
                   onChange={this.handleChange}
                 />
               </div>
@@ -74,7 +74,7 @@ export default class Signup extends Component {
                   name='password'
                   type='password'
                   placeholder='Your password...'
-                  autocomplete='off'
+                  autoComplete='off'
                   onChange={this.handleChange}
                 />
               </div>
@@ -92,7 +92,7 @@ export default class Signup extends Component {
                 <label htmlFor='phone'>Phone: (optional)</label>
                 <input
                   name='phone'
-                  autocomplete='off'
+                  autoComplete='off'
                   type='tel'
                   pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
                   placeholder='867-5309'
