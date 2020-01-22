@@ -152,6 +152,8 @@ a {
   padding: 0 1vw;
   border-radius: 10px;
   width: 550px;
+  box-shadow: 2px 2px #9398a2;
+  background-color: #baccf1;
   /* min-width: 420px; */
 }
 
@@ -161,6 +163,8 @@ a {
   padding: 0 1vw;
   border-radius: 10px;
   max-width: 550px;
+  box-shadow: 2px 2px #9398a2;
+  background-color: #baccf1;
 }
 
 .log h2 {
@@ -382,6 +386,12 @@ a {
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.no-log-created {
+  font-size: 3em;
+  text-align: center;
+  margin-top: 15vh;
 }
 
 .sort-by-age-box {

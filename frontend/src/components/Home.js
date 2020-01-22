@@ -144,7 +144,7 @@ export default class Home extends Component {
           </div>
         </div>
         <div>
-          <h1>CREATE AN ACCOUNT AND SEE!</h1>
+          <h1 className='sunlog-create'>CREATE AN ACCOUNT AND SEE!</h1>
           <div className='footer'>
             <div>
               <button className='footer-button' onClick={this.backToTop}>

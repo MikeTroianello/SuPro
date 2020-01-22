@@ -47,8 +47,8 @@ export default class Profile extends Component {
     if (results.length < 1) {
       this.setState({
         logs: (
-          <div>
-            You haven't created a log yet!{' '}
+          <div className='no-log-created'>
+            You haven't created a log yet! <br />
             <Link to='/create'>Make one now!</Link>
           </div>
         ),
@@ -172,9 +172,11 @@ export default class Profile extends Component {
           )}
         </div>
         <div className='sort-by-age-box'>
-          <button className='sort-by-age' onClick={this.sortByAge}>
-            Show {this.state.oldestFirst ? 'oldest' : 'newest'} first
-          </button>
+          {this.state.rawLogs && (
+            <button className='sort-by-age' onClick={this.sortByAge}>
+              Show {this.state.oldestFirst ? 'oldest' : 'newest'} first
+            </button>
+          )}
         </div>
         <br></br>
         <div className='log-box'>{this.state.logs}</div>

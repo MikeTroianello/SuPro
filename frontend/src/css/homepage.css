@@ -3,7 +3,7 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   height: 82vh;
-  background-image: url('../images-and-videos/images/Background-Winter.jpg');
+  background: url('../images-and-videos/images/Background-Winter.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0% 22%;
@@ -43,19 +43,24 @@
 }
 
 .homepage-sad {
-  margin-left: 5vw;
+  margin: 5vw;
+  /* margin-left: 5vw; */
 }
 
 .homepage-sad h2 {
   font-size: 5em;
+  text-align: center;
 }
 
 .homepage-sad h4 {
-  font-size: 2em;
+  font-size: 2.5em;
+  text-align: center;
+  margin: 10vw;
 }
 
 .homepage-sad p {
-  font-size: 1.5em;
+  font-size: 1.75em;
+  text-align: center;
 }
 
 .homepage-sunlog {
@@ -89,6 +94,10 @@
 .sunlog-example h4 {
   text-align: center;
   margin: 0 0 2vh 0;
+}
+
+.sunlog-create {
+  margin: 10vh 0;
 }
 
 .footer {
