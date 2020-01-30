@@ -53,6 +53,7 @@ class AuthService {
   };
 
   seeUser = userId => {
+    console.log('SEEING USER ', userId);
     return this.service
       .get(`/log/all/${userId}`)
       .then(response => response.data);

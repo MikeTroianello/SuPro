@@ -165,26 +165,30 @@ export default class Settings extends Component {
             <h1>Change your Account Info</h1>
             <div>
               <h3>Your old phone number: {this.state.oldPhone}</h3>
-              <span>Change Phone #</span>
-              <input
-                type='tel'
-                autocomplete='off'
-                pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
-                name='phone'
-                placeholder='+3(141)592-6535'
-                onChange={this.handleChange}
-              />
+              <div className='change-account-sub-box'>
+                <span>Change Phone # </span>
+                <input
+                  type='tel'
+                  autoComplete='off'
+                  pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+                  name='phone'
+                  placeholder='+3(141)592-6535'
+                  onChange={this.handleChange}
+                />
+              </div>
             </div>
             <div>
               <h3>Your old email: {this.state.oldEmail}</h3>
-              <span>Change email</span>
-              <input
-                type='email'
-                name='email'
-                autocomplete='off'
-                placeholder='name@email.com'
-                onChange={this.handleChange}
-              />
+              <div className='change-account-sub-box'>
+                <span>Change email</span>
+                <input
+                  type='email'
+                  name='email'
+                  autoComplete='off'
+                  placeholder='name@email.com'
+                  onChange={this.handleChange}
+                />
+              </div>
             </div>
             <button
               className='settings-change-button'
@@ -194,31 +198,40 @@ export default class Settings extends Component {
             </button>
             <div className='settings-change-password'>
               <h3>Change Password</h3>
-              <span>New Password</span>
-              <input
-                type='password'
-                name='oldPass'
-                autocomplete='off'
-                placeholder='********'
-                onChange={this.handleChange}
-              />
-              <br />
-              <span>Confirm Password</span>
-              <input
-                type='password'
-                name='newPass'
-                autocomplete='off'
-                placeholder='********'
-                onChange={this.handleChange}
-              />
-              <br />
-              <button
-                className='settings-change-button'
-                onClick={() => this.changeInfo()}
-              >
-                Change Password
-              </button>
+              <div className='change-password-super-box'>
+                <div className='change-password-box'>
+                  <div className='change-password-sub-box'>
+                    <span>New Password</span>
+                    <input
+                      type='password'
+                      name='oldPass'
+                      autoComplete='off'
+                      placeholder='********'
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <br />
+                  <div className='change-password-sub-box'>
+                    <span>Confirm Password</span>
+                    <input
+                      type='password'
+                      name='newPass'
+                      autoComplete='off'
+                      placeholder='********'
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <br />
+            <button
+              className='settings-change-button'
+              onClick={() => this.changeInfo()}
+            >
+              Change Password
+            </button>
           </div>
           <div className='settings-delete'>
             <h1>Delete Profile</h1>
@@ -241,8 +254,9 @@ export default class Settings extends Component {
             </span>
             <br></br>
             <input
+              className='confirmDelete'
               name='confirmDelete'
-              autocomplete='off'
+              autoComplete='off'
               placeholder='make sure this is what you want...'
               style={{ fontSize: '1em', width: '250px' }}
               onChange={this.handleChange}

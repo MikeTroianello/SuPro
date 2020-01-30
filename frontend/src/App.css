@@ -455,12 +455,6 @@ a {
   background-color: rgba(180, 194, 60, 0.75);
 }
 
-.create-mood-box {
-}
-
-.create-productivity-box {
-}
-
 .one-through-five-box {
   color: blue;
   font-weight: 100;
@@ -542,6 +536,7 @@ a {
   border-bottom: 2px solid black;
   margin-bottom: 3vh;
   padding: 1%;
+  background: #a9c3e0;
 }
 
 @media (max-width: 700px) {
@@ -571,17 +566,40 @@ a {
   background: rgba(235, 160, 160, 0.95);
 }
 
-.settings-aside {
-}
-
 .settings-change-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-bottom: 2px solid black;
   padding-bottom: 2vh;
+}
+
+.change-account-sub-box {
+  display: flex;
+  justify-content: space-between;
+  width: 275px;
 }
 
 .settings-change-password {
   border-top: 2px solid black;
   margin-top: 2vh;
+}
+
+.change-password-super-box {
+  display: flex;
+  justify-content: center;
+}
+
+.change-password-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 275px;
+}
+
+.change-password-sub-box {
+  display: flex;
+  justify-content: space-between;
 }
 
 .settings-change-button {
@@ -592,6 +610,7 @@ a {
   margin: 6vh 0 3vh;
   border-radius: 1ch;
   background-color: rgba(36, 100, 184, 0.8);
+  align-self: center;
 }
 
 .settings-change-button:hover {
@@ -599,11 +618,9 @@ a {
   background-color: rgba(19, 71, 139, 0.8);
 }
 
-.settings-delete {
-}
-
 .delete {
   background-color: rgba(255, 0, 0, 0.75);
+  /* box-shadow: 1px 1px rgb(16, 15, 15); */
   font-size: 1.5em;
   height: 52px;
   width: 200px;
@@ -615,6 +632,10 @@ a {
 .delete:hover {
   transition: 0.3s;
   background-color: rgba(255, 0, 0, 0.9);
+}
+
+.confirmDelete {
+  margin: 3vh 0 0 0;
 }
 
 /* MOBILE */
@@ -654,5 +675,12 @@ a {
 @media (min-width: 370px) and (max-width: 419px) {
   .header-productivity {
     width: 31% !important;
+  }
+}
+
+@media (max-width: 1500px) {
+  .settings-change-button {
+    width: 250px;
+    /* width: 85%; */
   }
 }

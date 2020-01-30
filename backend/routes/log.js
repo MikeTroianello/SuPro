@@ -185,8 +185,6 @@ router.post('/create', async (req, res, next) => {
       journal,
       privateJournal,
       hideCreator,
-      // latitude,
-      // longitude,
       year,
       dayOfWeek,
       dayOfYear,
@@ -194,9 +192,11 @@ router.post('/create', async (req, res, next) => {
       month
     } = req.body.info;
 
-    var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
+    // var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
 
-    console.log('LOGGING!!!! user', ip);
+    // console.log('LOGGING!!!! user', ip);
+
+    let ip = '100.44.178.190';
 
     let latitude;
     let longitude;

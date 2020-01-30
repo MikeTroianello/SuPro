@@ -12,6 +12,8 @@ import Profile from './components/Profile';
 import ViewProfile from './components/ViewProfile';
 import Navbar from './components/Navbar';
 
+import AllProfiles from './components/profileFolder/AllProfiles';
+
 import AuthService from './components/auth/auth-service';
 
 import './App.css';
@@ -170,9 +172,20 @@ class App extends React.Component {
             exact
             path='/profile'
             render={props => (
-              <Profile {...props} user={this.state.loggedInUser} />
+              <AllProfiles
+                {...props}
+                user={this.state.loggedInUser}
+                profileSelf={true}
+              />
             )}
           />
+          {/* <Route
+            exact
+            path='/profile'
+            render={props => (
+              <Profile {...props} user={this.state.loggedInUser} />
+            )}
+          /> */}
           <Route
             exact
             path='/logout'
@@ -220,8 +233,18 @@ class App extends React.Component {
           />
           <Route
             path='/view-profile/:id'
-            render={props => <ViewProfile {...props} setUser={this.setUser} />}
+            render={props => (
+              <AllProfiles
+                {...props}
+                setUser={this.setUser}
+                profileSelf={false}
+              />
+            )}
           />
+          {/* <Route
+            path='/view-profile/:id'
+            render={props => <ViewProfile {...props} setUser={this.setUser} />}
+          /> */}
         </Switch>
       </div>
     );

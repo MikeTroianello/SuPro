@@ -9,7 +9,6 @@ import {
   faSmile as smile,
   faMeh as middlin,
   faSadTear as crying
-  // faGrin as grin
 } from '@fortawesome/free-solid-svg-icons';
 
 export default class Create extends Component {
@@ -20,8 +19,6 @@ export default class Create extends Component {
     journal: null,
     privateJournal: false,
     hideCreator: false,
-    latitude: null,
-    longitude: null,
     err: null,
     message: null,
     messageCss: 'red',
@@ -127,32 +124,15 @@ export default class Create extends Component {
         .catch(error => {
           console.log(error);
           this.setState({
-            message: `It broke at geolocation`
+            message: `There was an error submitting your log`
           });
         });
     }
   };
 
   render() {
-    //THIS FINDS LATITUDE AND LONGITUDE
-
     if (this.state.err) {
       return <Redirect to='/view' />;
-    }
-
-    if ('geolocation' in navigator) {
-      console.log('Geolocation is available');
-      navigator.geolocation.getCurrentPosition(position => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-
-        this.setState({
-          latitude: latitude,
-          longitude: longitude
-        });
-      });
-    } else {
-      console.log('geolocation IS NOT available');
     }
 
     return (

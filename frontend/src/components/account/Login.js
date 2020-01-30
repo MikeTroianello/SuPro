@@ -5,8 +5,8 @@ export default class Login extends Component {
   state = {
     message: null,
     user: '',
-    username: '',
-    password: ''
+    username: 'michael',
+    password: 'michael'
   };
   service = new AuthService();
 
