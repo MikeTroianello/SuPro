@@ -8,7 +8,7 @@ import {
   faLaugh as happiest,
   faSmile as smile,
   faMeh as middlin,
-  faSadTear as crying
+  faSadTear as crying,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default class Create extends Component {
@@ -23,7 +23,7 @@ export default class Create extends Component {
     message: null,
     messageCss: 'red',
     day: null,
-    year: null
+    year: null,
   };
 
   service = new AuthService();
@@ -48,21 +48,21 @@ export default class Create extends Component {
         year: year,
         dayOfWeek: a[0],
         dayOfMonth: Number(a[2]),
-        month: a[1]
+        month: a[1],
       });
     }
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     if (e.target.value) {
       e.target.value = e.target.value.replace(/[\r\n\v]+/g, '');
     }
     this.setState({
-      [e.target.id]: e.target.innerText || e.target.value
+      [e.target.id]: e.target.innerText || e.target.value,
     });
   };
 
-  setMood = num => {
+  setMood = (num) => {
     let emoji;
     switch (num) {
       case 1:
@@ -85,46 +85,46 @@ export default class Create extends Component {
     // IF SOMETHING BREAKS, IT IS PROBABLY DUE TO THIS
     return this.setState({
       mood: num,
-      moodEmoji: emoji
+      moodEmoji: emoji,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     if (this.props.createdToday) {
       this.setState({
         err: true,
         message: `You already created a log today!`,
-        messageCss: 'red'
+        messageCss: 'red',
       });
-      setTimeout(function() {}, 1000);
+      setTimeout(function () {}, 1000);
     } else if (!this.state.mood) {
       this.setState({
         message: `You didn't select your mood`,
-        messageCss: 'red'
+        messageCss: 'red',
       });
     } else if (!this.state.productivity) {
       this.setState({
         message: `You didn't select your productivity`,
-        messageCss: 'red'
+        messageCss: 'red',
       });
     } else {
       let info = this.state;
       this.setState({
         message: 'Submitting your log',
-        messageCss: 'black'
+        messageCss: 'black',
       });
       this.service
         .create(info)
-        .then(results => {
+        .then((results) => {
           console.log(results);
           this.props.logCreated();
           this.props.history.push('/view');
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
           this.setState({
-            message: `There was an error submitting your log`
+            message: `There was an error submitting your log`,
           });
         });
     }
@@ -218,25 +218,25 @@ export default class Create extends Component {
               checked={this.state.privateJournal}
               onChange={() => {
                 this.setState({
-                  privateJournal: !this.state.privateJournal
+                  privateJournal: !this.state.privateJournal,
                 });
               }}
             />
           </div>
           <div>
-            <label htmlFor='hideCreator'>Hide your status as creator:</label>
+            <label htmlFor='hideCreator'>Hide your status as creator*:</label>
             <input
               type='checkbox'
               name='hideCreator'
               checked={this.state.hideCreator}
               onChange={() => {
                 this.setState({
-                  hideCreator: !this.state.hideCreator
+                  hideCreator: !this.state.hideCreator,
                 });
               }}
             />
             <p>
-              (Note: people will still see the contents of this log, they just
+              (*Note: people will still see the contents of this log, they just
               will be unable to know you created it)
             </p>
           </div>

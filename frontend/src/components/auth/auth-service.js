@@ -9,76 +9,77 @@ class AuthService {
   //   this.service = service;
   // }
   constructor() {
+    axios.defaults.withCredentials = true;
     let service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}`,
-      withCredentials: true
+      withCredentials: true,
     });
     this.service = service;
   }
 
-  signup = state => {
+  signup = (state) => {
     return this.service
       .post('/signup', { state })
-      .then(response => response.data);
+      .then((response) => response.data);
   };
 
   loggedin = (day, year) => {
     return this.service
       .get(`/loggedin/${day}/${year}`)
-      .then(response => response.data);
+      .then((response) => response.data);
   };
 
   login = (username, password, day, year) => {
     return this.service
       .post('/login', { username, password, day, year })
-      .then(response => response.data);
+      .then((response) => response.data);
   };
 
-  create = info => {
+  create = (info) => {
     return this.service
       .post('/log/create', { info })
-      .then(response => response.data);
+      .then((response) => response.data);
   };
 
   getDate = (year, dayOfYear) => {
     return this.service
       .get(`/log/date/${year}/${dayOfYear}`)
-      .then(response => response.data);
+      .then((response) => response.data);
   };
 
   profile = () => {
     return this.service
       .get(`/log/all/my-posts`)
-      .then(response => response.data);
+      .then((response) => response.data);
   };
 
-  seeUser = userId => {
+  seeUser = (userId) => {
     console.log('SEEING USER ', userId);
     return this.service
       .get(`/log/all/${userId}`)
-      .then(response => response.data);
+      .then((response) => response.data);
   };
 
-  changeInfo = userInfo => {
+  changeInfo = (userInfo) => {
     return this.service
       .post(`/change-info`, { userInfo })
-      .then(response => response.data);
+      .then((response) => response.data);
   };
 
-  changePass = userInfo => {
+  changePass = (userInfo) => {
     return this.service
       .post(`/change-password`, { userInfo })
-      .then(response => response.data);
+      .then((response) => response.data);
   };
 
-  deleteUser = confirmation => {
+  deleteUser = (confirmation) => {
     return this.service
       .post(`/delete-user`, { confirmation })
-      .then(response => response.data);
+      .then((response) => response.data);
   };
 
   logout = () => {
-    return this.service.post('/logout', {}).then(response => response.data);
+    return this.service.post('/logout', {}).then((response) => response.data);
   };
 }
 export default AuthService;

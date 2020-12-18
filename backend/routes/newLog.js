@@ -18,7 +18,6 @@ router.post('/create', async (req, res, next) => {
       journal,
       privateJournal,
       hideCreator,
-\
       year,
       dayOfWeek,
       dayOfYear,

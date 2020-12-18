@@ -1,5 +1,4 @@
-.history
-history
+
 
 # IDE - VSCode
 .vscode/*
@@ -8,3 +7,5 @@ history
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+.history
+history
